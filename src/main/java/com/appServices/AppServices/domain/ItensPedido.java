@@ -93,6 +93,18 @@ public class ItensPedido implements Serializable {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("item=");
+		builder.append(getDescricao());
+		builder.append("\n");
+		builder.append("valor=");
+		builder.append(getValor());
+		builder.append("\n");
+		return builder.toString();
+	}
 	
 	
 	
