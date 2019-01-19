@@ -40,6 +40,8 @@ public class Cliente implements Serializable {
 	private Integer sexo;
 	
 	private String login;
+	
+	@JsonIgnore
 	private String senha;
 	
 	@Column(unique=true)

@@ -186,13 +186,13 @@ public class Pedido implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Pedido");
+		builder.append("Pedido :");
 		builder.append(getId());
 		builder.append(",data: ");
 		builder.append(getData());
 		builder.append(",Cliente:");
 		builder.append(getCliente());
-		builder.append(",Status do Pagamento");
+		builder.append(",Status do Pagamento:");
 		builder.append(getStatusPagamento());
 		builder.append("\n");
 		builder.append("Itens:");

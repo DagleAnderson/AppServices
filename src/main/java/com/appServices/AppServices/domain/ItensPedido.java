@@ -70,11 +70,11 @@ public class ItensPedido implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
+	public String getItem() {
 		return item;
 	}
 
-	public void setDescricao(String item) {
+	public void setItem(String item) {
 		this.item = item;
 	}
 
@@ -98,7 +98,7 @@ public class ItensPedido implements Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("item=");
-		builder.append(getDescricao());
+		builder.append(getItem());
 		builder.append("\n");
 		builder.append("valor=");
 		builder.append(getValor());

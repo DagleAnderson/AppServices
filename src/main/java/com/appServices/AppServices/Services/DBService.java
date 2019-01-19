@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appServices.AppServices.domain.Avaliacoes;
@@ -36,6 +37,10 @@ import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
 
 @Service
 public class DBService {
+
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private ClienteRepository clienteRespository;
 	
@@ -81,27 +86,27 @@ public class DBService {
 			
 		//Cadastro de Cliente
 		
-		Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,"Dagle22","221094","dagle_life@hotmail.com");
+		Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,"Dagle22",pe.encode("221094"),"dagle_life@hotmail.com");
 		EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
 		cli1.setEndereco(end1);
 		
 		
-		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22","123","teste@hotmail.com");	
+		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22",pe.encode("221094"),"teste@hotmail.com");	
 		cli2.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end2 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli2);
 		cli2.setEndereco(end2);
 		
-		Cliente cli3 = new Cliente(null,"Inove lima ","",data.parse("05/12/1965 00:00"),"123453678","789456123",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose224","123","test2e@hotmail.com");	
+		Cliente cli3 = new Cliente(null,"Inove lima ","",data.parse("05/12/1965 00:00"),"123453678","789456123",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose224",pe.encode("221094"),"test2e@hotmail.com");	
 		cli3.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end3 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli3);
 		cli3.setEndereco(end3);
 		
-		Cliente cli4 = new Cliente(null,"Jessica ","",data.parse("05/12/1965 00:00"),"123453678","147852369",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose225","123","teste3@hotmail.com");	
+		Cliente cli4 = new Cliente(null,"Jessica ","",data.parse("05/12/1965 00:00"),"123453678","147852369",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose225",pe.encode("221094"),"teste3@hotmail.com");	
 		cli4.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end4 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli4);
 		cli4.setEndereco(end4);
 		
-		Cliente cli5 = new Cliente(null,"Anderson Teste ","",data.parse("05/12/1965 00:00"),"123453678","128745693",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose226","123","teste4@hotmail.com");	
+		Cliente cli5 = new Cliente(null,"Anderson Teste ","",data.parse("05/12/1965 00:00"),"123453678","128745693",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose226",pe.encode("221094"),"teste4@hotmail.com");	
 		cli5.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end5 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli5);
 		cli5.setEndereco(end5);

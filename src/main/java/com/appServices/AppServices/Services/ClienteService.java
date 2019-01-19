@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,9 @@ public class ClienteService {
 	
 	@Autowired
 	private EnderecoClienteRepository enderecoRepository;
+	
+	@Autowired 
+	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
 		
@@ -83,7 +87,7 @@ public class ClienteService {
 
 	public Cliente fromNewDTO(ClienteNewDTO objDTO) {
 		
-		Cliente cliente = new Cliente(null,objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail());
+		Cliente cliente = new Cliente(null,objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),pe.encode(objDTO.getSenha()),objDTO.getEmail());
 		cliente.getTelefones().add(objDTO.getTelefone1());
 		
 		if(objDTO.getTelefone2()!=null){
