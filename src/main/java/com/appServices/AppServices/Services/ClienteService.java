@@ -4,24 +4,26 @@ package com.appServices.AppServices.Services;
 import java.util.List;
 import java.util.Optional;
 
-
-
+import org.hibernate.cfg.annotations.reflection.PersistentAttributeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.appServices.AppServices.Service.exception.AuthorizationException;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.EnderecoCliente;
+import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.dto.ClienteNewDTO;
 import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.EnderecoClienteRepository;
+import com.appServices.AppServices.security.UserSpringSecurity;
 
 @Service
 public class ClienteService {
@@ -36,6 +38,12 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
+		
+		UserSpringSecurity user = UserService.authenticated();
+		
+		if (user == null || !user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId())){
+			throw new  AuthorizationException("Acesso negado");
+		}
 		
 		Optional<Cliente> objOp = repository.findById(id);
 		

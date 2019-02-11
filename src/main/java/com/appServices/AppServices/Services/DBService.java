@@ -93,7 +93,7 @@ public class DBService {
 		
 		
 		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22",pe.encode("221094"),"teste@hotmail.com");	
-		cli2.addPerfil(TipoPerfil.PRESTADOR);
+		cli2.addPerfil(TipoPerfil.ADMIN);
 		cli2.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end2 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli2);
 		cli2.setEndereco(end2);

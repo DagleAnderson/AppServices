@@ -78,5 +78,9 @@ public class UserSpringSecurity implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public  boolean hasRole(TipoPerfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getNome()));  
+	}
 
 }
