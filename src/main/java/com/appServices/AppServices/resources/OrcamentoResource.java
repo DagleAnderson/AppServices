@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +53,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(objOp);
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody OrcamentoNewDTO objDTO,
@@ -78,7 +79,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.created(uri).build();
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
 			@Valid @RequestBody OrcamentoDTO objDTO,@PathVariable Integer id,
@@ -99,6 +100,7 @@ public class OrcamentoResource implements Serializable{
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);

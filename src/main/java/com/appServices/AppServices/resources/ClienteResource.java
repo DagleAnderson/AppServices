@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class ClienteResource {
 	
 	@Autowired
 	private ClienteService service;
-	
+	 
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id){
 		Cliente objOp = service.find(id);
@@ -35,6 +36,7 @@ public class ClienteResource {
 	}
 	
 	
+	@PreAuthorize("hasAnyRole('CLIENTE')") 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(@Valid @RequestBody ClienteNewDTO objDTO){
 		Cliente obj = service.fromNewDTO(objDTO);
@@ -46,7 +48,7 @@ public class ClienteResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO,@PathVariable Integer id){
 		
@@ -57,6 +59,7 @@ public class ClienteResource {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
@@ -64,6 +67,7 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();	
 	}
 	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll(){
 		List<Cliente> objList =service.findAll();

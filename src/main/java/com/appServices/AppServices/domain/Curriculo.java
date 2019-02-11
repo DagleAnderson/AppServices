@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,10 @@ public class Curriculo implements Serializable{
 	@JoinColumn(name="prestador_id")
 	private Prestador prestador;
 	
-	@OneToMany(mappedBy = "curriculo")
+	@OneToMany(mappedBy = "curriculo",cascade = CascadeType.ALL)
 	private List<Cursos> cursos =new ArrayList<>();
 	
-	@OneToMany(mappedBy = "curriculo")
+	@OneToMany(mappedBy = "curriculo",cascade = CascadeType.ALL)
 	private List<Experiencias> experiencias = new ArrayList<>();
 	
 	public Curriculo() {

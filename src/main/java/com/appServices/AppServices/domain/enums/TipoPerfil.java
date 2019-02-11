@@ -2,7 +2,8 @@ package com.appServices.AppServices.domain.enums;
 
 public enum TipoPerfil {
 	CLIENTE(1,"ROLE_CLIENTE"),
-	PRESTADOR(2,"ROLE_PRESTADOR");
+	PRESTADOR(2,"ROLE_PRESTADOR"),
+	ADMIN(2,"ROLE_ADMIN");
 
 	
 	private Integer codigo;

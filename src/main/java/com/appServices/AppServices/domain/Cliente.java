@@ -71,16 +71,16 @@ public class Cliente implements Serializable {
 	
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<SolicitacaoServico> solicitacao = new ArrayList<>();
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<Pedido> pedido = new ArrayList<>();
 	
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<Orcamento> orcamento = new ArrayList<>();
 	
 	public Cliente() {

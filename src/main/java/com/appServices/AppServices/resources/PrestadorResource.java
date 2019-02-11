@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class PrestadorResource {
 	@Autowired
 	private ProfissaoService profissaoService;
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Prestador> find(@PathVariable Integer id){
 		
@@ -43,6 +45,7 @@ public class PrestadorResource {
 		return ResponseEntity.ok().body(objOp);
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')") 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> inserir(@RequestBody PrestadorNewDTO objDTO){
 		
@@ -63,7 +66,7 @@ public class PrestadorResource {
 		
 	}
 	
-
+	@PreAuthorize("hasAnyRole('PRESTADOR')") 
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public ResponseEntity<Void>update(@RequestBody PrestadorDTO objDTO, @PathVariable Integer id){
 		
@@ -83,9 +86,11 @@ public class PrestadorResource {
 	
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')") 
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id ){
-		service.find(id);
+		
+		service.delete(id);
 		
 		return ResponseEntity.noContent().build();
 	}

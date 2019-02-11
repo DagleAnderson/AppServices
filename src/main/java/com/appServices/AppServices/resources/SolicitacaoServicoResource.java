@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +46,7 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.ok().body(objOp);
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody SolicitacaoServicoNewDTO objDTO,
@@ -68,7 +69,7 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
 			@Valid @RequestBody SolicitacaoServicoDTO objDTO,@PathVariable Integer id,
@@ -85,6 +86,7 @@ public class SolicitacaoServicoResource {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);

@@ -6,6 +6,7 @@ package com.appServices.AppServices.resources;
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class CurriculoResource {
 	@Autowired
 	private CurriculoService service;	
 	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Curriculo> find(@PathVariable Integer id ){
 		Curriculo objOp = service.find(id);
@@ -33,6 +35,7 @@ public class CurriculoResource {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Curriculo> insert(@RequestBody CurriculoNewDTO objDTO){
 		

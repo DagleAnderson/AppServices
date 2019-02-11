@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class CursosResource {
 	@Autowired
 	private CursosService service;
 	
+	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Cursos> find(@PathVariable Integer id){
 
@@ -33,6 +35,7 @@ public class CursosResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(@Valid @RequestBody CursosNewDTO objDTO){
 		Cursos obj = service.fromNewDTO(objDTO);
@@ -44,6 +47,7 @@ public class CursosResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public ResponseEntity<Cursos> update(@Valid @RequestBody CursosDTO objDTO,@PathVariable Integer id){
 		
@@ -55,6 +59,7 @@ public class CursosResource {
 		return ResponseEntity.noContent().build();			
 	}
 	
+	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);

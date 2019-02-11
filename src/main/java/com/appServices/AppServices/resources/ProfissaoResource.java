@@ -4,6 +4,7 @@ package com.appServices.AppServices.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,7 @@ public class ProfissaoResource {
 		return ResponseEntity.ok().body(listDto);
 	}**/
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<ProfissaoDTO>> findAllPage(
 			@RequestParam(value="categoria",defaultValue ="0") Integer categoria,

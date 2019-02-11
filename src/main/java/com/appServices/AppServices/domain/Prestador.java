@@ -31,17 +31,17 @@ public class Prestador implements Serializable {
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="prestador")
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="prestador")
 	private EnderecoPrestador endereco;
 	
 	@OneToOne
 	@JoinColumn(name="profissao_id")
 	private Profissao profissao;
 	
-	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="prestador")
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="prestador")
 	private Curriculo curriculo;
 
-	@OneToMany(mappedBy = "prestador")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy = "prestador")
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
 
 	public Prestador() {

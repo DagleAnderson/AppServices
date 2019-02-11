@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class SolicitacaoServico implements Serializable{
 	@JoinColumn(name="cliente_id")
 	private  Cliente cliente;
 	
-	@OneToMany(mappedBy ="solicitacao")
+	@OneToMany(mappedBy ="solicitacao",cascade = CascadeType.ALL)
 	private List<ItensSolicitacao> itemServico = new ArrayList<>();
 	
 	@ManyToOne
