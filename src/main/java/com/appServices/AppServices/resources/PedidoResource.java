@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -108,12 +109,26 @@ public class PedidoResource implements Serializable {
 		return ResponseEntity.noContent().build();	
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	/**@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<PedidoDTO>> findAll(){
 		List<Pedido> objList =service.findAll();
 		List<PedidoDTO> listDto = objList.stream().map(obj -> new PedidoDTO(obj)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listDto);
+	}**/
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<Page<Pedido>> findAllProfissaoPage(
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="data")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="DESC") String direction
+			){
+		
+		Page<Pedido> objList =service.findPage(page, linesPerPage, orderBy, direction);
+		
+		
+		return ResponseEntity.ok().body(objList);
 	}
 
 }

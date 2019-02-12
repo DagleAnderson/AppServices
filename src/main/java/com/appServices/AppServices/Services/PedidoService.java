@@ -6,9 +6,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.appServices.AppServices.Service.exception.AuthorizationException;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
@@ -23,6 +27,7 @@ import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
 import com.appServices.AppServices.repositories.ItensPedidoRepository;
 import com.appServices.AppServices.repositories.PedidoRepository;
+import com.appServices.AppServices.security.UserSpringSecurity;
 
 @Service
 public class PedidoService {
@@ -34,6 +39,9 @@ public class PedidoService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	public Pedido find(Integer id) {
 
@@ -105,5 +113,16 @@ public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestado
 		newObj.setTotal(obj.getTotal());
 		newObj.setSituacao(obj.getSituacao());
 		
+	}
+	
+	public 	Page<Pedido> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){
+		UserSpringSecurity user = 	UserService.authenticated();
+		if(user==null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction),orderBy);
+		Cliente cliente = clienteService.find(user.getId()); 
+		
+		return repository.findByCliente(cliente, pageRequest);
 	}
 }
