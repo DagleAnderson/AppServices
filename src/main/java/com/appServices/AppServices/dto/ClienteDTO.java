@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import com.appServices.AppServices.Services.Validation.ClienteUpdate;
@@ -50,6 +51,7 @@ public class ClienteDTO  implements Serializable {
 		private String senha;
 		
 		@NotEmpty(message="Preenchimento Obrigatório!")
+		@Email(message = "Email inválido")
 		private String email;
 		
 		
