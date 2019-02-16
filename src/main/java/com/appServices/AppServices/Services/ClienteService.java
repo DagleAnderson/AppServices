@@ -1,15 +1,16 @@
 package com.appServices.AppServices.Services;
 
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.cfg.annotations.reflection.PersistentAttributeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.appServices.AppServices.Service.exception.AuthorizationException;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
@@ -36,6 +37,9 @@ public class ClienteService {
 	
 	@Autowired 
 	private BCryptPasswordEncoder pe;
+	
+	@Autowired
+	private S3service s3service;
 	
 	public Cliente find(Integer id) {
 		
@@ -120,6 +124,10 @@ public class ClienteService {
 		newObj.setSenha(obj.getSenha());
 		newObj.setEmail(obj.getEmail());
 	} 
+	
+	public URI uploadProfilePicture(MultipartFile multipartfile) {
+		return s3service.uploadFile(multipartfile);
+	}
 	
 }
 
