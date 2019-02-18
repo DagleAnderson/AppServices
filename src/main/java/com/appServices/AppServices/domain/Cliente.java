@@ -83,6 +83,8 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<Orcamento> orcamento = new ArrayList<>();
 	
+	private String imageURL;
+	
 	public Cliente() {
 		addPerfil(TipoPerfil.CLIENTE);
 	}
@@ -225,6 +227,16 @@ public class Cliente implements Serializable {
 		this.endereco = endereco;
 	}
 	
+	
+	
+	public String getImageURL() {
+		return imageURL;
+	}
+
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
 
 	
 
