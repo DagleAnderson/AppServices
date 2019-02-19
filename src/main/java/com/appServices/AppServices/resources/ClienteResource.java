@@ -23,8 +23,6 @@ import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.dto.ClienteNewDTO;
 
-import io.netty.util.internal.SuppressJava6Requirement;
-
 @RestController
 @RequestMapping(value="/cliente")
 public class ClienteResource {
