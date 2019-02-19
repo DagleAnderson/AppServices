@@ -23,6 +23,8 @@ import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.dto.ClienteNewDTO;
 
+import io.netty.util.internal.SuppressJava6Requirement;
+
 @RestController
 @RequestMapping(value="/cliente")
 public class ClienteResource {
@@ -38,6 +40,12 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(objOp);
 	}
 	
+	@RequestMapping(value="/email",method = RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email){
+		Cliente obj = service.findByEmail(email);
+		
+		return ResponseEntity.ok().body(obj);
+	}
 	
 	@PreAuthorize("hasAnyRole('CLIENTE')") 
 	@RequestMapping(method = RequestMethod.POST)

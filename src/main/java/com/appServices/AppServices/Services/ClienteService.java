@@ -99,6 +99,18 @@ public class ClienteService {
 		return repository.findAll();
 	}
 	
+	public Cliente findByEmail(String email){
+		UserSpringSecurity user = UserService.authenticated();
+		if(user == null || !user.hasRole(TipoPerfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Cliente obj = repository.findByEmail(email);
+		if(obj ==null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! id:"+ user.getId()+",Tipo:"+ Cliente.class.getName());
+		}
+		
+		return obj;
+	}
 	
 	public Cliente fromDTO(ClienteDTO objDTO) {
 		
