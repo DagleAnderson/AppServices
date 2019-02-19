@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationErro extends StandardError {
+	private static final long serialVersionUID = 1L;
 	
 	private List<FieldMessage> errors= new ArrayList<>();
 	
-	public ValidationErro(Integer status, String msg, Long timeStamp) {
-		super(status, msg, timeStamp);
-		// TODO Auto-generated constructor stub
+	public ValidationErro(Long timestamp, Integer status, String error, String messager, String path) {
+		super(timestamp, status, error, messager, path);
 	}
 
 	public List<FieldMessage> getErrors() {
