@@ -123,21 +123,79 @@ public class DBService {
 		Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
 		Profissao prof2 = new Profissao(null, "Arquiteto",areaProf1);
 		Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
+		Profissao prof4 = new Profissao(null, "Pintor",areaProf1);
+		Profissao prof5 = new Profissao(null, "Arquiteto",areaProf1);
+		Profissao prof6 = new Profissao(null, "Engenheiro",areaProf1);
+		Profissao prof7 = new Profissao(null, "Pintor",areaProf1);
+		Profissao prof8 = new Profissao(null, "Arquiteto",areaProf1);
+		Profissao prof9 = new Profissao(null, "Engenheiro",areaProf1);
+		Profissao prof10 = new Profissao(null, "Pintor",areaProf1);
+		Profissao prof11 = new Profissao(null, "Arquiteto",areaProf1);
+		Profissao prof12= new Profissao(null, "Engenheiro",areaProf1);
 		
 		Categoria areaProf2= new Categoria(null, "Tecnologia e ELetrônicos");		
-		Profissao prof4 = new Profissao(null, "programador",areaProf2);
-		Profissao prof5 = new Profissao(null, "Técnico em Informatica",areaProf2);
-		Profissao prof6 = new Profissao(null, "Analista de sistemas",areaProf2);
+		Profissao prof13 = new Profissao(null, "programador",areaProf1);
+		Profissao prof14 = new Profissao(null, "Técnico em Informatica",areaProf1);
+		Profissao prof15 = new Profissao(null, "Analista de sistemas",areaProf1);
+		Profissao prof16 = new Profissao(null, "programador",areaProf1);
+		Profissao prof17 = new Profissao(null, "Técnico em Informatica",areaProf1);
+		Profissao prof18 = new Profissao(null, "Analista de sistemas",areaProf1);
+		Profissao prof19 = new Profissao(null, "programador",areaProf1);
+		Profissao prof20 = new Profissao(null, "Técnico em Informatica",areaProf1);
+		Profissao prof21 = new Profissao(null, "Analista de sistemas",areaProf1);
+		Profissao prof22 = new Profissao(null, "programador",areaProf1);
+		Profissao prof23 = new Profissao(null, "Técnico em Informatica",areaProf1);
+		Profissao prof24 = new Profissao(null, "Analista de sistemas",areaProf1);
 		
 		Categoria areaProf3= new Categoria(null, "Veículo automotores");		
-		Profissao prof7 = new Profissao(null, "Mecânico",areaProf3);
-		Profissao prof8 = new Profissao(null, "Motorista",areaProf3);
-			areaProf1.getProfissoes().addAll(Arrays.asList(prof1,prof2,prof3));
-			areaProf2.getProfissoes().addAll(Arrays.asList(prof4,prof5,prof6));
-			areaProf3.getProfissoes().addAll(Arrays.asList(prof7,prof8));
+		Profissao prof25 = new Profissao(null, "Mecânico",areaProf1);
+		Profissao prof26= new Profissao(null, "Motorista",areaProf1);
+		Profissao prof27= new Profissao(null, "Mecânico",areaProf1);
+		Profissao prof28= new Profissao(null, "Motorista",areaProf1);
+		Profissao prof29= new Profissao(null, "Mecânico",areaProf1);
+		Profissao prof30= new Profissao(null, "Motorista",areaProf1);
+		Profissao prof31= new Profissao(null, "Mecânico",areaProf1);
+		Profissao prof32= new Profissao(null, "Motorista",areaProf1);
+		Profissao prof33= new Profissao(null, "Mecânico",areaProf1);
+		Profissao prof34= new Profissao(null, "Motorista",areaProf1);
+		Profissao prof35= new Profissao(null, "Mecânico",areaProf1);
+		Profissao prof36= new Profissao(null, "Motorista",areaProf1);
+		
+			areaProf1.getProfissoes().addAll(Arrays.asList(
+					prof1,prof2,prof3,
+					prof4,prof5,prof6,
+					prof7,prof8,prof9,
+					prof10,prof11,prof12,
+					prof13,prof14,prof15,
+					prof16,prof17,prof18,
+					prof19,prof20,prof21,
+					prof22,prof23,prof24,
+					prof25,prof26,prof27,
+					prof28,prof29,prof30,
+					prof31,prof32,prof33,
+					prof34,prof35,prof36
+					));
+			areaProf2.getProfissoes().addAll(Arrays.asList(
+					
+					));
+			areaProf3.getProfissoes().addAll(Arrays.asList(
+					
+					));
 			
 			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3));
-			servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3,prof4,prof5,prof6,prof7,prof8));
+			servicosRepository.saveAll(Arrays.asList(
+					prof1,prof2,prof3,
+					prof4,prof5,prof6,
+					prof7,prof8,prof9,
+					prof10,prof11,prof12,
+					prof13,prof14,prof15,
+					prof16,prof17,prof18,
+					prof19,prof20,prof21,
+					prof22,prof23,prof24,
+					prof25,prof26,prof27,
+					prof28,prof29,prof30,
+					prof31,prof32,prof33,
+					prof34,prof35,prof36));
 		
 		//Cadsatro de Prestador	
 		Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli1,prof1);	
