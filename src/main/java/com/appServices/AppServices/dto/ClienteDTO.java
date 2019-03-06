@@ -37,15 +37,15 @@ public class ClienteDTO  implements Serializable {
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		@Length(min=11 , max=11,message=" Seu CPF deve conter no mínimo 11 caracteres")
 		private String cpfOuCnpj;
-		
+		@NotEmpty(message="Preenchimento Obrigatório!")
 		private Integer tipoPessoa;
-
+		@NotEmpty(message="Preenchimento Obrigatório!")
 		private Integer sexo;
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		private Set<String> telefones =  new HashSet<>();
 		
-		@NotEmpty(message="Preenchimento Obrigatório!")
-		private String login;
+		//@NotEmpty(message="Preenchimento Obrigatório!")
+		//private String login;
 		
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		private String senha;
@@ -68,7 +68,7 @@ public class ClienteDTO  implements Serializable {
 			this.cpfOuCnpj = clienteObj.getCpfOuCnpj();
 			this.tipoPessoa = clienteObj.getTipoPessoa().getCod();
 			this.sexo = clienteObj.getSexo().getCod();
-			this.login  = clienteObj.getLogin();
+			//this.login  = clienteObj.getLogin();
 			this.senha = clienteObj.getSenha();
 			this.email = clienteObj.getEmail();
 		}
@@ -143,13 +143,13 @@ public class ClienteDTO  implements Serializable {
 			this.telefones = telefones;
 		}
 
-		public String getLogin() {
+		/**public String getLogin() {
 			return login;
 		}
 
 		public void setLogin(String login) {
 			this.login = login;
-		}
+		}**/
 
 		public String getSenha() {
 			return senha;

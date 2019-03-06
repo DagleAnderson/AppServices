@@ -45,7 +45,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')") 
+ 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(@Valid @RequestBody ClienteNewDTO objDTO){
 		Cliente obj = service.fromNewDTO(objDTO);

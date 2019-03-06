@@ -114,7 +114,7 @@ public class ClienteService {
 	
 	public Cliente fromDTO(ClienteDTO objDTO) {
 		
-		Cliente cliente = new Cliente(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo(),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail());
+		Cliente cliente = new Cliente(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo(),objDTO.getSenha(),objDTO.getEmail());
 		cliente.getTelefones().addAll(objDTO.getTelefones());
 		
 		return cliente;
@@ -122,7 +122,7 @@ public class ClienteService {
 
 	public Cliente fromNewDTO(ClienteNewDTO objDTO) {
 		
-		Cliente cliente = new Cliente(null,objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),pe.encode(objDTO.getSenha()),objDTO.getEmail());
+		Cliente cliente = new Cliente(null,objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),pe.encode(objDTO.getSenha()),objDTO.getEmail());
 		cliente.getTelefones().add(objDTO.getTelefone1());
 		
 		if(objDTO.getTelefone2()!=null){
@@ -143,7 +143,6 @@ public class ClienteService {
 		newObj.setCpfOuCnpj(obj.getCpfOuCnpj());
 		newObj.setSexo(obj.getSexo());
 		newObj.setTipoPessoa(obj.getTipoPessoa());
-		newObj.setLogin(obj.getLogin());
 		newObj.setSenha(obj.getSenha());
 		newObj.setEmail(obj.getEmail());
 	} 

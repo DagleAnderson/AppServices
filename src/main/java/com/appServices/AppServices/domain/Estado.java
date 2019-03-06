@@ -22,6 +22,10 @@ public class Estado implements Serializable {
 	@OneToMany(mappedBy = "estado")
 	private List<Cidade> cidades = new ArrayList<>();
 
+	public Estado() {
+		
+	}
+	
 	public Estado(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;

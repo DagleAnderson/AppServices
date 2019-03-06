@@ -61,8 +61,8 @@ public class ClienteNewDTO implements Serializable {
 	private String complemento;
 	
 	
-	@NotEmpty(message="Preenchimento Obrigatório!")
-	private String login;
+	//@NotEmpty(message="Preenchimento Obrigatório!")
+	//private String login;
 	
 	@NotEmpty(message="Preenchimento Obrigatório!")
 	private String senha;
@@ -237,14 +237,14 @@ public class ClienteNewDTO implements Serializable {
 	}
 
 
-	public String getLogin() {
+	/**public String getLogin() {
 		return login;
 	}
 
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
+	}**/
 
 
 	public String getSenha() {

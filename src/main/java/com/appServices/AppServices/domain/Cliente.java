@@ -42,7 +42,7 @@ public class Cliente implements Serializable {
 	private Integer tipoPessoa;
 	private Integer sexo;
 	
-	private String login;
+	//private String login;
 	
 	@JsonIgnore
 	private String senha;
@@ -89,7 +89,7 @@ public class Cliente implements Serializable {
 	}
 	
 
-	public Cliente(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo,String login,String senha,String email) {
+	public Cliente(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo,String senha,String email) {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome=sobrenome;
@@ -98,7 +98,7 @@ public class Cliente implements Serializable {
 		this.cpfOuCnpj=CpfOuCnpj;
 		this.tipoPessoa =tipoPessoa.getCod();
 		this.sexo = sexo.getCod();
-		this.login = login;
+		//this.login = login;
 		this.senha = senha;
 		this.email = email;
 		addPerfil(TipoPerfil.CLIENTE);
@@ -181,14 +181,14 @@ public class Cliente implements Serializable {
 
 	
 
-	public String getLogin() {
+	/**public String getLogin() {
 		return login;
 	}
 
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
+	}**/
 
 
 	public String getSenha() {

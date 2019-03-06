@@ -2,6 +2,7 @@ package com.appServices.AppServices.Services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.appServices.AppServices.domain.Avaliacoes;
 import com.appServices.AppServices.domain.Categoria;
+import com.appServices.AppServices.domain.Cidade;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Curriculo;
 import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.domain.EnderecoCliente;
 import com.appServices.AppServices.domain.EnderecoPrestador;
+import com.appServices.AppServices.domain.Estado;
 import com.appServices.AppServices.domain.Experiencias;
 import com.appServices.AppServices.domain.ItensSolicitacao;
 import com.appServices.AppServices.domain.Prestador;
@@ -25,11 +28,13 @@ import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.repositories.AvaliacoesRepository;
 import com.appServices.AppServices.repositories.CategoriaRepository;
+import com.appServices.AppServices.repositories.CidadeRepository;
 import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.CurriculoRepository;
 import com.appServices.AppServices.repositories.CursosRepository;
 import com.appServices.AppServices.repositories.EnderecoClienteRepository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRepository;
+import com.appServices.AppServices.repositories.EstadoRepository;
 import com.appServices.AppServices.repositories.ExperienciasRepository;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
 import com.appServices.AppServices.repositories.PrestadorRepository;
@@ -78,6 +83,14 @@ public class DBService {
 	@Autowired
 	private ItensSolicitacaoRepository itensSolicitacaoRepository;
 	
+	@Autowired
+	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+	
+
+	
 	public void instantiateTestDataBase()throws ParseException 	{
 		
 		
@@ -87,28 +100,28 @@ public class DBService {
 			
 		//Cadastro de Cliente
 		
-		Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,"Dagle22",pe.encode("221094"),"dagle_life@hotmail.com");
+		Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,pe.encode("221094"),"dagle_life@hotmail.com");
 		EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
 		cli1.setEndereco(end1);
 		
 		
-		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22",pe.encode("221094"),"teste@hotmail.com");	
+		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"teste@hotmail.com");	
 		cli2.addPerfil(TipoPerfil.ADMIN);
 		cli2.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end2 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli2);
 		cli2.setEndereco(end2);
-		Cliente cli3 = new Cliente(null,"Inove lima ","",data.parse("05/12/1965 00:00"),"123453678","789456123",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose224",pe.encode("221094"),"test2e@hotmail.com");	
+		Cliente cli3 = new Cliente(null,"Inove lima ","",data.parse("05/12/1965 00:00"),"123453678","789456123",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"test2e@hotmail.com");	
 		cli3.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end3 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli3);
 		cli3.setEndereco(end3);
 		
-		Cliente cli4 = new Cliente(null,"Jessica ","",data.parse("05/12/1965 00:00"),"123453678","147852369",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose225",pe.encode("221094"),"teste3@hotmail.com");	
+		Cliente cli4 = new Cliente(null,"Jessica ","",data.parse("05/12/1965 00:00"),"123453678","147852369",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"teste3@hotmail.com");	
 		cli4.addPerfil(TipoPerfil.PRESTADOR);
 		cli4.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end4 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli4);
 		cli4.setEndereco(end4);
 		
-		Cliente cli5 = new Cliente(null,"Anderson Teste","",data.parse("05/12/1965 00:00"),"123453678","128745693",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose226",pe.encode("221094"),"teste4@hotmail.com");	
+		Cliente cli5 = new Cliente(null,"Anderson Teste","",data.parse("05/12/1965 00:00"),"123453678","128745693",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"teste4@hotmail.com");	
 		cli5.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end5 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli5);
 		cli5.setEndereco(end5);
@@ -253,14 +266,40 @@ public class DBService {
 		enderecoPrestadorRepository.saveAll(Arrays.asList(end6,end7,end8,end9,end10));
 
 		
-		
+		//savando dados em BD
 		curriculoRepository.saveAll(Arrays.asList(c1,c2));
 		cursosRespository.saveAll(Arrays.asList(curso1,curso2,curso3));
 		experienciasRespository.saveAll(Arrays.asList(exp1));
 		 
-		 
-		 
 		 avaliacoesRespository.saveAll(Arrays.asList(aval1));
+		 
+		
+		 //Estados
+		 Estado estado1 = new Estado(null, "Bahia");
+		 Estado estado2 = new Estado(null, "Piaui");
+		 
+		 
+		 //Cidades 
+		 Cidade cidade1 = new Cidade(null, "Barrerias", estado1);
+		 Cidade cidade2 = new Cidade(null, "Luis Eduardo Magalhães", estado1);
+		 Cidade cidade3 = new Cidade(null, "Formosa do Rio Preto", estado1);
+		 Cidade cidade4 = new Cidade(null, "São Desidério", estado1);
+		 Cidade cidade5 = new Cidade(null, "Roda Velha", estado1);
+		 
+		 Cidade cidade6 = new Cidade(null, "Corrente", estado2);
+		 Cidade cidade7 = new Cidade(null, "Terezina", estado2);
+		 
+		 
+		 //salvando dados
+		 
+		 estadoRepository.saveAll(Arrays.asList(estado1,estado2));
+		 cidadeRepository.saveAll(Arrays.asList(cidade1,cidade2,cidade3,cidade4,cidade5,cidade6,cidade7));
+		 
+		 
+		 
+		 
+		 
+		 
 	}
 
 }
