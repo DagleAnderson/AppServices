@@ -41,14 +41,12 @@ public class CategoriaResource {
 		@RequestMapping(value="{id}/profissoes",method = RequestMethod.GET)
 		public ResponseEntity<Page<ProfissaoDTO>> findAllPage(
 				@PathVariable Integer id,
-				//@RequestParam(value="categoria",defaultValue ="0") Integer categoria,
 				@RequestParam(value="page",defaultValue ="0") Integer page, 
 				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
 				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
 				@RequestParam(value="direction",defaultValue ="ASC") String direction
 				){
 			
-			//Integer categoriaDecod = Integer.parseInt(categoria);
 			Page<Profissao> objList =serviceProfissao.search(id, page, linesPerPage, orderBy, direction);
 			
 			Page<ProfissaoDTO> listProfissao= objList.map(obj -> new ProfissaoDTO(obj));

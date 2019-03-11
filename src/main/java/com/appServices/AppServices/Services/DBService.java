@@ -147,52 +147,52 @@ public class DBService {
 		Profissao prof12= new Profissao(null, "Engenheiro",areaProf1);
 		
 		Categoria areaProf2= new Categoria(null, "Tecnologia e ELetrônicos");		
-		Profissao prof13 = new Profissao(null, "programador",areaProf1);
-		Profissao prof14 = new Profissao(null, "Técnico em Informatica",areaProf1);
-		Profissao prof15 = new Profissao(null, "Analista de sistemas",areaProf1);
+		Profissao prof13 = new Profissao(null, "programador",areaProf2);
+		Profissao prof14 = new Profissao(null, "Técnico em Informatica",areaProf2);
+		Profissao prof15 = new Profissao(null, "Analista de sistemas",areaProf2);
 		Profissao prof16 = new Profissao(null, "programador",areaProf1);
-		Profissao prof17 = new Profissao(null, "Técnico em Informatica",areaProf1);
-		Profissao prof18 = new Profissao(null, "Analista de sistemas",areaProf1);
-		Profissao prof19 = new Profissao(null, "programador",areaProf1);
-		Profissao prof20 = new Profissao(null, "Técnico em Informatica",areaProf1);
-		Profissao prof21 = new Profissao(null, "Analista de sistemas",areaProf1);
-		Profissao prof22 = new Profissao(null, "programador",areaProf1);
-		Profissao prof23 = new Profissao(null, "Técnico em Informatica",areaProf1);
-		Profissao prof24 = new Profissao(null, "Analista de sistemas",areaProf1);
+		Profissao prof17 = new Profissao(null, "Técnico em Informatica",areaProf2);
+		Profissao prof18 = new Profissao(null, "Analista de sistemas",areaProf2);
+		Profissao prof19 = new Profissao(null, "programador",areaProf2);
+		Profissao prof20 = new Profissao(null, "Técnico em Informatica",areaProf2);
+		Profissao prof21 = new Profissao(null, "Analista de sistemas",areaProf2);
+		Profissao prof22 = new Profissao(null, "programador",areaProf2);
+		Profissao prof23 = new Profissao(null, "Técnico em Informatica",areaProf2);
+		Profissao prof24 = new Profissao(null, "Analista de sistemas",areaProf2);
 		
 		Categoria areaProf3= new Categoria(null, "Veículo automotores");		
-		Profissao prof25 = new Profissao(null, "Mecânico",areaProf1);
-		Profissao prof26= new Profissao(null, "Motorista",areaProf1);
-		Profissao prof27= new Profissao(null, "Mecânico",areaProf1);
-		Profissao prof28= new Profissao(null, "Motorista",areaProf1);
-		Profissao prof29= new Profissao(null, "Mecânico",areaProf1);
-		Profissao prof30= new Profissao(null, "Motorista",areaProf1);
-		Profissao prof31= new Profissao(null, "Mecânico",areaProf1);
-		Profissao prof32= new Profissao(null, "Motorista",areaProf1);
-		Profissao prof33= new Profissao(null, "Mecânico",areaProf1);
-		Profissao prof34= new Profissao(null, "Motorista",areaProf1);
-		Profissao prof35= new Profissao(null, "Mecânico",areaProf1);
-		Profissao prof36= new Profissao(null, "Motorista",areaProf1);
+		Profissao prof25 = new Profissao(null, "Mecânico",areaProf3);
+		Profissao prof26= new Profissao(null, "Motorista",areaProf3);
+		Profissao prof27= new Profissao(null, "Mecânico",areaProf3);
+		Profissao prof28= new Profissao(null, "Motorista",areaProf3);
+		Profissao prof29= new Profissao(null, "Mecânico",areaProf3);
+		Profissao prof30= new Profissao(null, "Motorista",areaProf3);
+		Profissao prof31= new Profissao(null, "Mecânico",areaProf3);
+		Profissao prof32= new Profissao(null, "Motorista",areaProf3);
+		Profissao prof33= new Profissao(null, "Mecânico",areaProf3);
+		Profissao prof34= new Profissao(null, "Motorista",areaProf3);
+		Profissao prof35= new Profissao(null, "Mecânico",areaProf3);
+		Profissao prof36= new Profissao(null, "Motorista",areaProf3);
 		
 			areaProf1.getProfissoes().addAll(Arrays.asList(
 					prof1,prof2,prof3,
 					prof4,prof5,prof6,
 					prof7,prof8,prof9,
-					prof10,prof11,prof12,
+					prof10,prof11,prof12
+					
+					
+					));
+			areaProf2.getProfissoes().addAll(Arrays.asList(
 					prof13,prof14,prof15,
 					prof16,prof17,prof18,
 					prof19,prof20,prof21,
-					prof22,prof23,prof24,
+					prof22,prof23,prof24
+					));
+			areaProf3.getProfissoes().addAll(Arrays.asList(
 					prof25,prof26,prof27,
 					prof28,prof29,prof30,
 					prof31,prof32,prof33,
 					prof34,prof35,prof36
-					));
-			areaProf2.getProfissoes().addAll(Arrays.asList(
-					
-					));
-			areaProf3.getProfissoes().addAll(Arrays.asList(
-					
 					));
 			
 			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3));
@@ -257,7 +257,7 @@ public class DBService {
 		solicitacaoRepository.save(solicitacao);
 		
 		//Avaliações de clientes
-		Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5, "Um dos melhores pintores que ja contratei na vida");
+		Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
 		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
 		
 		itensSolicitacaoRepository.saveAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));

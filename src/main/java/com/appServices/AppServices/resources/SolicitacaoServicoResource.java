@@ -46,7 +46,7 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.ok().body(objOp);
 	}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
+	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody SolicitacaoServicoNewDTO objDTO,

@@ -14,6 +14,16 @@ public class PrestadorDTO  implements Serializable {
 	private String slogan;
 	private String localAtendimento;
 	
+	//Endereço
+	private String cidade;
+	private String estado;
+	private String cep;
+	private String bairro;
+	private String rua;
+	private int numero;
+	private String complemento;
+	
+	
 	@JsonIgnore
 	private Integer clienteId;
 	private String clienteNome;
@@ -32,6 +42,15 @@ public class PrestadorDTO  implements Serializable {
 		this.nomeFantasia = prestadorObj.getNomeFantasia();
 		this.slogan =prestadorObj.getSlogan();
 		this.localAtendimento = prestadorObj.getLocalAtendimento();
+		
+		this.cidade = prestadorObj.getEndereco().getCidade();
+		this.estado = prestadorObj.getEndereco().getEstado();
+		this.cep = prestadorObj.getEndereco().getCep();
+		this.bairro = prestadorObj.getEndereco().getBairro();
+		this.rua = prestadorObj.getEndereco().getRua();
+		this.numero = prestadorObj.getEndereco().getNumero();
+		this.complemento = prestadorObj.getEndereco().getComplemento();
+		
 		this.clienteId = prestadorObj.getCliente().getId();
 		this.clienteNome = prestadorObj.getCliente().getNome();
 		this.profissaoId = prestadorObj.getProfissao().getId();
@@ -70,6 +89,68 @@ public class PrestadorDTO  implements Serializable {
 		this.localAtendimento = localAtendimento;
 	}
 
+	
+	
+	//Endereço do prestador
+	
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	
+	
 	
 	public Integer getClienteId() {
 		return clienteId;

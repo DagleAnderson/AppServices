@@ -20,7 +20,7 @@ public class ClienteNewDTO implements Serializable {
 	private String sobrenome;
 	
 	@NotNull(message="preenchimento obrigatório")
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataNascimento;
 	
 	@NotEmpty(message="Preenchimento obrigatório")

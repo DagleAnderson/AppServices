@@ -36,7 +36,7 @@ public class PrestadorResource {
 	@Autowired
 	private ProfissaoService profissaoService;
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Prestador> find(@PathVariable Integer id){
 		
@@ -45,7 +45,7 @@ public class PrestadorResource {
 		return ResponseEntity.ok().body(objOp);
 	}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')") 
+	//@PreAuthorize("hasAnyRole('PRESTADOR')") 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> inserir(@RequestBody PrestadorNewDTO objDTO){
 		
@@ -66,7 +66,7 @@ public class PrestadorResource {
 		
 	}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')") 
+	//@PreAuthorize("hasAnyRole('PRESTADOR')") 
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public ResponseEntity<Void>update(@RequestBody PrestadorDTO objDTO, @PathVariable Integer id){
 		

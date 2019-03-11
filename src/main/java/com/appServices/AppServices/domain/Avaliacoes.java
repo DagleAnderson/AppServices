@@ -29,7 +29,7 @@ public class Avaliacoes implements Serializable{
 	@JoinColumn(name="prestador_id")
 	private Prestador prestador;
 	
-	private Integer estrelas;
+	private Double estrelas;
 	private String comentario;
 	
 	
@@ -38,7 +38,7 @@ public class Avaliacoes implements Serializable{
 	}
 
 
-	public Avaliacoes(Integer id, Cliente cliente, Prestador prestador, Integer estrelas, String comentario) {
+	public Avaliacoes(Integer id, Cliente cliente, Prestador prestador, Double estrelas, String comentario) {
 		this.id = id;
 		this.cliente = cliente;
 		this.prestador = prestador;
@@ -104,12 +104,12 @@ public class Avaliacoes implements Serializable{
 	}
 
 
-	public Integer getEstrelas() {
+	public Double getEstrelas() {
 		return estrelas;
 	}
 
 
-	public void setEstrelas(Integer estrelas) {
+	public void setEstrelas(Double estrelas) {
 		this.estrelas = estrelas;
 	}
 

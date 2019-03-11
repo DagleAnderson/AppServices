@@ -35,7 +35,7 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nome;
 	private String sobrenome;
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataNascimento;
 	private String rg;
 	private String cpfOuCnpj;
