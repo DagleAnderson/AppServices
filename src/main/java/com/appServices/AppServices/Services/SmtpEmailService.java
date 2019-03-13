@@ -9,7 +9,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class SmtpEmailService extends AbstractEmailService {
+public class SmtpEmailService extends AbstractEmailServicePedido {
 
 	@Autowired
 	private MailSender mailSender;

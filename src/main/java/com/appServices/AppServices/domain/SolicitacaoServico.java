@@ -137,13 +137,14 @@ public class SolicitacaoServico implements Serializable{
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Solicitação de Orçamento:");
-		builder.append( getId());
-		builder.append(getProdutoServico());
-		builder.append(", cliente=");
-		builder.append(getCliente().getNome());
+		builder.append( getId()+"\n");
+		builder.append("Produto:");
+		builder.append(getProdutoServico()+"\n");
+		builder.append("Cliente=");
+		builder.append(getCliente().getNome() +" "+ getCliente().getSobrenome() + "\n");
 		builder.append(",Serviço=");
 		for(ItensSolicitacao is : getItemServico()) {
-			builder.append(is.toString());
+			builder.append(is.toString()+"\n");
 		}	
 		builder.append("]");
 		return builder.toString();

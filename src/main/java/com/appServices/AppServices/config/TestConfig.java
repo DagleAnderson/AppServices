@@ -8,8 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.appServices.AppServices.Services.DBService;
-import com.appServices.AppServices.Services.EmailService;
-import com.appServices.AppServices.Services.MockEmailService;
+import com.appServices.AppServices.Services.EmailServicePedido;
+import com.appServices.AppServices.Services.EmailServiceSolicitacao;
+import com.appServices.AppServices.Services.MockEmailServicePedido;
+import com.appServices.AppServices.Services.MockEmailServiceSolicitacao;
 
 @Configuration
 @Profile("test")
@@ -27,7 +29,12 @@ public class TestConfig {
 	}
 	
 	@Bean
-	public EmailService emailService() {
-		return new MockEmailService();
+	public EmailServicePedido emailServicePedido() {
+		return new MockEmailServicePedido();
+	}
+	
+	@Bean
+	public EmailServiceSolicitacao emailServiceSolicitacao() {
+		return new MockEmailServiceSolicitacao();
 	}
 }

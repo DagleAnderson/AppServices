@@ -1,9 +1,11 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
@@ -185,6 +188,7 @@ public class Pedido implements Serializable{
 
 	@Override
 	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		StringBuilder builder = new StringBuilder();
 		builder.append("Pedido :");
 		builder.append(getId());
@@ -201,7 +205,7 @@ public class Pedido implements Serializable{
 				}
 		
 		builder.append("Valor Total:");
-		builder.append(getTotal());
+		builder.append(nf.format(getTotal()));
 		
 		return builder.toString();
 	}

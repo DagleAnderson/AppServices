@@ -33,6 +33,9 @@ public class SolicitacaoServicoService {
 	@Autowired
 	private ProfissaoRepository profissaoRepository;
 	
+	@Autowired
+	private EmailServiceSolicitacao emailService;
+	
 	public SolicitacaoServico find(Integer id) {
 
 		Optional<SolicitacaoServico> objOp = repository.findById(id);
@@ -51,7 +54,7 @@ public class SolicitacaoServicoService {
 		
 		 profissaoRepository.save(obj.getProfissao());
 		 
-		 System.out.println(obj);
+		 emailService.sendOrderConfirmationEmail(obj);
 
 		return obj;
 	}

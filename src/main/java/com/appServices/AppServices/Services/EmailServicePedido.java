@@ -7,7 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Pedido;
 
-public interface EmailService {
+public interface EmailServicePedido {
 
 	void sendOrderConfirmationEmail(Pedido obj);
 	
