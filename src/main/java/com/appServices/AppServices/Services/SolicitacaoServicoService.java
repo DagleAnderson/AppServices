@@ -50,6 +50,8 @@ public class SolicitacaoServicoService {
 		itensSolicitacaoRepo.saveAll(obj.getItemServico());
 		
 		 profissaoRepository.save(obj.getProfissao());
+		 
+		 System.out.println(obj);
 
 		return obj;
 	}

@@ -81,6 +81,16 @@ public class ItensSolicitacao  implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("produto/Serviço:");
+		builder.append(getId());
+		builder.append(", Detalhes do item:");
+		builder.append(getDescricao());
+		return builder.toString();
+	}
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,8 +29,8 @@ public class Profissao implements Serializable {
 	private Categoria categoria;
 	
 	@JsonIgnore
-	@ManyToOne
-	private SolicitacaoServico solicitacao;
+	@OneToMany(mappedBy ="profissao")
+	private List<SolicitacaoServico> solicitacao = new ArrayList<>();
 
 	public Profissao() {
 
@@ -87,5 +90,15 @@ public class Profissao implements Serializable {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public List<SolicitacaoServico> getSolicitacao() {
+		return solicitacao;
+	}
+
+	public void setSolicitacao(List<SolicitacaoServico> solicitacao) {
+		this.solicitacao = solicitacao;
+	}
+	
+	
 
 }

@@ -166,13 +166,14 @@ public class DBService {
 		Profissao prof27= new Profissao(null, "Mecânico",areaProf3);
 		Profissao prof28= new Profissao(null, "Motorista",areaProf3);
 		Profissao prof29= new Profissao(null, "Mecânico",areaProf3);
-		Profissao prof30= new Profissao(null, "Motorista",areaProf3);
-		Profissao prof31= new Profissao(null, "Mecânico",areaProf3);
-		Profissao prof32= new Profissao(null, "Motorista",areaProf3);
-		Profissao prof33= new Profissao(null, "Mecânico",areaProf3);
-		Profissao prof34= new Profissao(null, "Motorista",areaProf3);
-		Profissao prof35= new Profissao(null, "Mecânico",areaProf3);
-		Profissao prof36= new Profissao(null, "Motorista",areaProf3);
+		
+		
+		Categoria areaProf4 = new Categoria(null,"Saúde e Bem Estar");
+		Profissao prof30= new Profissao(null, "Médico",areaProf4);
+		Profissao prof31= new Profissao(null, "Instrutor",areaProf4);
+		Profissao prof32= new Profissao(null, "Nutricionista",areaProf4);
+		Profissao prof33= new Profissao(null, "Personal",areaProf4);
+
 		
 			areaProf1.getProfissoes().addAll(Arrays.asList(
 					prof1,prof2,prof3,
@@ -190,12 +191,13 @@ public class DBService {
 					));
 			areaProf3.getProfissoes().addAll(Arrays.asList(
 					prof25,prof26,prof27,
-					prof28,prof29,prof30,
-					prof31,prof32,prof33,
-					prof34,prof35,prof36
+					prof28,prof29,prof30
+					));
+			areaProf4.getProfissoes().addAll(Arrays.asList(
+					prof30,prof31,prof32,prof33
 					));
 			
-			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3));
+			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3,areaProf4));
 			servicosRepository.saveAll(Arrays.asList(
 					prof1,prof2,prof3,
 					prof4,prof5,prof6,
@@ -207,8 +209,8 @@ public class DBService {
 					prof22,prof23,prof24,
 					prof25,prof26,prof27,
 					prof28,prof29,prof30,
-					prof31,prof32,prof33,
-					prof34,prof35,prof36));
+					prof31,prof32,prof33
+					));
 		
 		//Cadsatro de Prestador	
 		Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli1,prof1);	

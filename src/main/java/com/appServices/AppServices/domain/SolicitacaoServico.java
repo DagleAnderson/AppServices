@@ -2,6 +2,7 @@ package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -132,7 +133,21 @@ public class SolicitacaoServico implements Serializable{
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Solicitação de Orçamento:");
+		builder.append( getId());
+		builder.append(getProdutoServico());
+		builder.append(", cliente=");
+		builder.append(getCliente().getNome());
+		builder.append(",Serviço=");
+		for(ItensSolicitacao is : getItemServico()) {
+			builder.append(is.toString());
+		}	
+		builder.append("]");
+		return builder.toString();
+	}
 	
 	
 }
