@@ -9,7 +9,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class SmtpEmailService extends AbstractEmailServicePedido {
+public class SmtpEmailServicePedido extends AbstractEmailServicePedido {
 
 	@Autowired
 	private MailSender mailSender;
@@ -17,7 +17,7 @@ public class SmtpEmailService extends AbstractEmailServicePedido {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailServicePedido.class);
 	
 	@Override
 	public void sendEmail(SimpleMailMessage msg) {
@@ -31,7 +31,7 @@ public class SmtpEmailService extends AbstractEmailServicePedido {
 	
 	@Override
 	public void sendHtmlEmail(MimeMessage msg) {
-		LOG.info("Simulando envio dE email HTML...");
+		LOG.info("Simulando envio de email HTML...");
 		javaMailSender.send(msg);
 		LOG.info("Email enviado");
 	}

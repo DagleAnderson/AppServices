@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Profile;
 
 import com.appServices.AppServices.Services.DBService;
 import com.appServices.AppServices.Services.EmailServicePedido;
-import com.appServices.AppServices.Services.SmtpEmailService;
+import com.appServices.AppServices.Services.EmailServiceSolicitacao;
+import com.appServices.AppServices.Services.SmtpEmailServicePedido;
+import com.appServices.AppServices.Services.SmtpEmailServiceSolicitacao;
 
 @Configuration
 @Profile("dev")
@@ -36,6 +38,11 @@ public class DevConfig {
 	
 	@Bean
 	public EmailServicePedido emailServicePedido() {
-		return new SmtpEmailService();
+		return new SmtpEmailServicePedido();
+	}
+	
+	@Bean
+	public EmailServiceSolicitacao emailServiceSolicitacao() {
+		return new SmtpEmailServiceSolicitacao();
 	}
 }
