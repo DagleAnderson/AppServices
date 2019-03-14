@@ -53,7 +53,6 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(objOp);
 	}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody OrcamentoNewDTO objDTO,

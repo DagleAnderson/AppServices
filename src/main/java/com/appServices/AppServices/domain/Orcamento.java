@@ -187,6 +187,24 @@ public class Orcamento implements Serializable{
 		return soma;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Orçamento:");
+		builder.append( getId()+"\n");
+		builder.append("Produto:");
+		builder.append(getProdutoServico()+"\n");
+		builder.append("Cliente=");
+		builder.append(getCliente().getNome() +" "+ getCliente().getSobrenome() + "\n");
+		builder.append(",Serviço=");
+		for(ItensOrcamento is : getItensOrcamento()) {
+			builder.append(is.toString()+"\n");
+		}	
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 	
 	
 }

@@ -14,9 +14,9 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.appServices.AppServices.domain.Cliente;
-import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.Orcamento;
 
-public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSolicitacao{
+public abstract class AbstractEmailServiceOrcamento implements EmailServiceOrcamento{
 	
 	@Value("${default.sender}")
 	private String sender;
@@ -28,18 +28,18 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	private JavaMailSender javaMailSender;
 	
 	@Override
-	public void sendOrderConfirmationEmail(SolicitacaoServico obj){
+	public void sendOrderConfirmationEmail(Orcamento obj){
 		
-		SimpleMailMessage sm = prepareSimpleMailMessageFromSolicitacao(obj);
+		SimpleMailMessage sm = prepareSimpleMailMessageFromOrcamento(obj);
 		sendEmail(sm);
 	}
 
-	protected SimpleMailMessage prepareSimpleMailMessageFromSolicitacao(SolicitacaoServico obj) {
+	protected SimpleMailMessage prepareSimpleMailMessageFromOrcamento(Orcamento obj) {
 		// TODO Auto-generated method stub
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(obj.getCliente().getEmail());
 		sm.setFrom(sender);
-		sm.setSubject(" Nova Solicitação de Serviço para você! Código:"+obj.getId());
+		sm.setSubject(" Nova Solicitação de Serviço para você! Código:#"+obj.getId());
 		sm.setSentDate(new Date(System.currentTimeMillis()));
 		sm.setText(obj.toString());
 		
@@ -47,19 +47,19 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	}
 	
 	
-	protected String htmlFromTemplateSolicitacao(SolicitacaoServico obj) {
+	protected String htmlFromTemplateOrcamento(Orcamento obj) {
 		Context context = new Context();
-		context.setVariable("Solicitação de Serviço", obj);
+		context.setVariable("orcamento", obj);
 		
-		return templateEngine.process("email/solicitacaoDeServiço", context);
+		return templateEngine.process("email/orcamento", context);
 	
 	}
 	
 	
 	@Override
-	public void sendOrderConfirmationHtmlEmail(SolicitacaoServico obj) { 
+	public void sendOrderConfirmationHtmlEmail(Orcamento obj) { 
 		try {
-		MimeMessage mm = prepareMimeMessageFromSolicitacaoServico(obj);
+		MimeMessage mm = prepareMimeMessageFromOrcamento(obj);
 		sendHtmlEmail(mm);
 		}
 		catch (MessagingException e) {
@@ -67,14 +67,14 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 		}
 	}
 
-	protected  MimeMessage prepareMimeMessageFromSolicitacaoServico(SolicitacaoServico obj) throws MessagingException {
+	protected  MimeMessage prepareMimeMessageFromOrcamento(Orcamento obj) throws MessagingException {
 		MimeMessage mimeMessage =  javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true );
 		mmh.setTo(obj.getCliente().getEmail());
 		mmh.setFrom(sender);
 		mmh.setSubject("Pedido Confirmado! Código:"+ obj.getId());
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
-		mmh.setText(htmlFromTemplateSolicitacao(obj),true);
+		mmh.setText(htmlFromTemplateOrcamento(obj),true);
 		
 		return mimeMessage;
 	}

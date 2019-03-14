@@ -124,6 +124,18 @@ public class ItensOrcamento implements Serializable {
 		return (valor - desconto) * quantidade;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("item:");
+		builder.append(getId()+"\n");
+		builder.append(", Detalhes do item:"+"\n");
+		builder.append(getItem());
+		return builder.toString();
+	}
+	
+	
+	
 	
 	
 	

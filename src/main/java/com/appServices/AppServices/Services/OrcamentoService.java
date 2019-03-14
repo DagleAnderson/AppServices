@@ -29,7 +29,10 @@ public class OrcamentoService {
 	private OrcamentoRepository repository;
 
 	@Autowired
-	private ItensOrcamentoRepository itensOrcamentoRepo;	
+	private ItensOrcamentoRepository itensOrcamentoRepo;
+	
+	@Autowired
+	private EmailServiceOrcamento emailService;
 	
 	public Orcamento find(Integer id) {
 
@@ -47,6 +50,7 @@ public class OrcamentoService {
 		
 		itensOrcamentoRepo.saveAll(obj.getItensOrcamento());
 		
+		 emailService.sendOrderConfirmationEmail(obj);
 
 		return obj;
 	}
