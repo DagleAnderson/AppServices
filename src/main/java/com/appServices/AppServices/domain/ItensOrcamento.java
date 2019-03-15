@@ -1,6 +1,8 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -126,15 +128,16 @@ public class ItensOrcamento implements Serializable {
 	
 	@Override
 	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		StringBuilder builder = new StringBuilder();
 		builder.append("item:");
 		builder.append(getItem()+"\n");
 		builder.append("quantidade :");
 		builder.append(getQuantidade()+"\n");
-		builder.append("desconto: ");
-		builder.append(getDesconto()+"\n");
+		builder.append("desconto :");
+		builder.append(nf.format(getDesconto())+"\n");
 		builder.append("Valor :");
-		builder.append(getValor()+"\n");
+		builder.append(nf.format(getValor())+"\n");
 		
 		
 		

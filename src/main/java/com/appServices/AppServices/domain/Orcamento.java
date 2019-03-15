@@ -1,8 +1,10 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -183,31 +185,50 @@ public class Orcamento implements Serializable{
 		for(ItensOrcamento itensOrc: itensOrcamento ) {
 			soma = soma + itensOrc.getSubTotal();
 		}
+		soma = soma - this.getDesconto();
+		
+		return soma;
+	}
+	
+	public double getDescontoTotal() {
+		double soma = 0.0;
+		
+		for(ItensOrcamento itensOrc: itensOrcamento ) {
+			soma = soma + itensOrc.getDesconto();
+		}
+		soma = soma + this.getDesconto();
 		
 		return soma;
 	}
 	
 	@Override
 	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		StringBuilder builder = new StringBuilder();
 		builder.append("Olá "+getCliente().getNome() +" "+ getCliente().getSobrenome()+"!");
-		builder.append( "Você tem um novo orçamento para avaliação. Boa sorte na sua escolha!");
+		builder.append( "Você tem um novo orçamento para avaliação. Boa sorte na sua escolha!"+"\n");
 		builder.append("\n");
-		builder.append("Orçamento Nº #"+getId()+"\n");
+		builder.append("------------ **    Orçamento Nº #"+getId()+"   ** --------------");
+		builder.append("\n");
 		builder.append("Prestador:"+ getPrestador().getNomeFantasia()+"\n");
-		builder.append("Produto:");
+		builder.append("Produto / Serviço :");
 		builder.append(getProdutoServico()+"\n");
 		builder.append("\n");
-		builder.append("Itens do Orçamento");
+		builder.append("----------- **   Itens do Orçamento   ** -------------");
 		builder.append("\n");
 		for(ItensOrcamento is : getItensOrcamento()) {
 			builder.append(is.toString()+"\n");
 		}	
-		builder.append("Desconto :");
-		builder.append(getDesconto()+"\n");
-		builder.append("Total:");
-		builder.append(getValorTotal());
+		builder.append("----------- **************************** -------------"+"\n");
+		builder.append("Desconto geral :");
+		builder.append(nf.format(getDesconto())+"\n"+"\n");
 		
+		builder.append("------------------------- **  TOTAIS  ** --------------------------");
+		builder.append("\n");
+		builder.append("Total de desconto :");
+		builder.append(nf.format(getDescontoTotal())+"\n");
+		builder.append("Total do Orçamento :");
+		builder.append(nf.format(getValorTotal())+"\n");
 		return builder.toString();
 	}
 	
