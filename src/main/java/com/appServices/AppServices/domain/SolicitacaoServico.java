@@ -41,6 +41,8 @@ public class SolicitacaoServico implements Serializable{
 	@OneToMany(mappedBy="solicitacao")
 	private List<Orcamento> orcamento = new ArrayList<>();
 	
+	private int i;
+	
 	public SolicitacaoServico() {
 		
 	}
@@ -136,18 +138,43 @@ public class SolicitacaoServico implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Solicitação de Orçamento:");
-		builder.append( getId()+"\n");
-		builder.append("Produto:");
-		builder.append(getProdutoServico()+"\n");
-		builder.append("Cliente=");
+		builder.append("Olá prestador(a)! Nós do AppServices temos uma nova solicitação de serviço para você."+"\n");
+		builder.append( "Entre em seu aplicativo e seja o primeiro a enviar um orçamento para "+getCliente().getNome()+"!"+"\n");
+		builder.append("\n");
+		builder.append("----------- **   Solicitação de Serviço   ** -------------");
+		builder.append("\n");
+		builder.append("Cliente: ");
 		builder.append(getCliente().getNome() +" "+ getCliente().getSobrenome() + "\n");
-		builder.append(",Serviço=");
+		builder.append("Produto / Serviço: ");
+		builder.append(getProdutoServico()+"\n");
+		builder.append("\n");
+		builder.append("----------- ** Informações do Serviço ** -------------");
+		builder.append("\n"); 
 		for(ItensSolicitacao is : getItemServico()) {
-			builder.append(is.toString()+"\n");
+			builder.append(i +" ) "+LayoutItens(i++)+"\n");
+			builder.append(" - "+is.toString()+"\n");
 		}	
-		builder.append("]");
 		return builder.toString();
+	}
+
+	
+	private String LayoutItens(int i) {
+		// TODO Auto-generated method stub
+		String question="#";
+		
+		switch (i) {
+		case 0:
+			question =  "Detalhes do produto ou serviço: ";
+			break;
+		case 1:
+			question = "defeitos ou circunstâncias: "; 
+			break;
+		case 2:
+			question = "Desejo do cliente: "; 
+			break;
+		}
+		
+		return question;
 	}
 	
 	

@@ -85,9 +85,6 @@ public class ItensSolicitacao  implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("item:");
-		builder.append(getId()+"\n");
-		builder.append(", Detalhes do item:"+"\n");
 		builder.append(getDescricao());
 		return builder.toString();
 	}

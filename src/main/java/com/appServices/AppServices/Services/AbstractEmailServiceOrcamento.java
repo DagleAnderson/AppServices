@@ -39,7 +39,7 @@ public abstract class AbstractEmailServiceOrcamento implements EmailServiceOrcam
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(obj.getCliente().getEmail());
 		sm.setFrom(sender);
-		sm.setSubject(" Nova Solicitação de Serviço para você! Código:#"+obj.getId());
+		sm.setSubject(" Você tem um novo Orçamento! Código:#"+obj.getId());
 		sm.setSentDate(new Date(System.currentTimeMillis()));
 		sm.setText(obj.toString());
 		
