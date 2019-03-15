@@ -1,22 +1,17 @@
 package com.appServices.AppServices.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrcamentoNewDTO {
 	private Integer id;
 	private String produtoServico;
 	private Integer prestador;
 	private Integer cliente;
-	private String itemOrcamento1;
-	private String itemOrcamento2;
-	private String itemOrcamento3;
-	private Double quantidade1;
-	private Double quantidade2;
-	private Double quantidade3;
-	private Double desconto1;
-	private Double desconto2;
-	private Double desconto3;
-	private Double valorItem1;
-	private Double valorItem2;
-	private Double valorItem3;
+	private List<String> itemOrcamento = new ArrayList<>();
+	private List<Double> quantidade = new ArrayList<>();
+	private List<Double> descontoItem = new ArrayList<>();
+	private List<Double> valorItem =new ArrayList<>();
 	private Double desconto;
 	private Double total;
 	private Integer situacao;
@@ -58,124 +53,59 @@ public class OrcamentoNewDTO {
 	public void setCliente(Integer cliente) {
 		this.cliente = cliente;
 	}
-
-	public String getItemOrcamento1() {
-		return itemOrcamento1;
-	}
-
-	public void setItemOrcamento1(String itemOrcamento1) {
-		this.itemOrcamento1 = itemOrcamento1;
-	}
-
-	public String getItemOrcamento2() {
-		return itemOrcamento2;
-	}
-
-	public void setItemOrcamento2(String itemOrcamento2) {
-		this.itemOrcamento2 = itemOrcamento2;
-	}
-
-	public String getItemOrcamento3() {
-		return itemOrcamento3;
-	}
-
-	public void setItemOrcamento3(String itemOrcamento3) {
-		this.itemOrcamento3 = itemOrcamento3;
-	}
 	
 	
+	public List<String> getItemOrcamento() {
+		return itemOrcamento;
+	}
+
+
+	public void setItemOrcamento(List<String> itemOrcamento) {
+		this.itemOrcamento = itemOrcamento;
+	}
+
+
+	public List<Double> getQuantidade() {
+		return quantidade;
+	}
+
+
+	public void setQuantidade(List<Double> quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+
+	public List<Double> getValorItem() {
+		return valorItem;
+	}
+
+
+	public void setValorItem(List<Double> valorItem) {
+		this.valorItem = valorItem;
+	}
+
+
+	public List<Double> getDescontoItem() {
+		return descontoItem;
+	}
+
+
+	public void setDescontoItem(List<Double> descontoItem) {
+		this.descontoItem = descontoItem;
+	}
+
 	
-	public Double getQuantidade1() {
-		return quantidade1;
-	}
-
-
-	public void setQuantidade1(Double quantidade1) {
-		this.quantidade1 = quantidade1;
-	}
-
-
-	public Double getQuantidade2() {
-		return quantidade2;
-	}
-
-
-	public void setQuantidade2(Double quantidade2) {
-		this.quantidade2 = quantidade2;
-	}
-
-
-	public Double getQuantidade3() {
-		return quantidade3;
-	}
-
-
-	public void setQuantidade3(Double quantidade3) {
-		this.quantidade3 = quantidade3;
-	}
-
-
-	public Double getDesconto1() {
-		return desconto1;
-	}
-
-
-	public void setDesconto1(Double desconto1) {
-		this.desconto1 = desconto1;
-	}
-
-
-	public Double getDesconto2() {
-		return desconto2;
-	}
-
-
-	public void setDesconto2(Double desconto2) {
-		this.desconto2 = desconto2;
-	}
-
-
-	public Double getDesconto3() {
-		return desconto3;
-	}
-
-
-	public void setDesconto3(Double desconto3) {
-		this.desconto3 = desconto3;
-	}
-
-
-	public Double getValorItem1() {
-		return valorItem1;
-	}
-
-	public void setValorItem1(Double valorItem1) {
-		this.valorItem1 = valorItem1;
-	}
-
-	public Double getValorItem2() {
-		return valorItem2;
-	}
-
-	public void setValorItem2(Double valorItem2) {
-		this.valorItem2 = valorItem2;
-	}
-
-	public Double getValorItem3() {
-		return valorItem3;
-	}
-
-	public void setValorItem3(Double valorItem3) {
-		this.valorItem3 = valorItem3;
-	}
 
 	public Double getDesconto() {
 		return desconto;
 	}
 
+
 	public void setDesconto(Double desconto) {
 		this.desconto = desconto;
 	}
+
 
 	public Double getTotal() {
 		return total;

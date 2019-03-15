@@ -128,9 +128,18 @@ public class ItensOrcamento implements Serializable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("item:");
-		builder.append(getId()+"\n");
-		builder.append(", Detalhes do item:"+"\n");
-		builder.append(getItem());
+		builder.append(getItem()+"\n");
+		builder.append("quantidade :");
+		builder.append(getQuantidade()+"\n");
+		builder.append("desconto: ");
+		builder.append(getDesconto()+"\n");
+		builder.append("Valor :");
+		builder.append(getValor()+"\n");
+		
+		
+		
+		
+		
 		return builder.toString();
 	}
 	

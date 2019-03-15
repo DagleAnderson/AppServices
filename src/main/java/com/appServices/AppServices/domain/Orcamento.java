@@ -190,17 +190,24 @@ public class Orcamento implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Orçamento:");
-		builder.append( getId()+"\n");
+		builder.append("Olá "+getCliente().getNome() +" "+ getCliente().getSobrenome()+"!");
+		builder.append( "Você tem um novo orçamento para avaliação. Boa sorte na sua escolha!");
+		builder.append("\n");
+		builder.append("Orçamento Nº #"+getId()+"\n");
+		builder.append("Prestador:"+ getPrestador().getNomeFantasia()+"\n");
 		builder.append("Produto:");
 		builder.append(getProdutoServico()+"\n");
-		builder.append("Cliente=");
-		builder.append(getCliente().getNome() +" "+ getCliente().getSobrenome() + "\n");
-		builder.append(",Serviço=");
+		builder.append("\n");
+		builder.append("Itens do Orçamento");
+		builder.append("\n");
 		for(ItensOrcamento is : getItensOrcamento()) {
 			builder.append(is.toString()+"\n");
 		}	
-		builder.append("]");
+		builder.append("Desconto :");
+		builder.append(getDesconto()+"\n");
+		builder.append("Total:");
+		builder.append(getValorTotal());
+		
 		return builder.toString();
 	}
 	

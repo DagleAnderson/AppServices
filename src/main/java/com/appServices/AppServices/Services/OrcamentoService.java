@@ -1,6 +1,5 @@
 package com.appServices.AppServices.Services;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +23,11 @@ import com.appServices.AppServices.repositories.OrcamentoRepository;
 
 @Service
 public class OrcamentoService {
+	//atributos internos para obternção de valores
+	private String item;
+	private Double quantidade;
+	private Double descontoItem;
+	private Double valorItem;
 	
 	@Autowired
 	private OrcamentoRepository repository;
@@ -84,19 +88,26 @@ public class OrcamentoService {
 	
 	
 public Orcamento fromNewDTO(OrcamentoNewDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
-		
+
 		
 	Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),TipoSituacao.toEnum(objDTO.getSituacao()),solicitacao);
-		
-		ItensOrcamento itensOrcamento1 = new ItensOrcamento(null,objDTO.getItemOrcamento1(),objDTO.getQuantidade1(),objDTO.getDesconto1(),objDTO.getValorItem1(), orcamento);
-		ItensOrcamento itensOrcamento2 = new ItensOrcamento(null, objDTO.getItemOrcamento2(),objDTO.getQuantidade2(),objDTO.getDesconto2(),objDTO.getValorItem2(), orcamento);
-		ItensOrcamento itensOrcamento3 = new ItensOrcamento(null, objDTO.getItemOrcamento3(),objDTO.getQuantidade3(),objDTO.getDesconto3(),objDTO.getValorItem3(), orcamento);
-		
-		orcamento.getItensOrcamento().addAll(Arrays.asList(itensOrcamento1,itensOrcamento2,itensOrcamento3));
-		
-		return orcamento;
-	}
+	extractArrayItens(objDTO,orcamento);
 	
+	return orcamento;
+	}
+
+	private void extractArrayItens(OrcamentoNewDTO objDTO,Orcamento orcamento) {
+
+			for(int x=0; x < objDTO.getItemOrcamento().size();x++ ) {
+				 item = objDTO.getItemOrcamento().get(x);
+				 quantidade = objDTO.getQuantidade().get(x);
+				 descontoItem= objDTO.getDescontoItem().get(x);
+				 valorItem = objDTO.getValorItem().get(x);	
+				 ItensOrcamento itensOrcamento = new ItensOrcamento(null,item,quantidade,descontoItem,valorItem,orcamento);
+				 orcamento.getItensOrcamento().add(itensOrcamento);
+			}
+}
+
 	private void updateData(Orcamento newObj,Orcamento obj) {
 		newObj.setId(obj.getId());
 		newObj.setProdutoServico(obj.getProdutoServico());

@@ -151,14 +151,14 @@ public class SolicitacaoServico implements Serializable{
 		builder.append("----------- ** Informações do Serviço ** -------------");
 		builder.append("\n"); 
 		for(ItensSolicitacao is : getItemServico()) {
-			builder.append(i +" ) "+LayoutItens(i++)+"\n");
+			builder.append(i +" ) "+LayoutItensToString(i++)+"\n");
 			builder.append(" - "+is.toString()+"\n");
 		}	
 		return builder.toString();
 	}
 
 	
-	private String LayoutItens(int i) {
+	private String LayoutItensToString(int i) {
 		// TODO Auto-generated method stub
 		String question="#";
 		
