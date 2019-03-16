@@ -185,27 +185,71 @@ public class Pedido implements Serializable{
 	public void setOrcamento(Orcamento orcamento) {
 		this.orcamento = orcamento;
 	}
+	
+	
+
+	
+	public double getValorTotal() {
+		double soma = 0.0;
+		
+		for(ItensPedido itensPed: itensPedido ) {
+			soma = soma + itensPed.getSubTotal();
+		}
+		soma = soma - this.getDesconto();
+		
+		this.setTotal(soma);
+		
+		return soma;
+	}
+	
+	public double getDescontoTotal() {
+		double soma = 0.0;
+		
+		for(ItensPedido itensPed: itensPedido ) {
+			soma = soma + itensPed.getDesconto();
+		}
+		soma = soma + this.getDesconto();
+		
+	
+		return soma;
+	}
+	
 
 	@Override
 	public String toString() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		StringBuilder builder = new StringBuilder();
-		builder.append("Pedido :");
-		builder.append(getId());
-		builder.append(",data: ");
-		builder.append(getData());
-		builder.append(",Cliente:");
-		builder.append(getCliente());
-		builder.append(",Status do Pagamento:");
-		builder.append(getStatusPagamento());
+		builder.append("Olá "+getCliente().getNome() +" "+ getCliente().getSobrenome()+"!");
+		builder.append( "Foi gerado um novo pedido apartir do orcamento Nº");
+		builder.append(getOrcamento().getId()+"\n");
+		builder.append( "Logo "+ getPrestador().getNomeFantasia());
+		builder.append(" entrará em contato com você!"+"\n");
 		builder.append("\n");
-		builder.append("Itens:");
+		builder.append("-------------- **    Pedido Nº #"+getId()+"   ** ----------------"+"\n");
+		builder.append("\n");
+		builder.append("Data e hora: ");
+		builder.append(getData()+"\n");
+		builder.append("\n");
+		builder.append("Orçamento Efetivado Nº :");
+		builder.append(getOrcamento().getId()+"\n");
+		builder.append( "Prestador :");
+		builder.append(getPrestador().getNomeFantasia()+"\n");
+		builder.append("\n");
+		builder.append("------------- **   Itens do Pedido   ** ---------------"+"\n");
+		builder.append("\n");
 				for(ItensPedido itens : getItensPedido()) {
-					builder.append(itens.toString());
+					builder.append(itens.toString()+"\n");
 				}
+		builder.append("----------- **************************** -------------"+"\n");
+		builder.append("Desconto geral :");
+		builder.append(nf.format(getDesconto())+"\n"+"\n");		
 		
-		builder.append("Valor Total:");
-		builder.append(nf.format(getTotal()));
+		builder.append("------------------------- **  TOTAIS  ** --------------------------");
+		builder.append("\n");
+		builder.append("Total de desconto :");
+		builder.append(nf.format(getDescontoTotal())+"\n");
+		builder.append("Total do Orçamento :");
+		builder.append(nf.format(getValorTotal())+"\n");
 		
 		return builder.toString();
 	}

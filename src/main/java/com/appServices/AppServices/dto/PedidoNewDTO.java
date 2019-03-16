@@ -1,18 +1,18 @@
 package com.appServices.AppServices.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoNewDTO {
 	private Integer id;
 	private String produtoServico;
 	private Integer prestador;
 	private Integer cliente;
-	private String itemPedido1;
-	private String itemPedido2;
-	private String itemPedido3;
-	private Double valorItem1;
-	private Double valorItem2;
-	private Double valorItem3;
+	private List<String> itemPedido = new ArrayList<>();
+	private List<Double> valorItem = new ArrayList<>();
+	private List<Double> quantidade = new ArrayList<>();
+	private List<Double> descontoItem = new ArrayList<>();
 	private Double desconto;
 	private Double total;
 	private Date data;
@@ -56,52 +56,37 @@ public class PedidoNewDTO {
 		this.cliente = cliente;
 	}
 
-	public String getItemPedido1() {
-		return itemPedido1;
-	}
-
-	public void setItemPedido1(String itemPedido1) {
-		this.itemPedido1 = itemPedido1;
-	}
-
-	public String getItemPedido2() {
-		return itemPedido2;
-	}
-
-	public void setItemPedido2(String itemPedido2) {
-		this.itemPedido2 = itemPedido2;
-	}
-
-	public String getItemPedido3() {
-		return itemPedido3;
-	}
-
-	public void setItemPedido3(String itemPedido3) {
-		this.itemPedido3 = itemPedido3;
-	}
 	
-	public Double getValorItem1() {
-		return valorItem1;
+	public List<String> getItemPedido() {
+		return itemPedido;
 	}
 
-	public void setValorItem1(Double valorItem1) {
-		this.valorItem1 = valorItem1;
+	public void setItemPedido(List<String> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
-	public Double getValorItem2() {
-		return valorItem2;
+	public List<Double> getValorItem() {
+		return valorItem;
 	}
 
-	public void setValorItem2(Double valorItem2) {
-		this.valorItem2 = valorItem2;
+	public void setValorItem(List<Double> valorItem) {
+		this.valorItem = valorItem;
 	}
 
-	public Double getValorItem3() {
-		return valorItem3;
+	public List<Double> getQuantidade() {
+		return quantidade;
 	}
 
-	public void setValorItem3(Double valorItem3) {
-		this.valorItem3 = valorItem3;
+	public void setQuantidade(List<Double> quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public List<Double> getDescontoItem() {
+		return descontoItem;
+	}
+
+	public void setDescontoItem(List<Double> descontoItem) {
+		this.descontoItem = descontoItem;
 	}
 
 	public Double getDesconto() {

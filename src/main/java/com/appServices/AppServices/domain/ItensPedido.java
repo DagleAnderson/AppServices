@@ -1,6 +1,8 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,8 @@ public class ItensPedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String item;
+	private Double quantidade;
+	private Double desconto;
 	private Double valor;
 	
 	@JsonIgnore
@@ -30,9 +34,11 @@ public class ItensPedido implements Serializable {
 	public ItensPedido() {
 	}
 
-	public ItensPedido(Integer id, String item, Double valor, Pedido pedido) {
+	public ItensPedido(Integer id, String item,Double quantidade,Double desconto, Double valor, Pedido pedido) {
 		this.id = id;
 		this.item = item;
+		this.quantidade = quantidade;
+		this.desconto = desconto;
 		this.valor = valor;
 		this.pedido = pedido;
 	}
@@ -81,6 +87,23 @@ public class ItensPedido implements Serializable {
 	public Double getValor() {
 		return valor;
 	}
+	
+	
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
 
 	public void setValor(Double valor) {
 		this.valor = valor;
@@ -93,16 +116,24 @@ public class ItensPedido implements Serializable {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-
+	
+	public double getSubTotal(){
+		return (valor - desconto) * quantidade;
+	}
+	
 	@Override
 	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		StringBuilder builder = new StringBuilder();
-		builder.append("item=");
-		builder.append(getItem());
-		builder.append("\n");
-		builder.append("valor=");
-		builder.append(getValor());
-		builder.append("\n");
+		builder.append("item:");
+		builder.append(getItem()+"\n");
+		builder.append("quantidade :");
+		builder.append(getQuantidade()+"\n");
+		builder.append("desconto :");
+		builder.append(nf.format(getDesconto())+"\n");
+		builder.append("Valor :");
+		builder.append(nf.format(getValor())+"\n");
+		
 		return builder.toString();
 	}
 	

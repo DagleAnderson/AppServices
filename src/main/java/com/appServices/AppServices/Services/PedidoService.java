@@ -31,6 +31,13 @@ import com.appServices.AppServices.security.UserSpringSecurity;
 
 @Service
 public class PedidoService {
+	//atributos internos para obternção de valores
+	private String item;
+	private Double quantidade;
+	private Double descontoItem;
+	private Double valorItem;
+	
+
 	@Autowired
 	private PedidoRepository repository;
 
@@ -59,7 +66,7 @@ public class PedidoService {
 		
 		itensPedidoRepo.saveAll(obj.getItensPedido());
 		
-		emailServicePedido.sendOrderConfirmationHtmlEmail(obj);
+		emailServicePedido.sendOrderConfirmationEmail(obj);
 		
 		return obj;
 	}
@@ -96,15 +103,24 @@ public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestado
 		
 		
 	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(), TipoSituacao.toEnum(objDTO.getSituacao()),StatusPagamento.toEnum(objDTO.getStatusPagamento()),orcamento);
-		
-		ItensPedido itensPedido1 = new ItensPedido(null, objDTO.getItemPedido1(),objDTO.getValorItem1(), pedido);
-		ItensPedido itensPedido2 = new ItensPedido(null, objDTO.getItemPedido2(),objDTO.getValorItem2(), pedido);
-		ItensPedido itensPedido3 = new ItensPedido(null, objDTO.getItemPedido3(),objDTO.getValorItem3(), pedido);
-		
-		pedido.getItensPedido().addAll(Arrays.asList(itensPedido1,itensPedido2,itensPedido3));
+	extractArrayItens(objDTO,pedido);
 		
 		return pedido;
 	}
+	
+	private void extractArrayItens(PedidoNewDTO objDTO,Pedido pedido) {
+
+		for(int x=0; x < objDTO.getItemPedido().size();x++ ) {
+			 item = objDTO.getItemPedido().get(x);
+			 quantidade = objDTO.getQuantidade().get(x);
+			 descontoItem= objDTO.getDescontoItem().get(x);
+			 valorItem = objDTO.getValorItem().get(x);	
+			 ItensPedido itensPedido = new ItensPedido(null,item,quantidade,descontoItem,valorItem,pedido);
+			 pedido.getItensPedido().add(itensPedido);
+			 
+		}
+	}	
+	
 	
 	private void updateData(Pedido newObj,Pedido obj) {
 		newObj.setId(obj.getId());

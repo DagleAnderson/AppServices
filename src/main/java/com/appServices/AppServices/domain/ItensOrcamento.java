@@ -139,10 +139,6 @@ public class ItensOrcamento implements Serializable {
 		builder.append("Valor :");
 		builder.append(nf.format(getValor())+"\n");
 		
-		
-		
-		
-		
 		return builder.toString();
 	}
 	
