@@ -3,6 +3,7 @@ package com.appServices.AppServices.domain;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,6 +29,8 @@ public class Orcamento implements Serializable{
 	private Integer id;
 	
 	private String produtoServico;
+	
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn(name="prestador_id")
@@ -57,11 +60,12 @@ public class Orcamento implements Serializable{
 		
 	}
 	
-	public Orcamento(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double total, Double desc,
+	public Orcamento(Integer id,String produtoServico,Date data, Prestador prestador, Cliente cliente, Double desc,
 			TipoSituacao situacao,SolicitacaoServico solicitacao) {
 		this.id = id;
 		this.produtoServico = produtoServico;
 		this.prestador = prestador;
+		this.data = data;
 		this.cliente = cliente;
 		this.desconto = desc;
 		this.situacao = situacao.getCodigo();
@@ -119,7 +123,15 @@ public class Orcamento implements Serializable{
 		this.produtoServico = produtoServico;
 	}
 
+	
 
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
 
 	public Prestador getPrestador() {
 		return prestador;
@@ -129,6 +141,7 @@ public class Orcamento implements Serializable{
 		this.prestador = prestador;
 	}
 
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -158,6 +171,11 @@ public class Orcamento implements Serializable{
 		this.desconto = desc;
 	}
 
+	
+	public Double getTotal() {
+		return getValorTotal();
+	}
+
 	public TipoSituacao getSituacao() {
 		return TipoSituacao.toEnum(situacao);
 	}
@@ -185,9 +203,9 @@ public class Orcamento implements Serializable{
 		for(ItensOrcamento itensOrc: itensOrcamento ) {
 			soma = soma + itensOrc.getSubTotal();
 		}
-		soma = soma - this.getDesconto();
+			soma = soma - this.getDesconto();
 		
-		return soma;
+		return  soma;
 	}
 	
 	public double getDescontoTotal() {
@@ -196,6 +214,7 @@ public class Orcamento implements Serializable{
 		for(ItensOrcamento itensOrc: itensOrcamento ) {
 			soma = soma + itensOrc.getDesconto();
 		}
+		
 		soma = soma + this.getDesconto();
 		
 		return soma;

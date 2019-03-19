@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +53,7 @@ public class OrcamentoResource implements Serializable{
 		
 		return ResponseEntity.ok().body(objOp);
 	}
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
@@ -114,5 +116,21 @@ public class OrcamentoResource implements Serializable{
 		
 		return ResponseEntity.ok().body(listDto);
 	}
-
+	
+	//GetList Orcamentos por solilicitação
+	@RequestMapping(value="/list",method = RequestMethod.GET)
+	public ResponseEntity<Page<OrcamentoDTO>> findAllBySolicitacaoPage(
+			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao,
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
+		
+		Page<Orcamento> objList =service.search(solicitacao, page, linesPerPage, orderBy, direction);
+		
+		Page<OrcamentoDTO> listOrcamento= objList.map(obj -> new OrcamentoDTO(obj));
+		
+		return ResponseEntity.ok().body(listOrcamento);
+	}
 }

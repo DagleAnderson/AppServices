@@ -25,6 +25,7 @@ public class SolicitacaoServico implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String produtoServico;
+	private Date data;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -47,9 +48,10 @@ public class SolicitacaoServico implements Serializable{
 		
 	}
 	
-	public SolicitacaoServico(Integer id, String produtoServico, Cliente cliente, Profissao profissao) {
+	public SolicitacaoServico(Integer id, String produtoServico,Date data, Cliente cliente, Profissao profissao) {
 		this.id = id;
 		this.produtoServico = produtoServico;
+		this.data = data;
 		this.cliente = cliente;
 		this.profissao = profissao;
 	}
@@ -107,6 +109,16 @@ public class SolicitacaoServico implements Serializable{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public List<ItensSolicitacao> getItemServico() {
@@ -167,7 +179,7 @@ public class SolicitacaoServico implements Serializable{
 			question =  "Detalhes do produto ou serviço: ";
 			break;
 		case 1:
-			question = "defeitos ou circunstâncias: "; 
+			question = "Defeitos ou circunstâncias: "; 
 			break;
 		case 2:
 			question = "Desejo do cliente: "; 

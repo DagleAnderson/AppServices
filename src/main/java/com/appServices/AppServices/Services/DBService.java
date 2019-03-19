@@ -18,13 +18,16 @@ import com.appServices.AppServices.domain.EnderecoCliente;
 import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Estado;
 import com.appServices.AppServices.domain.Experiencias;
+import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.domain.ItensSolicitacao;
+import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
+import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.repositories.AvaliacoesRepository;
 import com.appServices.AppServices.repositories.CategoriaRepository;
 import com.appServices.AppServices.repositories.CidadeRepository;
@@ -35,7 +38,9 @@ import com.appServices.AppServices.repositories.EnderecoClienteRepository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRepository;
 import com.appServices.AppServices.repositories.EstadoRepository;
 import com.appServices.AppServices.repositories.ExperienciasRepository;
+import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
+import com.appServices.AppServices.repositories.OrcamentoRepository;
 import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
 import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
@@ -81,6 +86,13 @@ public class DBService {
 	
 	@Autowired
 	private ItensSolicitacaoRepository itensSolicitacaoRepository;
+	
+	
+	@Autowired
+	private OrcamentoRepository orcamentoRepository;
+	
+	@Autowired
+	private ItensOrcamentoRepository itensOrcamentoRespository;
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
@@ -246,35 +258,45 @@ public class DBService {
 		prest1.setCurriculo(c1);
 		prest2.setCurriculo(c2);
 		
-		//Solicitacao de Servico
+		//Solicitacao de Servico,Orcamento e Pedido
 		
-		SolicitacaoServico solicitacao = new SolicitacaoServico(null, "computador", cli1, prof1);
-		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao);
-		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao);
-		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, "formatação", solicitacao);
-		solicitacao.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
-
+		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "computador",data.parse("05/04/2019 00:00"), cli1, prof1);
+		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao1);
+		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao1);
+		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, "formatação", solicitacao1);
+		solicitacao1.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		solicitacaoRepository.save(solicitacao);
+		SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1);
+		ItensSolicitacao itensSolicitacao4 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
+		ItensSolicitacao itensSolicitacao5 = new ItensSolicitacao(null, "quebrado", solicitacao2);
+		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
+		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		//Avaliações de clientes
-		Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
-		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
+		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1);
+		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
+		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
+		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);
+		solicitacao3.getItemServico().addAll(Arrays.asList(itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));
 		
-		itensSolicitacaoRepository.saveAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
+		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli1 ,0.0, TipoSituacao.APROVADO, solicitacao1);
+		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento1);
+		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento1);
+		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento1);
+		orcamento1.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
 		
-		prestadorRepository.saveAll(Arrays.asList(prest1,prest2,prest3,prest4,prest5));
-		enderecoPrestadorRepository.saveAll(Arrays.asList(end6,end7,end8,end9,end10));
-
+		Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli1 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
+		ItensOrcamento itensOrc4 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento2);
+		ItensOrcamento itensOrc5 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento2);
+		ItensOrcamento itensOrc6 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento2);
+		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
 		
-		//savando dados em BD
-		curriculoRepository.saveAll(Arrays.asList(c1,c2));
-		cursosRespository.saveAll(Arrays.asList(curso1,curso2,curso3));
-		experienciasRespository.saveAll(Arrays.asList(exp1));
+		Orcamento orcamento3 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli1 ,0.0, TipoSituacao.ANALISE, solicitacao3);
+		ItensOrcamento itensOrc7 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento3);
+		ItensOrcamento itensOrc8 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento3);
+		ItensOrcamento itensOrc9 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento3);
+		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc7,itensOrc8,itensOrc9));
+		
 		 
-		 avaliacoesRespository.saveAll(Arrays.asList(aval1));
-		 
-		
 		 //Estados
 		 Estado estado1 = new Estado(null, "Bahia");
 		 Estado estado2 = new Estado(null, "Piaui");
@@ -289,9 +311,37 @@ public class DBService {
 		 
 		 Cidade cidade6 = new Cidade(null, "Corrente", estado2);
 		 Cidade cidade7 = new Cidade(null, "Terezina", estado2);
+		
+		
+		//Avaliações de clientes
+		Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
+		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
 		 
+		
+		
+		//savando dados em  BD
+		 prestadorRepository.saveAll(Arrays.asList(prest1,prest2,prest3,prest4,prest5));
+		enderecoPrestadorRepository.saveAll(Arrays.asList(end6,end7,end8,end9,end10));
+		
+		curriculoRepository.saveAll(Arrays.asList(c1,c2));
+		cursosRespository.saveAll(Arrays.asList(curso1,curso2,curso3));
+		experienciasRespository.saveAll(Arrays.asList(exp1));
 		 
-		 //salvando dados
+		 avaliacoesRespository.saveAll(Arrays.asList(aval1));
+		 
+		 solicitacaoRepository.saveAll(Arrays.asList(solicitacao1,solicitacao2,solicitacao3));
+		 itensSolicitacaoRepository.saveAll(Arrays.asList(
+				 itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
+				 itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
+				 itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));
+		 
+		 orcamentoRepository.saveAll(Arrays.asList(orcamento1,orcamento2,orcamento3));
+		 itensOrcamentoRespository.saveAll(Arrays.asList(
+				 itensOrc1,itensOrc2,itensOrc3,
+				 itensOrc4,itensOrc5,itensOrc6,
+				 itensOrc7,itensOrc8,itensOrc9
+				 ));
+		 
 		 
 		 estadoRepository.saveAll(Arrays.asList(estado1,estado2));
 		 cidadeRepository.saveAll(Arrays.asList(cidade1,cidade2,cidade3,cidade4,cidade5,cidade6,cidade7));

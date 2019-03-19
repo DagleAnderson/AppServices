@@ -1,11 +1,13 @@
 package com.appServices.AppServices.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OrcamentoNewDTO {
 	private Integer id;
 	private String produtoServico;
+	private Date data;
 	private Integer prestador;
 	private Integer cliente;
 	private List<String> itemOrcamento = new ArrayList<>();
@@ -33,6 +35,17 @@ public class OrcamentoNewDTO {
 	public String getProdutoServico() {
 		return produtoServico;
 	}
+	
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 
 	public void setProdutoServico(String produtoServico) {
 		this.produtoServico = produtoServico;

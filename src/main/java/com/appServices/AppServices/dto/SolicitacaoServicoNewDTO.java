@@ -1,8 +1,11 @@
 package com.appServices.AppServices.dto;
 
+import java.util.Date;
+
 public class SolicitacaoServicoNewDTO {
 	private Integer id;
 	private String produtoServico;
+	private Date data;
 	private Integer cliente;
 	private String itemSolicitacao1;
 	private String itemSolicitacao2;
@@ -22,6 +25,15 @@ public class SolicitacaoServicoNewDTO {
 	public String getProdutoServico() {
 		return produtoServico;
 	}
+	
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 	public void setProdutoServico(String produtoServico) {
 		this.produtoServico = produtoServico;
 	}

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Prestador implements Serializable {
@@ -40,6 +42,10 @@ public class Prestador implements Serializable {
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="prestador")
 	private Curriculo curriculo;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy ="prestador")
+	private List<Orcamento> orcamentos = new ArrayList<>();
 
 	@OneToMany(cascade=CascadeType.ALL,mappedBy = "prestador")
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
@@ -147,6 +153,16 @@ public class Prestador implements Serializable {
 
 	public void setCurriculo(Curriculo curriculo) {
 		this.curriculo = curriculo;
+	}
+	
+	
+
+	public List<Orcamento> getOrcamentos() {
+		return orcamentos;
+	}
+
+	public void setOrcamentos(List<Orcamento> orcamentos) {
+		this.orcamentos = orcamentos;
 	}
 
 	public List<Avaliacoes> getAvaliacoes() {

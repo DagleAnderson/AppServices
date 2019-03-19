@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
@@ -19,6 +22,7 @@ import com.appServices.AppServices.dto.OrcamentoDTO;
 import com.appServices.AppServices.dto.OrcamentoNewDTO;
 import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
+import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
 
 
 @Service
@@ -34,6 +38,9 @@ public class OrcamentoService {
 
 	@Autowired
 	private ItensOrcamentoRepository itensOrcamentoRepo;
+	
+	@Autowired 
+	private SolicitacaoServicoRepository solicitacaoRepository;
 	
 	@Autowired
 	private EmailServiceOrcamento emailService;
@@ -79,18 +86,27 @@ public class OrcamentoService {
 		return repository.findAll();
 	}
 	
+	public Page<Orcamento> search(Integer idSolicitacao,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<SolicitacaoServico> solicitacao = solicitacaoRepository.findById(idSolicitacao); 
+		return repository.search(solicitacao,pageRequest);
+	}
+	
+	
 	public Orcamento fromDTO(OrcamentoDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
-		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getSituacao(),solicitacao);
+		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(),prestador, cliente, objDTO.getDesconto(),objDTO.getSituacao(),solicitacao);
 		return orcamento;
 	}
 	
 	
 	
-public Orcamento fromNewDTO(OrcamentoNewDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
+	public Orcamento fromNewDTO(OrcamentoNewDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
 		
-	Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),TipoSituacao.toEnum(objDTO.getSituacao()),solicitacao);
+	Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(), prestador, cliente, objDTO.getDesconto(),TipoSituacao.toEnum(objDTO.getSituacao()),solicitacao);
 	extractArrayItens(objDTO,orcamento);
 	
 	return orcamento;

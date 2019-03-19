@@ -81,7 +81,7 @@ public class SolicitacaoServicoService {
 	
 	public SolicitacaoServico fromDTO(SolicitacaoServicoDTO objDTO,Cliente cliente, Profissao profissao) {
 
-		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),cliente, null);
+		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),objDTO.getData(),cliente, null);
 
 		return solicitacaoServ;
 	}
@@ -91,7 +91,7 @@ public class SolicitacaoServicoService {
 public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cliente, Profissao profissao) {
 		
 		
-		SolicitacaoServico SolicitacaoServico = new SolicitacaoServico(objDTO.getId(), objDTO.getProdutoServico(), cliente, profissao);
+		SolicitacaoServico SolicitacaoServico = new SolicitacaoServico(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(), cliente, profissao);
 		
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, objDTO.getItemSolicitacao1(), SolicitacaoServico);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, objDTO.getItemSolicitacao2(), SolicitacaoServico);

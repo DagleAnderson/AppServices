@@ -1,5 +1,7 @@
 package com.appServices.AppServices.dto;
 
+import java.util.Date;
+
 import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,11 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class OrcamentoDTO {
 	private Integer id;
 	private String produtoServico;
+	private Date data;
 	
 	@JsonIgnore
 	private Integer prestadorId;
 	
-	private String prestadorNome;
+	private String prestador;
 	
 	@JsonIgnore
 	private Integer cliente;
@@ -29,9 +32,10 @@ public class OrcamentoDTO {
 		this.id = obj.getId();
 		this.produtoServico = obj.getProdutoServico();
 		this.prestadorId = obj.getPrestador().getId();
-		this.prestadorNome = obj.getPrestador().getNomeFantasia();
+		this.prestador = obj.getPrestador().getNomeFantasia();
 		this.cliente = obj.getCliente().getId();
 		this.desconto = obj.getDesconto();
+		this.total = obj.getTotal();
 		this.situacao = obj.getSituacao().getCodigo();
 		
 	}
@@ -47,6 +51,15 @@ public class OrcamentoDTO {
 	public String getProdutoServico() {
 		return produtoServico;
 	}
+	
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
 
 	public void setProdutoServico(String produtoServico) {
 		this.produtoServico = produtoServico;
@@ -61,12 +74,12 @@ public class OrcamentoDTO {
 	}
 
 	
-	public String getPrestadorNome() {
-		return prestadorNome;
+	public String getPrestador() {
+		return prestador;
 	}
 
-	public void setPrestadorNome(String prestadorNome) {
-		this.prestadorNome = prestadorNome;
+	public void setPrestador(String prestador) {
+		this.prestador = prestador;
 	}
 
 	public Integer getCliente() {
