@@ -233,7 +233,7 @@ public class DBService {
 		EnderecoPrestador end7 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 		prest2.setEndereco(end7);
 		
-		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral","domiciliar", cli3,prof1);	
+		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral","domiciliar", cli3,prof2);	
 		EnderecoPrestador end8 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest3);
 		prest3.setEndereco(end8);
 		

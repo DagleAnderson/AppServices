@@ -1,6 +1,8 @@
 package com.appServices.AppServices.Services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -14,6 +16,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.appServices.AppServices.domain.Cliente;
+import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 
 public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSolicitacao{
@@ -27,6 +30,8 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
+	List<String> emails = new ArrayList<>();
+		
 	@Override
 	public void sendOrderConfirmationEmail(SolicitacaoServico obj){
 		
@@ -37,17 +42,29 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	protected SimpleMailMessage prepareSimpleMailMessageFromSolicitacao(SolicitacaoServico obj) {
 		// TODO Auto-generated method stub
 		SimpleMailMessage sm = new SimpleMailMessage();
-		sm.setTo(obj.getCliente().getEmail());
-		sm.setTo(obj.getProfissao().getPrestador().toString());
+		GetEmailsPrestadores(obj);
+		sm.setTo(emails.toArray(new String[emails.size()]));
 		sm.setFrom(sender);
 		sm.setSubject(" Nova Solicitação de Serviço para você! Código:#"+obj.getId());
 		sm.setSentDate(new Date(System.currentTimeMillis()));
-		sm.setText(obj.toString());
-		
+		sm.setText(obj.toString());		
+			
 		return sm;
 	}
 	
 	
+	private void GetEmailsPrestadores(SolicitacaoServico obj) {
+		for( int n=0; n < obj.getProfissao().getPrestador().size();n++) {
+			Prestador prestEmail = new Prestador();
+				prestEmail = obj.getProfissao().getPrestador().get(n);
+				String emailsPrestadores = prestEmail.getCliente().getEmail();
+			
+				emails.add(emailsPrestadores);		
+		}
+		
+		
+	}
+
 	protected String htmlFromTemplateSolicitacao(SolicitacaoServico obj) {
 		Context context = new Context();
 		context.setVariable("Solicitação de Serviço", obj);
