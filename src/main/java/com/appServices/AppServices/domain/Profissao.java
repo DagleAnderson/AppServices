@@ -31,6 +31,11 @@ public class Profissao implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy ="profissao")
 	private List<SolicitacaoServico> solicitacao = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy ="profissao")
+	private List<Prestador> prestador = new ArrayList<>();
+	
 
 	public Profissao() {
 
@@ -97,6 +102,14 @@ public class Profissao implements Serializable {
 
 	public void setSolicitacao(List<SolicitacaoServico> solicitacao) {
 		this.solicitacao = solicitacao;
+	}
+
+	public List<Prestador> getPrestador() {
+		return prestador;
+	}
+
+	public void setPrestador(List<Prestador> prestador) {
+		this.prestador = prestador;
 	}
 	
 	

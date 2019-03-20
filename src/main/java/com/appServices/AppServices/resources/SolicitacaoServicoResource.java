@@ -59,6 +59,8 @@ public class SolicitacaoServicoResource {
 		
 		SolicitacaoServico obj = service.fromNewDTO(objDTO,cli,prof);
 		
+		
+		
 		obj = service.insert(obj);
 		
 		

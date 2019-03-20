@@ -117,12 +117,12 @@ public class DBService {
 		cli1.setEndereco(end1);
 		
 		
-		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"teste@hotmail.com");	
+		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"dagleandersonlima@gmail.com");	
 		cli2.addPerfil(TipoPerfil.ADMIN);
 		cli2.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end2 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli2);
 		cli2.setEndereco(end2);
-		Cliente cli3 = new Cliente(null,"Inove lima ","",data.parse("05/12/1965 00:00"),"123453678","789456123",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"test2e@hotmail.com");	
+		Cliente cli3 = new Cliente(null,"Inove lima ","",data.parse("05/12/1965 00:00"),"123453678","789456123",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"appservicesba@gmail.com");	
 		cli3.getTelefones().addAll(Arrays.asList("77-991489740"));
 		EnderecoCliente end3 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli3);
 		cli3.setEndereco(end3);
@@ -225,15 +225,15 @@ public class DBService {
 					));
 		
 		//Cadsatro de Prestador	
-		Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli1,prof1);	
+		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral","domiciliar", cli1,prof1);	
 		EnderecoPrestador end6 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 				prest1.setEndereco(end6);
 				
-		Prestador prest2 = new Prestador(null,"Jessica Manicure","unhas em geral","domiciliar", cli2,prof1);	
+		Prestador prest2 = new Prestador(null,"Ceará Pinturas","pinturas em Geral","domiciliar", cli2,prof1);	
 		EnderecoPrestador end7 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 		prest2.setEndereco(end7);
 		
-		Prestador prest3 = new Prestador(null,"Domesticos e Cia","casas em geral","domiciliar", cli3,prof3);	
+		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral","domiciliar", cli3,prof1);	
 		EnderecoPrestador end8 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest3);
 		prest3.setEndereco(end8);
 		

@@ -38,6 +38,7 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 		// TODO Auto-generated method stub
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(obj.getCliente().getEmail());
+		sm.setTo(obj.getProfissao().getPrestador().toString());
 		sm.setFrom(sender);
 		sm.setSubject(" Nova Solicitação de Serviço para você! Código:#"+obj.getId());
 		sm.setSentDate(new Date(System.currentTimeMillis()));
@@ -72,7 +73,7 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true );
 		mmh.setTo(obj.getCliente().getEmail());
 		mmh.setFrom(sender);
-		mmh.setSubject("Pedido Confirmado! Código:"+ obj.getId());
+		mmh.setSubject("Nova Solicitação de Serviço para você! Código:#"+ obj.getId());
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
 		mmh.setText(htmlFromTemplateSolicitacao(obj),true);
 		
