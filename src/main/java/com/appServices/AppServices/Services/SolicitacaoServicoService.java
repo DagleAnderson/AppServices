@@ -15,6 +15,7 @@ import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.ItensSolicitacao;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoNewDTO;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
@@ -81,7 +82,7 @@ public class SolicitacaoServicoService {
 	
 	public SolicitacaoServico fromDTO(SolicitacaoServicoDTO objDTO,Cliente cliente, Profissao profissao) {
 
-		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),objDTO.getData(),cliente, null);
+		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),objDTO.getData(),cliente,null,objDTO.getStatusSolicitacao());
 
 		return solicitacaoServ;
 	}
@@ -91,7 +92,8 @@ public class SolicitacaoServicoService {
 public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cliente, Profissao profissao) {
 		
 		
-		SolicitacaoServico SolicitacaoServico = new SolicitacaoServico(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(), cliente, profissao);
+		SolicitacaoServico SolicitacaoServico = new SolicitacaoServico(objDTO.getId(), objDTO.getProdutoServico()
+				,objDTO.getData(), cliente, profissao,StatusSolicitacao.toEnum(objDTO.getStatusSolicitacao()));
 		
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, objDTO.getItemSolicitacao1(), SolicitacaoServico);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, objDTO.getItemSolicitacao2(), SolicitacaoServico);

@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.appServices.AppServices.domain.enums.StatusSolicitacao;
+import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -26,6 +28,7 @@ public class SolicitacaoServico implements Serializable{
 	private Integer id;
 	private String produtoServico;
 	private Date data;
+	private Integer statusSolicitacao;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -48,12 +51,13 @@ public class SolicitacaoServico implements Serializable{
 		
 	}
 	
-	public SolicitacaoServico(Integer id, String produtoServico,Date data, Cliente cliente, Profissao profissao) {
+	public SolicitacaoServico(Integer id, String produtoServico,Date data, Cliente cliente, Profissao profissao,StatusSolicitacao status) {
 		this.id = id;
 		this.produtoServico = produtoServico;
 		this.data = data;
 		this.cliente = cliente;
 		this.profissao = profissao;
+		this.statusSolicitacao =  status.getCod();
 	}
 
 	
@@ -144,6 +148,15 @@ public class SolicitacaoServico implements Serializable{
 
 	public void setOrcamento(List<Orcamento> orcamento) {
 		this.orcamento = orcamento;
+	}
+	
+	
+	public StatusSolicitacao getStatusSolicitacao() {
+		return StatusSolicitacao.toEnum(statusSolicitacao);
+	}
+
+	public void setStatusSolicitacao(StatusSolicitacao status) {
+		this.statusSolicitacao = status.getCod();
 	}
 	
 	

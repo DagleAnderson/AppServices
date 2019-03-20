@@ -1,14 +1,14 @@
 package com.appServices.AppServices.domain.enums;
 
-public enum StatusPagamento {
-	ABERTO(1,"ABERTO"),
-	FEHCADO(2,"FECHADO");
+public enum StatusSolicitacao {
+	ABERTA(1,"ABERTA"),
+	FECHADA(2,"FECHADA");
 	
 	private Integer cod;
 	private String nome;
 	
 	
-	private StatusPagamento(Integer codigo, String nome){
+	private StatusSolicitacao(Integer codigo, String nome){
 		this.cod = codigo;
 		this.nome = nome;
 	}
@@ -33,11 +33,11 @@ public enum StatusPagamento {
 		this.nome = nome;
 	}
 	
-	public static StatusPagamento toEnum(Integer cod) {
+	public static StatusSolicitacao toEnum(Integer cod) {
 		if(cod==null) {
 			return null;
 		}
-		for(StatusPagamento x : StatusPagamento.values()) {
+		for(StatusSolicitacao x : StatusSolicitacao.values()) {
 			if(cod.equals(x.getCod())) {
 				return x;
 			}

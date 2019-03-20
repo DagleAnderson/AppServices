@@ -24,6 +24,7 @@ import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
@@ -260,19 +261,19 @@ public class DBService {
 		
 		//Solicitacao de Servico,Orcamento e Pedido
 		
-		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "computador",data.parse("05/04/2019 00:00"), cli1, prof1);
+		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "computador",data.parse("05/04/2019 00:00"), cli1, prof1,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao1);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao1);
 		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, "formatação", solicitacao1);
 		solicitacao1.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1);
+		SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao4 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao5 = new ItensSolicitacao(null, "quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
 		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1);
+		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1,StatusSolicitacao.FECHADA);
 		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);

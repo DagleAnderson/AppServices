@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 
 public class SolicitacaoServicoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -13,6 +14,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 	private String produtoServico;
 	private String profissao;
 	private Date data;
+	private Integer statusSolicitacao;
 	
 	public SolicitacaoServicoDTO() {
 		
@@ -23,6 +25,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 		this.produtoServico = objDTO.getProdutoServico();
 		this.profissao = objDTO.getProfissao().getNome();
 		this.data = objDTO.getData();
+		this.statusSolicitacao = objDTO.getStatusSolicitacao().getCod();
 	}
 
 	public Integer getId() {
@@ -56,6 +59,15 @@ public class SolicitacaoServicoDTO implements Serializable{
 
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
+	}
+	
+	
+	public StatusSolicitacao getStatusSolicitacao() {
+		return StatusSolicitacao.toEnum(statusSolicitacao);
+	}
+
+	public void setStatusSolicitacao(StatusSolicitacao status) {
+		this.statusSolicitacao = status.getCod();
 	}
 	
 	

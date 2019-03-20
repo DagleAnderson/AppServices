@@ -11,7 +11,9 @@ public class SolicitacaoServicoNewDTO {
 	private String itemSolicitacao2;
 	private String itemSolicitacao3;
 	private Integer profissao;
+	private Integer statusSolicitacao;
 	
+
 	public SolicitacaoServicoNewDTO() {
 		
 	}
@@ -66,6 +68,14 @@ public class SolicitacaoServicoNewDTO {
 	}
 	public void setProfissao(Integer profissao) {
 		this.profissao = profissao;
+	}
+	
+	public Integer getStatusSolicitacao() {
+		return statusSolicitacao;
+	}
+
+	public void setStatusSolicitacao(Integer statusSolicitacao) {
+		this.statusSolicitacao = statusSolicitacao;
 	}
 	
 	
