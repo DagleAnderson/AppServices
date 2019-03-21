@@ -86,14 +86,6 @@ public class OrcamentoService {
 		return repository.findAll();
 	}
 	
-	public Page<Orcamento> search(Integer idSolicitacao,Integer page, Integer linesPerPage,String orderBy,String direction){
-		
-		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		
-		Optional<SolicitacaoServico> solicitacao = solicitacaoRepository.findById(idSolicitacao); 
-		return repository.search(solicitacao,pageRequest);
-	}
-	
 	
 	public Orcamento fromDTO(OrcamentoDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
@@ -130,5 +122,14 @@ public class OrcamentoService {
 		newObj.setDesconto(obj.getDesconto());
 		newObj.setSituacao(obj.getSituacao());
 		
+	}
+	
+	public Page<Orcamento> search(Integer idSolicitacao,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<SolicitacaoServico> solicitacao = solicitacaoRepository.findById(idSolicitacao);
+		
+		return repository.search(solicitacao,pageRequest);
 	}
 }

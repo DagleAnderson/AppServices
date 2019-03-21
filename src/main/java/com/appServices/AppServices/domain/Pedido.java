@@ -55,12 +55,11 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double total, Double desconto, Date data,TipoSituacao situacao,StatusPagamento statusPg,Orcamento orcamento) {
+	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double desconto, Date data,TipoSituacao situacao,StatusPagamento statusPg,Orcamento orcamento) {
 		this.id = id;
 		this.produtoServico = produtoServico;
 		this.prestador = prestador;
 		this.cliente = cliente;
-		this.total = total;
 		this.desconto = desconto;
 		this.data = data;
 		this.situacao = situacao.getCodigo();
@@ -139,7 +138,7 @@ public class Pedido implements Serializable{
 	}
 
 	public Double getTotal() {
-		return total;
+		return this.getValorTotal();
 	}
 
 	public void setTotal(Double total) {

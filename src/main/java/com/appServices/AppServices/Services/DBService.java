@@ -19,11 +19,14 @@ import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Estado;
 import com.appServices.AppServices.domain.Experiencias;
 import com.appServices.AppServices.domain.ItensOrcamento;
+import com.appServices.AppServices.domain.ItensPedido;
 import com.appServices.AppServices.domain.ItensSolicitacao;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
@@ -40,8 +43,10 @@ import com.appServices.AppServices.repositories.EnderecoPrestadorRepository;
 import com.appServices.AppServices.repositories.EstadoRepository;
 import com.appServices.AppServices.repositories.ExperienciasRepository;
 import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
+import com.appServices.AppServices.repositories.ItensPedidoRepository;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
+import com.appServices.AppServices.repositories.PedidoRepository;
 import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
 import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
@@ -88,12 +93,17 @@ public class DBService {
 	@Autowired
 	private ItensSolicitacaoRepository itensSolicitacaoRepository;
 	
-	
 	@Autowired
 	private OrcamentoRepository orcamentoRepository;
 	
 	@Autowired
 	private ItensOrcamentoRepository itensOrcamentoRespository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ItensPedidoRepository itensPedidoRepository;
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
@@ -185,6 +195,9 @@ public class DBService {
 		Profissao prof31= new Profissao(null, "Instrutor",areaProf4);
 		Profissao prof32= new Profissao(null, "Nutricionista",areaProf4);
 		Profissao prof33= new Profissao(null, "Personal",areaProf4);
+		
+		Categoria areaProf5 = new Categoria(null,"Educação");
+		Categoria areaProf6 = new Categoria(null,"Eletrodomésticos");
 
 		
 			areaProf1.getProfissoes().addAll(Arrays.asList(
@@ -209,7 +222,7 @@ public class DBService {
 					prof30,prof31,prof32,prof33
 					));
 			
-			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3,areaProf4));
+			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3,areaProf4,areaProf5,areaProf6));
 			servicosRepository.saveAll(Arrays.asList(
 					prof1,prof2,prof3,
 					prof4,prof5,prof6,
@@ -296,6 +309,13 @@ public class DBService {
 		ItensOrcamento itensOrc8 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento3);
 		ItensOrcamento itensOrc9 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento3);
 		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc7,itensOrc8,itensOrc9));
+
+
+		Pedido pedido1 = new Pedido(null,"computador", prest1, cli1 ,0.0,data.parse("10/04/2019 22:00"), TipoSituacao.APROVADO,StatusPagamento.ABERTO, orcamento1);
+		ItensPedido itensPed1 = new ItensPedido(null, "memória", 1.0, 0.0, 200.0, pedido1);
+		ItensPedido itensPed2 = new ItensPedido(null, "formatação", 1.0, 0.0, 80.0, pedido1);
+		ItensPedido itensPed3 = new ItensPedido(null, "limpeza", 1.0, 0.0, 20.0, pedido1);
+		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
 		
 		 
 		 //Estados
@@ -342,6 +362,9 @@ public class DBService {
 				 itensOrc4,itensOrc5,itensOrc6,
 				 itensOrc7,itensOrc8,itensOrc9
 				 ));
+		 
+		 pedidoRepository.saveAll(Arrays.asList(pedido1));
+		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
 		 
 		 
 		 estadoRepository.saveAll(Arrays.asList(estado1,estado2));

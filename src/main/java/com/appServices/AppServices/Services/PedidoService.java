@@ -1,6 +1,6 @@
 package com.appServices.AppServices.Services;
 
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +26,7 @@ import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
 import com.appServices.AppServices.repositories.ItensPedidoRepository;
+import com.appServices.AppServices.repositories.OrcamentoRepository;
 import com.appServices.AppServices.repositories.PedidoRepository;
 import com.appServices.AppServices.security.UserSpringSecurity;
 
@@ -42,13 +43,16 @@ public class PedidoService {
 	private PedidoRepository repository;
 
 	@Autowired
-	private ItensPedidoRepository itensPedidoRepo;	
+	private ItensPedidoRepository itensPedidoRepo;
+	
+	private OrcamentoService orcamentoService;
 	
 	@Autowired
 	private EmailServicePedido emailServicePedido;
 	
 	@Autowired
 	private ClienteService clienteService;
+	
 	
 	public Pedido find(Integer id) {
 
@@ -57,6 +61,19 @@ public class PedidoService {
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id:" + id + ", Tipo: " + SolicitacaoServico.class.getName()));
 	}
+	
+	
+	public Page<Pedido> findByOrcamento(Integer id,Integer page, Integer linesPerPage,String orderBy,String direction) {
+
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Orcamento orcamento = orcamentoService.find(id);
+		
+		return repository.findByOrcamento(orcamento,pageRequest);
+	
+	}
+	
+	
 
 	@Transactional
 	public Pedido insert(Pedido obj) {
@@ -93,7 +110,7 @@ public class PedidoService {
 	
 	public Pedido fromDTO(PedidoDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
 
-		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(),objDTO.getSituacao(),objDTO.getStatusPagamento(),orcamento);		
+		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(),objDTO.getSituacao(),objDTO.getStatusPagamento(),orcamento);		
 		return Pedido;
 	}
 	
@@ -102,7 +119,7 @@ public class PedidoService {
 public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
 		
 		
-	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(), TipoSituacao.toEnum(objDTO.getSituacao()),StatusPagamento.toEnum(objDTO.getStatusPagamento()),orcamento);
+	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(), TipoSituacao.toEnum(objDTO.getSituacao()),StatusPagamento.toEnum(objDTO.getStatusPagamento()),orcamento);
 	extractArrayItens(objDTO,pedido);
 		
 		return pedido;
@@ -131,7 +148,7 @@ public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestado
 		
 	}
 	
-	public 	Page<Pedido> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){
+	public 	Page<PedidoDTO> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){
 		UserSpringSecurity user = 	UserService.authenticated();
 		if(user==null) {
 			throw new AuthorizationException("Acesso negado");

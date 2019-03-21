@@ -29,7 +29,7 @@ import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("/pedido")
 public class PedidoResource implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +50,19 @@ public class PedidoResource implements Serializable {
 		Pedido objOp = service.find(id);
 		
 		return ResponseEntity.ok().body(objOp);
+	}
+	
+	@RequestMapping(value="/view/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Page<Pedido>> findByOrcamento(
+	@PathVariable Integer id,
+	@RequestParam(value="page",defaultValue ="0") Integer page, 
+	@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+	@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+	@RequestParam(value="direction",defaultValue ="ASC") String direction
+	){
+		Page<Pedido> obj =service.findByOrcamento(id, page, linesPerPage, orderBy, direction);
+		
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	
@@ -107,23 +120,16 @@ public class PedidoResource implements Serializable {
 		return ResponseEntity.noContent().build();	
 	}
 	
-	/**@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<PedidoDTO>> findAll(){
-		List<Pedido> objList =service.findAll();
-		List<PedidoDTO> listDto = objList.stream().map(obj -> new PedidoDTO(obj)).collect(Collectors.toList());
-		
-		return ResponseEntity.ok().body(listDto);
-	}**/
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Page<Pedido>> findAllProfissaoPage(
+	public ResponseEntity<Page<PedidoDTO>> findAllProfissaoPage(
 			@RequestParam(value="page",defaultValue ="0") Integer page, 
 			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
 			@RequestParam(value="orderBy",defaultValue ="data")	String orderBy,
 			@RequestParam(value="direction",defaultValue ="DESC") String direction
 			){
 		
-		Page<Pedido> objList =service.findPage(page, linesPerPage, orderBy, direction);
+		Page<PedidoDTO> objList =service.findPage(page, linesPerPage, orderBy, direction);
 		
 		
 		return ResponseEntity.ok().body(objList);
