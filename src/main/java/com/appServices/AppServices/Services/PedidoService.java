@@ -61,18 +61,7 @@ public class PedidoService {
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id:" + id + ", Tipo: " + SolicitacaoServico.class.getName()));
 	}
-	
-	
-	public Page<Pedido> findByOrcamento(Integer id,Integer page, Integer linesPerPage,String orderBy,String direction) {
-
-			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Orcamento orcamento = orcamentoService.find(id);
-		
-		return repository.findByOrcamento(orcamento,pageRequest);
-	
-	}
-	
 	
 
 	@Transactional

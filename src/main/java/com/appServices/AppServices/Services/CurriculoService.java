@@ -3,14 +3,19 @@ package com.appServices.AppServices.Services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Curriculo;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.dto.CurriculoNewDTO;
 import com.appServices.AppServices.repositories.CurriculoRepository;
 import com.appServices.AppServices.repositories.CursosRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
 
 @Service
 public class CurriculoService {
@@ -20,6 +25,8 @@ public class CurriculoService {
 	
 	@Autowired
 	private CursosRepository cursoRepository;
+	
+	private PrestadorRepository prestadorRepository;
 
 	
 	public Curriculo find(Integer id) {
@@ -30,6 +37,16 @@ public class CurriculoService {
 				"Objeto não encontrado! Id:" + id + ", Tipo:" + Curriculo.class.getName())
 				);
 	}
+	
+public Page<Curriculo> search(Integer idPrestador,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<Prestador> prestador = prestadorRepository.findById(idPrestador); 
+		return repository.search(prestador,pageRequest);
+	}
+	
+
 	
 	public Curriculo insert(Curriculo obj) {
 		obj.setId(null);

@@ -15,7 +15,7 @@ import com.appServices.AppServices.domain.Profissao;
 @Repository
 public interface PrestadorRepository extends JpaRepository<Prestador, Integer>  {
 	
-	//Busca de profissões por Profissao
+	//Busca de prestador por Profissao
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Prestador obj INNER JOIN obj.profissao prof WHERE prof IN :profissao")
 		Page<Prestador> search(@Param("profissao") Optional<Profissao> profissao, Pageable pageRequest);
