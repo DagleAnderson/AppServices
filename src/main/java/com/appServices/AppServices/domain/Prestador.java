@@ -49,6 +49,8 @@ public class Prestador implements Serializable {
 
 	@OneToMany(cascade=CascadeType.ALL,mappedBy = "prestador")
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
+	
+	private Double mediaDeAvaliacao;
 
 	public Prestador() {
 		
@@ -179,6 +181,22 @@ public class Prestador implements Serializable {
 		// TODO Auto-generated method stub
 		return  this.getCliente().getEmail();
 	}
+
+	
+	
+	public Double getMediaDeAvaliacao() {
+		double valor = 0;
+		
+		for(int i=0; i < this.avaliacoes.size();i++) {
+			Avaliacoes aval = this.avaliacoes.get(i);
+			valor =  valor + aval.getEstrelas(); 
+		}
+		
+		
+		return valor/ this.avaliacoes.size(); 
+	}
+	
+	
 	
 
 	

@@ -335,8 +335,14 @@ public class DBService {
 		
 		
 		//Avaliações de clientes
-		Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
+		Avaliacoes aval1 = new Avaliacoes(null, cli2, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
 		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
+		 Avaliacoes aval2 = new Avaliacoes(null, cli2, prest1, 3.0, "Minha casa ficou top");
+		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
+		 Avaliacoes aval3 = new Avaliacoes(null, cli2, prest1, 1.0, "deixou tudo limpo depois do serviço");
+		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
+		 Avaliacoes aval4 = new Avaliacoes(null, cli2, prest1, 1.0, "recomendo sempre!");
+		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1,aval2,aval3,aval4));
 		 
 		
 		

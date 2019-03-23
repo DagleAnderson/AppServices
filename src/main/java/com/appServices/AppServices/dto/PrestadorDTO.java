@@ -32,6 +32,8 @@ public class PrestadorDTO  implements Serializable {
 	private Integer profissaoId;
 	private String profissaoNome;
 	
+	private Double mediaDeAvaliacao; 
+	
 	
 	public PrestadorDTO() {
 		
@@ -55,6 +57,7 @@ public class PrestadorDTO  implements Serializable {
 		this.clienteNome = prestadorObj.getCliente().getNome();
 		this.profissaoId = prestadorObj.getProfissao().getId();
 		this.profissaoNome = prestadorObj.getProfissao().getNome();
+		this.mediaDeAvaliacao = prestadorObj.getMediaDeAvaliacao();
 	}
 	
 	public Integer getId() {
@@ -184,6 +187,14 @@ public class PrestadorDTO  implements Serializable {
 
 	public void setProfissaoNome(String profissaoNome) {
 		this.profissaoNome = profissaoNome;
+	}
+
+	public Double getMediaDeAvaliacao() {
+		return mediaDeAvaliacao;
+	}
+
+	public void setMediaDeAvaliacao(Double mediaDeAvaliacao) {
+		this.mediaDeAvaliacao = mediaDeAvaliacao;
 	}
 	
 	

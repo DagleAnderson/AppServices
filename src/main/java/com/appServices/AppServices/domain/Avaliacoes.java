@@ -19,7 +19,6 @@ public class Avaliacoes implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -32,7 +31,9 @@ public class Avaliacoes implements Serializable{
 	private Double estrelas;
 	private String comentario;
 	
-	
+
+
+
 	public Avaliacoes() {
 		
 	}
@@ -123,7 +124,6 @@ public class Avaliacoes implements Serializable{
 		this.comentario = comentario;
 	}
 	
-	
-	
+
 }
 
