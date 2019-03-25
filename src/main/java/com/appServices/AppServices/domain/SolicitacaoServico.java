@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -27,6 +28,7 @@ public class SolicitacaoServico implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String produtoServico;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer statusSolicitacao;
 	

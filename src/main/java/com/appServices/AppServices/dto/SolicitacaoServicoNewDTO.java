@@ -2,9 +2,12 @@ package com.appServices.AppServices.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SolicitacaoServicoNewDTO {
 	private Integer id;
 	private String produtoServico;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer cliente;
 	private String itemSolicitacao1;

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class OrcamentoNewDTO {
 	private Integer id;
 	private String produtoServico;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer prestador;
 	private Integer cliente;

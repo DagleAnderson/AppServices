@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SolicitacaoServicoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -13,6 +14,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 	private Integer id;
 	private String produtoServico;
 	private String profissao;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer statusSolicitacao;
 	

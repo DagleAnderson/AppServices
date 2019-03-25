@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,6 +31,7 @@ public class Orcamento implements Serializable{
 	
 	private String produtoServico;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	
 	@ManyToOne

@@ -20,6 +20,7 @@ import javax.persistence.OneToOne;
 
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Pedido implements Serializable{
@@ -43,6 +44,7 @@ public class Pedido implements Serializable{
 	private List<ItensPedido> itensPedido = new ArrayList<>();
 	private Double desconto;
 	private Double total;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer situacao;
 	private Integer statusPagamento;

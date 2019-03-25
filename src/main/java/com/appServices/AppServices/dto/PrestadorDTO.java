@@ -32,7 +32,9 @@ public class PrestadorDTO  implements Serializable {
 	private Integer profissaoId;
 	private String profissaoNome;
 	
-	private Double mediaDeAvaliacao; 
+	private Double mediaDeAvaliacao;
+	
+	
 	
 	
 	public PrestadorDTO() {

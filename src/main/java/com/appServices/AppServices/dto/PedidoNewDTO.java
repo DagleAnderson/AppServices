@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PedidoNewDTO {
 	private Integer id;
 	private String produtoServico;
@@ -15,6 +17,7 @@ public class PedidoNewDTO {
 	private List<Double> descontoItem = new ArrayList<>();
 	private Double desconto;
 	private Double total;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer situacao;
 	private Integer statusPagamento;

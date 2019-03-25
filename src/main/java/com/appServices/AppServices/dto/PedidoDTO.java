@@ -6,6 +6,7 @@ import java.util.Date;
 import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PedidoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,6 +16,7 @@ public class PedidoDTO implements Serializable {
 	private String prestador;
 	private Double desconto;
 	private Double total;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private Integer situacao;
 	private Integer statusPagamento;
