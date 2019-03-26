@@ -13,6 +13,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 	
 	private Integer id;
 	private String produtoServico;
+	private String cliente;
 	private String profissao;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
@@ -25,6 +26,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 	public SolicitacaoServicoDTO(SolicitacaoServico objDTO) {
 		this.id=objDTO.getId();
 		this.produtoServico = objDTO.getProdutoServico();
+		this.cliente = objDTO.getCliente().getNome() +" "+ objDTO.getCliente().getSobrenome();
 		this.profissao = objDTO.getProfissao().getNome();
 		this.data = objDTO.getData();
 		this.statusSolicitacao = objDTO.getStatusSolicitacao().getCod();
@@ -46,6 +48,15 @@ public class SolicitacaoServicoDTO implements Serializable{
 		this.produtoServico = produtoServico;
 	}
 
+	
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
 
 	public Date getData() {
 		return data;

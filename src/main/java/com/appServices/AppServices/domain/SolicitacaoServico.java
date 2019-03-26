@@ -32,7 +32,6 @@ public class SolicitacaoServico implements Serializable{
 	private Date data;
 	private Integer statusSolicitacao;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private  Cliente cliente;

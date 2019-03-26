@@ -276,44 +276,44 @@ public class DBService {
 		
 		//Solicitacao de Servico,Orcamento e Pedido
 		
-		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "computador",data.parse("05/04/2019 00:00"), cli1, prof1,StatusSolicitacao.ABERTA);
+		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "computador",data.parse("05/04/2019 00:00"), cli2, prof1,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao1);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao1);
 		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, "formatação", solicitacao1);
 		solicitacao1.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1,StatusSolicitacao.ABERTA);
+		SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli3, prof1,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao4 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao5 = new ItensSolicitacao(null, "quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
 		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof2,StatusSolicitacao.FECHADA);
+		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli4, prof2,StatusSolicitacao.FECHADA);
 		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);
 		solicitacao3.getItemServico().addAll(Arrays.asList(itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));
 		
-		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli1 ,0.0, TipoSituacao.APROVADO, solicitacao1);
+		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli2 ,0.0, TipoSituacao.APROVADO, solicitacao1);
 		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento1);
 		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento1);
 		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento1);
 		orcamento1.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
 		
-		Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli1 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
+		Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli3 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
 		ItensOrcamento itensOrc4 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento2);
 		ItensOrcamento itensOrc5 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento2);
 		ItensOrcamento itensOrc6 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento2);
 		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
 		
-		Orcamento orcamento3 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli1 ,0.0, TipoSituacao.ANALISE, solicitacao3);
+		Orcamento orcamento3 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli4 ,0.0, TipoSituacao.ANALISE, solicitacao3);
 		ItensOrcamento itensOrc7 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento3);
 		ItensOrcamento itensOrc8 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento3);
 		ItensOrcamento itensOrc9 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento3);
 		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc7,itensOrc8,itensOrc9));
 
 
-		Pedido pedido1 = new Pedido(null,"computador", prest1, cli1 ,0.0,data.parse("10/04/2019 22:00"), TipoSituacao.APROVADO,StatusPagamento.ABERTO, orcamento1);
+		Pedido pedido1 = new Pedido(null,"computador", prest1, cli2 ,0.0,data.parse("10/04/2019 22:00"), TipoSituacao.APROVADO,StatusPagamento.ABERTO, orcamento1);
 		ItensPedido itensPed1 = new ItensPedido(null, "memória", 1.0, 0.0, 200.0, pedido1);
 		ItensPedido itensPed2 = new ItensPedido(null, "formatação", 1.0, 0.0, 80.0, pedido1);
 		ItensPedido itensPed3 = new ItensPedido(null, "limpeza", 1.0, 0.0, 20.0, pedido1);
