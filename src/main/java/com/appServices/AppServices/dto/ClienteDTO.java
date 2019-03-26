@@ -28,31 +28,33 @@ public class ClienteDTO  implements Serializable {
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		@Length(min=5 , max=20,message=" O tamanho deve ser entre 5 e 15 caracteres")
 		private String sobrenome;
-		@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+		@JsonFormat(pattern="dd/MM/yyyy")
 		private Date dataNascimento;
 	
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		@Length(min=10 , max=10,message=" Seu RG deve conter no mínimo 10 caracteres")
 		private String rg;
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		@Length(min=11 , max=11,message=" Seu CPF deve conter no mínimo 11 caracteres")
 		private String cpfOuCnpj;
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		private Integer tipoPessoa;
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		private Integer sexo;
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		private Set<String> telefones =  new HashSet<>();
 		
-		//@NotEmpty(message="Preenchimento Obrigatório!")
+
 		//private String login;
 		
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		private String senha;
 		
-		@NotEmpty(message="Preenchimento Obrigatório!")
+
 		@Email(message = "Email inválido")
 		private String email;
+		
+		private Integer prestador;
 		
 		
 		public ClienteDTO() {
@@ -68,9 +70,9 @@ public class ClienteDTO  implements Serializable {
 			this.cpfOuCnpj = clienteObj.getCpfOuCnpj();
 			this.tipoPessoa = clienteObj.getTipoPessoa().getCod();
 			this.sexo = clienteObj.getSexo().getCod();
-			//this.login  = clienteObj.getLogin();
 			this.senha = clienteObj.getSenha();
 			this.email = clienteObj.getEmail();
+			this.prestador = clienteObj.getPrestador().getId();
 		}
 
 		public Integer getId() {
@@ -121,17 +123,17 @@ public class ClienteDTO  implements Serializable {
 			this.cpfOuCnpj= cpf;
 		}
 		
-		public TipoPessoa getTipoPessoa() {
-			return TipoPessoa.toEnum(tipoPessoa);
+		public Integer getTipoPessoa() {
+			return tipoPessoa;
 		}
-		public void setTipoPessoa(TipoPessoa tipoPessoa) {
-			this.tipoPessoa = tipoPessoa.getCod();
+		public void setTipoPessoa(Integer tipoPessoa) {
+			this.tipoPessoa = tipoPessoa;
 		}
-		public TipoSexo getSexo() {
-			return TipoSexo.toEnum(sexo);
+		public Integer getSexo() {
+			return sexo;
 		}
-		public void setSexo(TipoSexo sexo) {
-			this.sexo =  sexo.getCod();
+		public void setSexo(Integer sexo) {
+			this.sexo =  sexo;
 		}
 
 		public Set<String> getTelefones() {
@@ -166,7 +168,15 @@ public class ClienteDTO  implements Serializable {
 		public void setEmail(String email) {
 			this.email = email;
 		}
-		
-		
 
+		public Integer getPrestador() {
+			return prestador;
+		}
+
+		public void setPrestador(Integer prestador) {
+			this.prestador = prestador;
+		}
+		
+		
+		
 }

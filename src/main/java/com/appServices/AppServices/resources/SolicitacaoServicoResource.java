@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +22,10 @@ import com.appServices.AppServices.Services.ClienteService;
 import com.appServices.AppServices.Services.ProfissaoService;
 import com.appServices.AppServices.Services.SolicitacaoServicoService;
 import com.appServices.AppServices.domain.Cliente;
+import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.dto.OrcamentoDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoNewDTO;
 
@@ -104,5 +107,39 @@ public class SolicitacaoServicoResource {
 		
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	
+		@RequestMapping(value="/listCliente",method = RequestMethod.GET)
+		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClientePage(
+				@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<SolicitacaoServico> objList =service.findByCliente(cliente, page, linesPerPage, orderBy, direction);
+			
+			Page<SolicitacaoServicoDTO> listSolicitacao= objList.map(obj -> new SolicitacaoServicoDTO(obj));
+			
+			return ResponseEntity.ok().body(listSolicitacao);
+		}
+		
+		
+		@RequestMapping(value="/listProfissao",method = RequestMethod.GET)
+		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByProfissaoPage(
+				@RequestParam(value="profissao",defaultValue="0") Integer profissao,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<SolicitacaoServico> objList =service.findByProfissao(profissao, page, linesPerPage, orderBy, direction);
+			
+			Page<SolicitacaoServicoDTO> listSolicitacao= objList.map(obj -> new SolicitacaoServicoDTO(obj));
+			
+			return ResponseEntity.ok().body(listSolicitacao);
+		}
 
 }

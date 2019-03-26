@@ -2,24 +2,24 @@ package com.appServices.AppServices.domain.enums;
 
 public enum TipoPessoa {
 	
-	FISICA(1,"Pessoa Física"), 
-	JURIDICA(2,"Pessoa Jurídica");
+	FISICA(1,"PF"), 
+	JURIDICA(2,"PJ");
 	
 	private Integer cod;
 	private String nome;
 
-	private TipoPessoa(Integer cod, String nome){
-		this.cod = cod;
+	private TipoPessoa(Integer codigo, String nome){
+		this.cod = codigo;
 		this.nome=nome;
 	}
 
 	public Integer getCod() {
-		return cod;
+		return this.cod;
 	}
 
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	

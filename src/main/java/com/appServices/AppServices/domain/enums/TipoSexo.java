@@ -7,17 +7,17 @@ public enum TipoSexo {
 		private Integer cod;
 		private String nome;
 		
-		private TipoSexo(Integer cod, String nome){
-			this.cod = cod;
+		private TipoSexo(Integer codigo, String nome){
+			this.cod = codigo;
 			this.nome = nome;
 		}
 
 		public Integer getCod() {
-			return cod;
+			return this.cod;
 		}
 		
 		public String getNome() {
-			return nome;
+			return this.nome;
 		}
 
 		

@@ -17,6 +17,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -66,7 +67,8 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
 	
-	@OneToOne(mappedBy = "cliente",cascade=CascadeType.ALL)
+	@OneToOne()
+	@JoinColumn(name="prestador_id")
 	private Prestador prestador;
 	
 	
@@ -96,8 +98,8 @@ public class Cliente implements Serializable {
 		this.dataNascimento = dataNascimento;
 		this.rg = rg;
 		this.cpfOuCnpj=CpfOuCnpj;
-		this.tipoPessoa =tipoPessoa.getCod();
-		this.sexo = sexo.getCod();
+		this.tipoPessoa =(tipoPessoa==null)?null  :  tipoPessoa.getCod();
+		this.sexo =  (sexo==null)?null : sexo.getCod();
 		//this.login = login;
 		this.senha = senha;
 		this.email = email;
@@ -224,6 +226,16 @@ public class Cliente implements Serializable {
 
 	public void setEndereco(EnderecoCliente endereco) {
 		this.endereco = endereco;
+	}
+
+
+	public Prestador getPrestador() {
+		return prestador;
+	}
+
+
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
 	}
 	
 

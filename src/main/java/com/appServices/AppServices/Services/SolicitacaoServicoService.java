@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +16,16 @@ import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.ItensSolicitacao;
+import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoNewDTO;
+import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
 import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
 
@@ -33,6 +40,10 @@ public class SolicitacaoServicoService {
 
 	@Autowired
 	private ProfissaoRepository profissaoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository ;
+	
 	
 	@Autowired
 	private EmailServiceSolicitacao emailService;
@@ -109,6 +120,26 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 		newObj.setProdutoServico(obj.getProdutoServico());;
 		
 	}
+	
+public Page<SolicitacaoServico> findByCliente(Integer idCliente,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+		
+		return repository.findByCliente(cliente,pageRequest);
+	}
+
+public Page<SolicitacaoServico> findByProfissao(Integer idProfissao,Integer page, Integer linesPerPage,String orderBy,String direction){
+	
+	PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+	
+	Optional<Profissao> profissao = profissaoRepository.findById(idProfissao);
+	
+	return repository.findByProfissao(profissao,pageRequest);
+}
+
+
 	
 		
 }

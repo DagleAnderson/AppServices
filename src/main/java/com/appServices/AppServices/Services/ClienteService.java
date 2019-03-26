@@ -19,6 +19,7 @@ import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.EnderecoCliente;
+import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
@@ -26,6 +27,7 @@ import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.dto.ClienteNewDTO;
 import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.EnderecoClienteRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.security.UserSpringSecurity;
 
 @Service
@@ -45,6 +47,9 @@ public class ClienteService {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private PrestadorRepository prestadorRepository;
 	
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
@@ -80,14 +85,14 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Cliente obj){	
-		Cliente newObj = find(obj.getId());
+		Cliente newObj = this.find(obj.getId());
 		updateData(newObj,obj);
 		return  repository.save(newObj);
 			
 	}
 	
 	public void delete(Integer id) {
-		find(id);
+		this.find(id);
 		try {
 			repository.deleteById(id);
 		}catch(DataIntegrityViolationException e) {
@@ -114,7 +119,16 @@ public class ClienteService {
 	
 	public Cliente fromDTO(ClienteDTO objDTO) {
 		
-		Cliente cliente = new Cliente(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo(),objDTO.getSenha(),objDTO.getEmail());
+		Cliente cliente = new Cliente(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()), TipoSexo.toEnum(objDTO.getSexo()),objDTO.getSenha(),objDTO.getEmail());
+		
+		if(objDTO.getPrestador() != null) {
+			Optional<Prestador> prestador = prestadorRepository.findById(objDTO.getPrestador());
+			cliente.setPrestador(prestador.get());
+			}
+		else {
+			objDTO.setPrestador(null);
+		}
+		
 		cliente.getTelefones().addAll(objDTO.getTelefones());
 		
 		return cliente;
@@ -143,8 +157,7 @@ public class ClienteService {
 		newObj.setCpfOuCnpj(obj.getCpfOuCnpj());
 		newObj.setSexo(obj.getSexo());
 		newObj.setTipoPessoa(obj.getTipoPessoa());
-		newObj.setSenha(obj.getSenha());
-		newObj.setEmail(obj.getEmail());
+		newObj.setPrestador(obj.getPrestador());
 	} 
 	
 	public URI uploadProfilePicture(MultipartFile multipartfile) {

@@ -238,23 +238,25 @@ public class DBService {
 					));
 		
 		//Cadsatro de Prestador	
-		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral","domiciliar", cli1,prof1);	
+		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral","domiciliar",cli1,prof1);	
+		cli1.setPrestador(prest1);
+		
 		EnderecoPrestador end6 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 				prest1.setEndereco(end6);
 				
-		Prestador prest2 = new Prestador(null,"Ceará Pinturas","pinturas em Geral","domiciliar", cli2,prof1);	
+		Prestador prest2 = new Prestador(null,"Ceará Pinturas","pinturas em Geral","domiciliar",cli2,prof1);	
 		EnderecoPrestador end7 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 		prest2.setEndereco(end7);
 		
-		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral","domiciliar", cli3,prof2);	
+		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral","domiciliar",cli3,prof2);	
 		EnderecoPrestador end8 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest3);
 		prest3.setEndereco(end8);
 		
-		Prestador prest4 = new Prestador(null,"Anderson developer","sistemas em geral","domiciliar", cli4,prof2);	
+		Prestador prest4 = new Prestador(null,"Anderson developer","sistemas em geral","domiciliar",cli4,prof2);	
 		EnderecoPrestador end9 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest4);
 		prest4.setEndereco(end9);
 		
-		Prestador prest5 = new Prestador(null,"Solutech sistemas","sistemas em geral","domiciliar", cli5,prof2);	
+		Prestador prest5 = new Prestador(null,"Solutech sistemas","sistemas em geral","domiciliar",cli5,prof2);	
 		EnderecoPrestador end10 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest5);
 		prest5.setEndereco(end10);
 		
@@ -286,7 +288,7 @@ public class DBService {
 		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
 		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof1,StatusSolicitacao.FECHADA);
+		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof2,StatusSolicitacao.FECHADA);
 		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);

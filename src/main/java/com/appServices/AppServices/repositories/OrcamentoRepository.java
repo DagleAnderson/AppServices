@@ -10,7 +10,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 
 @Repository
@@ -20,4 +22,5 @@ public interface OrcamentoRepository extends JpaRepository<Orcamento, Integer> {
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.solicitacao solic WHERE solic IN :solicitacao")
 		Page<Orcamento> search(@Param("solicitacao") Optional<SolicitacaoServico> solicitacao, Pageable pageRequest);
+		
 }

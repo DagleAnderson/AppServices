@@ -29,8 +29,8 @@ public class Prestador implements Serializable {
 	
 	private String localAtendimento;
 	
-	@OneToOne
-	@JoinColumn(name="cliente_id")
+	@JsonIgnore
+	@OneToOne(mappedBy = "prestador")
 	private Cliente cliente;
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="prestador")
