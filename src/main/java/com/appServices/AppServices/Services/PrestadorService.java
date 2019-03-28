@@ -102,17 +102,17 @@ public class PrestadorService {
 		return repository.search(profissao,pageRequest);
 	}
 	
-	public Prestador fromDTO(PrestadorDTO objDTO,Cliente cliente,Profissao profissao) {
+	public Prestador fromDTO(PrestadorDTO objDTO,Profissao profissao) {
 		
-		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),cliente,profissao);
+		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getEmail(),objDTO.getLocalAtendimento(),profissao);
 		return prestador;
 	}
 	
 
-	public Prestador fromNewDTO(PrestadorNewDTO objDTO,Cliente cliente,Profissao profissao) {
+	public Prestador fromNewDTO(PrestadorNewDTO objDTO,Profissao profissao) {
 			
 	
-		Prestador prestador = new Prestador(null,objDTO.getNomeFantasia(), objDTO.getSlogan(),objDTO.getLocalAtendimento(),cliente, profissao);
+		Prestador prestador = new Prestador(null,objDTO.getNomeFantasia(), objDTO.getSlogan(),objDTO.getEmail(),objDTO.getLocalAtendimento(), profissao);
 		
 		EnderecoPrestador endereco = new EnderecoPrestador(null,objDTO.getCidade() ,objDTO.getEstado(),objDTO.getCep(),objDTO.getBairro(), objDTO.getRua(),objDTO.getNumero(),objDTO.getComplemento(), prestador);
 		

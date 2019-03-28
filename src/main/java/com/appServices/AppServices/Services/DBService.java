@@ -197,8 +197,12 @@ public class DBService {
 		Profissao prof33= new Profissao(null, "Personal",areaProf4);
 		
 		Categoria areaProf5 = new Categoria(null,"Educação");
-		Categoria areaProf6 = new Categoria(null,"Eletrodomésticos");
+		Profissao prof34= new Profissao(null, "Professor de inglês",areaProf5);
+		Profissao prof35= new Profissao(null, "Palestrante",areaProf5);
 
+		Categoria areaProf6 = new Categoria(null,"Eletrodomésticos");
+		Profissao prof36= new Profissao(null, "montador de móveis",areaProf6);
+		Profissao prof37= new Profissao(null, "eletricista",areaProf6);
 		
 			areaProf1.getProfissoes().addAll(Arrays.asList(
 					prof1,prof2,prof3,
@@ -221,6 +225,13 @@ public class DBService {
 			areaProf4.getProfissoes().addAll(Arrays.asList(
 					prof30,prof31,prof32,prof33
 					));
+			areaProf5.getProfissoes().addAll(Arrays.asList(
+					prof34,prof35
+					));
+			areaProf6.getProfissoes().addAll(Arrays.asList(
+					prof36,prof37
+					));
+			
 			
 			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3,areaProf4,areaProf5,areaProf6));
 			servicosRepository.saveAll(Arrays.asList(
@@ -234,29 +245,33 @@ public class DBService {
 					prof22,prof23,prof24,
 					prof25,prof26,prof27,
 					prof28,prof29,prof30,
-					prof31,prof32,prof33
+					prof31,prof32,prof33,
+					prof34,prof35,prof36,prof37
 					));
 		
 		//Cadsatro de Prestador	
-		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral","domiciliar",cli1,prof1);	
+		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral",cli1.getEmail(),"domiciliar",prof1);	
 		cli1.setPrestador(prest1);
-		
 		EnderecoPrestador end6 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
-				prest1.setEndereco(end6);
+		prest1.setEndereco(end6);
 				
-		Prestador prest2 = new Prestador(null,"Ceará Pinturas","pinturas em Geral","domiciliar",cli2,prof1);	
+		Prestador prest2 = new Prestador(null,"Ceará Pinturas","pinturas em Geral",cli2.getEmail(),"domiciliar",prof1);	
+		cli2.setPrestador(prest2);
 		EnderecoPrestador end7 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 		prest2.setEndereco(end7);
 		
-		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral","domiciliar",cli3,prof2);	
+		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral",cli3.getEmail(),"domiciliar",prof2);	
+		cli3.setPrestador(prest3);
 		EnderecoPrestador end8 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest3);
 		prest3.setEndereco(end8);
 		
-		Prestador prest4 = new Prestador(null,"Anderson developer","sistemas em geral","domiciliar",cli4,prof2);	
+		Prestador prest4 = new Prestador(null,"Anderson developer","sistemas em geral",cli4.getEmail(),"domiciliar",prof2);	
+		cli4.setPrestador(prest4);
 		EnderecoPrestador end9 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest4);
 		prest4.setEndereco(end9);
 		
-		Prestador prest5 = new Prestador(null,"Solutech sistemas","sistemas em geral","domiciliar",cli5,prof2);	
+		Prestador prest5 = new Prestador(null,"Solutech sistemas","sistemas em geral",cli5.getEmail(),"domiciliar",prof2);	
+		cli5.setPrestador(prest5);
 		EnderecoPrestador end10 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest5);
 		prest5.setEndereco(end10);
 		
@@ -288,7 +303,7 @@ public class DBService {
 		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
 		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
-		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli4, prof2,StatusSolicitacao.FECHADA);
+		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof2,StatusSolicitacao.FECHADA);
 		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);

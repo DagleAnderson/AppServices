@@ -13,6 +13,7 @@ public class PrestadorDTO  implements Serializable {
 	private String nomeFantasia;
 	private String slogan;
 	private String localAtendimento;
+	private String email;
 	
 	//Endereço
 	private String cidade;
@@ -24,9 +25,6 @@ public class PrestadorDTO  implements Serializable {
 	private String complemento;
 	
 	
-	@JsonIgnore
-	private Integer clienteId;
-	private String clienteNome;
 	
 	@JsonIgnore
 	private Integer profissaoId;
@@ -55,8 +53,7 @@ public class PrestadorDTO  implements Serializable {
 		this.numero = prestadorObj.getEndereco().getNumero();
 		this.complemento = prestadorObj.getEndereco().getComplemento();
 		
-		this.clienteId = prestadorObj.getCliente().getId();
-		this.clienteNome = prestadorObj.getCliente().getNome();
+
 		this.profissaoId = prestadorObj.getProfissao().getId();
 		this.profissaoNome = prestadorObj.getProfissao().getNome();
 		this.mediaDeAvaliacao = prestadorObj.getMediaDeAvaliacao();
@@ -84,6 +81,14 @@ public class PrestadorDTO  implements Serializable {
 
 	public void setSlogan(String slogan) {
 		this.slogan = slogan;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getLocalAtendimento() {
@@ -157,22 +162,6 @@ public class PrestadorDTO  implements Serializable {
 	
 	
 	
-	public Integer getClienteId() {
-		return clienteId;
-	}
-
-	public void setClienteId(Integer clienteId) {
-		this.clienteId = clienteId;
-	}
-	
-	public String getClienteNome() {
-		return clienteNome;
-	}
-
-	public void setClienteNome(String clienteNome) {
-		this.clienteNome = clienteNome;
-	}
-
 
 	public Integer getProfissaoId() {
 		return profissaoId;

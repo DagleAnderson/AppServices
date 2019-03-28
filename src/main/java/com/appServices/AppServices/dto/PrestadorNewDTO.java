@@ -17,6 +17,8 @@ public class PrestadorNewDTO implements Serializable{
 	
 	@NotEmpty(message="usuario nao identificado")
 	private Integer cliente;
+	
+	private String email;
 
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String cidade;
@@ -91,6 +93,16 @@ public class PrestadorNewDTO implements Serializable{
 
 	public void setCliente(Integer cliente) {
 		this.cliente = cliente;
+	}
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getCidade() {

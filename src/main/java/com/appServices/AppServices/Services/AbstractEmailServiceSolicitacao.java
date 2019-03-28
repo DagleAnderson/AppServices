@@ -57,7 +57,7 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 		for( int n=0; n < obj.getProfissao().getPrestador().size();n++) {
 			Prestador prestEmail = new Prestador();
 				prestEmail = obj.getProfissao().getPrestador().get(n);
-				String emailsPrestadores = prestEmail.getCliente().getEmail();
+				String emailsPrestadores = prestEmail.getEmail();
 			
 				emails.add(emailsPrestadores);		
 		}

@@ -13,6 +13,12 @@ public class SolicitacaoServicoNewDTO {
 	private String itemSolicitacao1;
 	private String itemSolicitacao2;
 	private String itemSolicitacao3;
+	private String itemSolicitacao4;
+	private String itemSolicitacao5;
+	private String itemSolicitacao6;
+	private String itemSolicitacao7;
+	private String itemSolicitacao8;
+
 	private Integer profissao;
 	private Integer statusSolicitacao;
 	
@@ -66,6 +72,48 @@ public class SolicitacaoServicoNewDTO {
 	public void setItemSolicitacao3(String itemSolicitacao3) {
 		this.itemSolicitacao3 = itemSolicitacao3;
 	}
+	
+	
+	public String getItemSolicitacao4() {
+		return itemSolicitacao4;
+	}
+
+	public void setItemSolicitacao4(String itemSolicitacao4) {
+		this.itemSolicitacao4 = itemSolicitacao4;
+	}
+
+	public String getItemSolicitacao5() {
+		return itemSolicitacao5;
+	}
+
+	public void setItemSolicitacao5(String itemSolicitacao5) {
+		this.itemSolicitacao5 = itemSolicitacao5;
+	}
+
+	public String getItemSolicitacao6() {
+		return itemSolicitacao6;
+	}
+
+	public void setItemSolicitacao6(String itemSolicitacao6) {
+		this.itemSolicitacao6 = itemSolicitacao6;
+	}
+
+	public String getItemSolicitacao7() {
+		return itemSolicitacao7;
+	}
+
+	public void setItemSolicitacao7(String itemSolicitacao7) {
+		this.itemSolicitacao7 = itemSolicitacao7;
+	}
+
+	public String getItemSolicitacao8() {
+		return itemSolicitacao8;
+	}
+
+	public void setItemSolicitacao8(String itemSolicitacao8) {
+		this.itemSolicitacao8 = itemSolicitacao8;
+	}
+
 	public Integer getProfissao() {
 		return profissao;
 	}

@@ -109,8 +109,17 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, objDTO.getItemSolicitacao1(), SolicitacaoServico);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, objDTO.getItemSolicitacao2(), SolicitacaoServico);
 		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, objDTO.getItemSolicitacao3(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao4 = new ItensSolicitacao(null, objDTO.getItemSolicitacao4(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao5 = new ItensSolicitacao(null, objDTO.getItemSolicitacao5(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, objDTO.getItemSolicitacao6(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, objDTO.getItemSolicitacao7(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, objDTO.getItemSolicitacao8(), SolicitacaoServico);
+
 		
-		SolicitacaoServico.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
+		SolicitacaoServico.getItemServico().addAll(Arrays.asList(
+				itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
+				itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
+				itensSolicitacao7,itensSolicitacao8));
 		
 		return SolicitacaoServico;
 	}

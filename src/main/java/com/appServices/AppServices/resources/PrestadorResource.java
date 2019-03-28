@@ -57,7 +57,7 @@ public class PrestadorResource {
 		
 		Cliente cli = clienteService.find(idCliente);
 		
-		Prestador obj = service.fromNewDTO(objDTO,cli,prof);
+		Prestador obj = service.fromNewDTO(objDTO,prof);
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -72,14 +72,10 @@ public class PrestadorResource {
 		
 		//captura de identificador de cliente e profissao para realizar consulta
 		Integer idProfissao = objDTO.getProfissaoId();
-		Integer idCliente = objDTO.getClienteId();
 				
 		Profissao prof = profissaoService.find(idProfissao);
-				
-		Cliente cli = clienteService.find(idCliente);		
-		
-		
-		Prestador obj = service.fromDTO(objDTO,cli,prof);
+						
+		Prestador obj = service.fromDTO(objDTO,prof);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

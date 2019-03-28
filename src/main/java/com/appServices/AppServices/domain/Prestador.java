@@ -33,6 +33,8 @@ public class Prestador implements Serializable {
 	@OneToOne(mappedBy = "prestador")
 	private Cliente cliente;
 	
+	private String email;
+	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="prestador")
 	private EnderecoPrestador endereco;
 	
@@ -56,13 +58,13 @@ public class Prestador implements Serializable {
 		
 	}
 
-	public Prestador(Integer id,String nomeFantasia,String slogan, String localAtendimento, Cliente cliente,Profissao profissao) {
+	public Prestador(Integer id,String nomeFantasia,String slogan,String email, String localAtendimento,Profissao profissao) {
 		this.id = id;
 
 		this.nomeFantasia = nomeFantasia;
 		this.slogan = slogan;
+		this.email = email;
 		this.localAtendimento = localAtendimento;
-		this.cliente = cliente;
 		this.profissao = profissao;
 	}
 
@@ -136,6 +138,16 @@ public class Prestador implements Serializable {
 	public EnderecoPrestador getEndereco() {
 		return endereco;
 	}
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public void setEndereco(EnderecoPrestador endereco) {
 		this.endereco = endereco;
@@ -195,6 +207,7 @@ public class Prestador implements Serializable {
 		
 		return valor/ this.avaliacoes.size(); 
 	}
+	
 	
 	
 	
