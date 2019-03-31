@@ -153,7 +153,7 @@ public class SolicitacaoServico implements Serializable{
 	
 	
 	public StatusSolicitacao getStatusSolicitacao() {
-		return StatusSolicitacao.toEnum(statusSolicitacao);
+		return StatusSolicitacao.toEnum(this.statusSolicitacao);
 	}
 
 	public void setStatusSolicitacao(StatusSolicitacao status) {

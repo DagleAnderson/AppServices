@@ -17,6 +17,7 @@ import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.dto.OrcamentoDTO;
 import com.appServices.AppServices.dto.OrcamentoNewDTO;
@@ -30,6 +31,7 @@ public class OrcamentoService {
 	//atributos internos para obternção de valores
 	private String item;
 	private Double quantidade;
+	private Integer unidade;
 	private Double descontoItem;
 	private Double valorItem;
 	
@@ -95,26 +97,30 @@ public class OrcamentoService {
 	
 	
 	
-	public Orcamento fromNewDTO(OrcamentoNewDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
+	public Orcamento fromNewDTO(Orcamento obj,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
 		
-	Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(), prestador, cliente, objDTO.getDesconto(),TipoSituacao.toEnum(objDTO.getSituacao()),solicitacao);
-	extractArrayItens(objDTO,orcamento);
+	Orcamento orcamento = new Orcamento(obj.getId(), obj.getProdutoServico(),obj.getData(), prestador, cliente, obj.getDesconto(),obj.getSituacao(),solicitacao);
+	
+	extractArrayItens(obj,orcamento);
+	
 	
 	return orcamento;
 	}
 
-	private void extractArrayItens(OrcamentoNewDTO objDTO,Orcamento orcamento) {
+	private void extractArrayItens(Orcamento obj,Orcamento orcamento) {
 
-			for(int x=0; x < objDTO.getItemOrcamento().size();x++ ) {
-				 item = objDTO.getItemOrcamento().get(x);
-				 quantidade = objDTO.getQuantidade().get(x);
-				 descontoItem= objDTO.getDescontoItem().get(x);
-				 valorItem = objDTO.getValorItem().get(x);	
-				 ItensOrcamento itensOrcamento = new ItensOrcamento(null,item,quantidade,descontoItem,valorItem,orcamento);
+			for(int x=0; x < obj.getItensOrcamento().size();x++ ) {
+				 item = obj.getItensOrcamento().get(x).getItem();
+				 quantidade = obj.getItensOrcamento().get(x).getQuantidade();
+				 unidade = obj.getItensOrcamento().get(x).getUnidade().getCodigo();
+				 descontoItem=obj.getItensOrcamento().get(x).getDesconto();
+				 valorItem = obj.getItensOrcamento().get(x).getValor();
+				 
+				 ItensOrcamento itensOrcamento = new ItensOrcamento(null,item,quantidade,TipoUnidade.toEnum(unidade),descontoItem,valorItem,orcamento);
 				 orcamento.getItensOrcamento().add(itensOrcamento);
 			}
-}
+	}
 
 	private void updateData(Orcamento newObj,Orcamento obj) {
 		newObj.setId(obj.getId());

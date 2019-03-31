@@ -57,7 +57,7 @@ public class OrcamentoResource implements Serializable{
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
-			@Valid @RequestBody OrcamentoNewDTO objDTO,
+			@Valid @RequestBody Orcamento obj,
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
 			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao){
@@ -68,9 +68,9 @@ public class OrcamentoResource implements Serializable{
 		
 		SolicitacaoServico solicit =solicitacaoService.find(solicitacao); 
 		
-		Orcamento obj = service.fromNewDTO(objDTO, cli, prest,solicit);
+		Orcamento Newobj = service.fromNewDTO(obj, cli, prest,solicit);
 		
-		obj = service.insert(obj);
+		obj = service.insert(Newobj);
 		
 		
 		

@@ -61,9 +61,9 @@ public class ClienteService {
 		
 		UserSpringSecurity user = UserService.authenticated();
 		
-		if (user == null || !user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId())){
+		/**if (user == null || !user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId())){
 			throw new  AuthorizationException("Acesso negado");
-		}
+		}**/
 		
 		Optional<Cliente> objOp = repository.findById(id);
 		

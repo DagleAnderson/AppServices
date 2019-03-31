@@ -2,6 +2,7 @@ package com.appServices.AppServices.dto;
 
 import java.util.Date;
 
+import com.appServices.AppServices.domain.Cliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SolicitacaoServicoNewDTO {
@@ -9,7 +10,7 @@ public class SolicitacaoServicoNewDTO {
 	private String produtoServico;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
-	private Integer cliente;
+	private Cliente cliente;
 	private String itemSolicitacao1;
 	private String itemSolicitacao2;
 	private String itemSolicitacao3;
@@ -48,10 +49,10 @@ public class SolicitacaoServicoNewDTO {
 	public void setProdutoServico(String produtoServico) {
 		this.produtoServico = produtoServico;
 	}
-	public Integer getCliente(){
+	public Cliente getCliente(){
 		return cliente;
 	}
-	public void setCliente(Integer cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	public String getItemSolicitacao1() {

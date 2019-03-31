@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.appServices.AppServices.domain.enums.StatusSolicitacao;
+import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,6 +24,7 @@ public class ItensOrcamento implements Serializable {
 	private Integer id;
 	private String item;
 	private Double quantidade;
+	private Integer unidade;
 	private Double desconto;
 	private Double valor;
 	
@@ -36,10 +39,11 @@ public class ItensOrcamento implements Serializable {
 		
 	}
 	
-	public ItensOrcamento(Integer id, String item,Double quantidade, Double desconto, Double valor, Orcamento orcamento) {
+	public ItensOrcamento(Integer id, String item,Double quantidade,TipoUnidade unidade, Double desconto, Double valor, Orcamento orcamento) {
 		this.id = id;
 		this.item = item;
 		this.quantidade = quantidade;
+		this.unidade = unidade.getCodigo();
 		this.desconto =desconto;
 		this.valor = valor;
 		this.orcamento = orcamento;
@@ -96,7 +100,16 @@ public class ItensOrcamento implements Serializable {
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
+	
 
+	public TipoUnidade getUnidade() {
+		return TipoUnidade.toEnum(this.unidade);
+	}
+
+	public void setUnidade(TipoUnidade unidade) {
+		this.unidade = unidade.getCodigo();
+	}
+	
 	public Double getDesconto() {
 		return desconto;
 	}

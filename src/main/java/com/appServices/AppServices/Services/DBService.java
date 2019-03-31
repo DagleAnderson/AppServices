@@ -32,6 +32,7 @@ import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.repositories.AvaliacoesRepository;
 import com.appServices.AppServices.repositories.CategoriaRepository;
 import com.appServices.AppServices.repositories.CidadeRepository;
@@ -291,31 +292,56 @@ public class DBService {
 		
 		//Solicitacao de Servico,Orcamento e Pedido
 		
-		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "computador",data.parse("05/04/2019 00:00"), cli2, prof1,StatusSolicitacao.ABERTA);
-		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao1);
-		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao1);
-		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, "formatação", solicitacao1);
-		solicitacao1.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
+		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "casa na chácara",data.parse("05/04/2019 00:00"), cli2, prof1,StatusSolicitacao.ABERTA);
+		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null,
+		"As paredes e o teto estão manchados e existem alguns pontos que precisarão de reparos(correções com massa corrida)", solicitacao1);
+		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, 
+		"3", solicitacao1);
+				
+		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, 
+		"sala(3x4,forro de gesso,1 porta de ferro e uma janela de ferro), cozinha(4x4,forro de gesso,1 janela de ferro)", solicitacao1);	
+		ItensSolicitacao itensSolicitacao4 = new ItensSolicitacao(null,
+		"Barreiras", solicitacao1);
+		ItensSolicitacao itensSolicitacao5 = new ItensSolicitacao(null,
+		"Dentro da cidade", solicitacao1);
+		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null,
+		"15 dias", solicitacao1);
+		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null,
+		"pintura e reparado das paredes com massa corrida. Textura em uma parede da sala e pintura daa janela", solicitacao1);
+		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null,
+				"---------------", solicitacao1);
 		
-		SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli3, prof1,StatusSolicitacao.ABERTA);
-		ItensSolicitacao itensSolicitacao4 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
-		ItensSolicitacao itensSolicitacao5 = new ItensSolicitacao(null, "quebrado", solicitacao2);
-		ItensSolicitacao itensSolicitacao6 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
+		
+		solicitacao1.getItemServico().addAll(Arrays.asList(
+				itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
+				itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
+				itensSolicitacao7,itensSolicitacao8));
+		
+	   /**SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli3, prof1,StatusSolicitacao.ABERTA);
+		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
+		ItensSolicitacao itensSolicitacao10 = new ItensSolicitacao(null, "quebrado", solicitacao2);
+		ItensSolicitacao itensSolicitacao11 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
+		ItensSolicitacao itensSolicitacao12 = new ItensSolicitacao(null, "quebrado", solicitacao2);
+		ItensSolicitacao itensSolicitacao13 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
+		ItensSolicitacao itensSolicitacao14 = new ItensSolicitacao(null, "quebrado", solicitacao2);
+		ItensSolicitacao itensSolicitacao15 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
+		ItensSolicitacao itensSolicitacao16 = new ItensSolicitacao(null, "quebrado", solicitacao2); 
+
 		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
 		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof2,StatusSolicitacao.FECHADA);
 		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);
-		solicitacao3.getItemServico().addAll(Arrays.asList(itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));
+		solicitacao3.getItemServico().addAll(Arrays.asList(itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));**/
 		
 		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli2 ,0.0, TipoSituacao.APROVADO, solicitacao1);
-		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento1);
-		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento1);
-		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento1);
+		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, orcamento1);
+		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0,TipoUnidade.MT, 0.0, 80.0, orcamento1);
+		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0, orcamento1);
 		orcamento1.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
 		
-		Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli3 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
+		/**Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli3 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
 		ItensOrcamento itensOrc4 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento2);
 		ItensOrcamento itensOrc5 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento2);
 		ItensOrcamento itensOrc6 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento2);
@@ -325,14 +351,14 @@ public class DBService {
 		ItensOrcamento itensOrc7 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento3);
 		ItensOrcamento itensOrc8 = new ItensOrcamento(null, "formatação", 1.0, 0.0, 80.0, orcamento3);
 		ItensOrcamento itensOrc9 = new ItensOrcamento(null, "limpeza", 1.0, 0.0, 20.0, orcamento3);
-		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc7,itensOrc8,itensOrc9));
+		orcamento2.getItensOrcamento().addAll(Arrays.asList(itensOrc7,itensOrc8,itensOrc9));**/
 
 
-		Pedido pedido1 = new Pedido(null,"computador", prest1, cli2 ,0.0,data.parse("10/04/2019 22:00"), TipoSituacao.APROVADO,StatusPagamento.ABERTO, orcamento1);
+		/**Pedido pedido1 = new Pedido(null,"computador", prest1, cli2 ,0.0,data.parse("10/04/2019 22:00"), TipoSituacao.APROVADO,StatusPagamento.ABERTO, orcamento1);
 		ItensPedido itensPed1 = new ItensPedido(null, "memória", 1.0, 0.0, 200.0, pedido1);
 		ItensPedido itensPed2 = new ItensPedido(null, "formatação", 1.0, 0.0, 80.0, pedido1);
 		ItensPedido itensPed3 = new ItensPedido(null, "limpeza", 1.0, 0.0, 20.0, pedido1);
-		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
+		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/
 		
 		 
 		 //Estados
@@ -373,21 +399,21 @@ public class DBService {
 		 
 		 avaliacoesRespository.saveAll(Arrays.asList(aval1));
 		 
-		 solicitacaoRepository.saveAll(Arrays.asList(solicitacao1,solicitacao2,solicitacao3));
+		 solicitacaoRepository.saveAll(Arrays.asList(solicitacao1/**,solicitacao2,solicitacao3**/));
 		 itensSolicitacaoRepository.saveAll(Arrays.asList(
 				 itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
 				 itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
-				 itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));
+				 itensSolicitacao7,itensSolicitacao8));
 		 
-		 orcamentoRepository.saveAll(Arrays.asList(orcamento1,orcamento2,orcamento3));
+		 orcamentoRepository.saveAll(Arrays.asList(orcamento1/**,orcamento2,orcamento3**/));
 		 itensOrcamentoRespository.saveAll(Arrays.asList(
-				 itensOrc1,itensOrc2,itensOrc3,
-				 itensOrc4,itensOrc5,itensOrc6,
-				 itensOrc7,itensOrc8,itensOrc9
+				 itensOrc1,itensOrc2,itensOrc3
+				 /** itensOrc4,itensOrc5,itensOrc6,
+				 itensOrc7,itensOrc8,itensOrc9**/
 				 ));
 		 
-		 pedidoRepository.saveAll(Arrays.asList(pedido1));
-		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
+		 /** pedidoRepository.saveAll(Arrays.asList(pedido1));
+		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/
 		 
 		 
 		 estadoRepository.saveAll(Arrays.asList(estado1,estado2));
