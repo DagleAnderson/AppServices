@@ -3,6 +3,7 @@ package com.appServices.AppServices.dto;
 import java.util.Date;
 
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.FormaDePagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +24,7 @@ public class OrcamentoDTO {
 	
 	private Double desconto;
 	private Double total;
+	private FormaDePagamento formaDePagamento;
 	private Integer situacao;
 	
 	
@@ -38,7 +40,8 @@ public class OrcamentoDTO {
 		this.cliente = obj.getCliente().getId();
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
-		this.situacao = obj.getSituacao().getCodigo();
+		this.formaDePagamento = obj.getPagamento();
+		this.situacao = obj.getSituacao().getCod();
 		
 	}
 
@@ -103,13 +106,23 @@ public class OrcamentoDTO {
 	public Double getTotal(){
 		return  total;
 	}
+	
+	
+
+	public FormaDePagamento getPagamento() {
+		return formaDePagamento;
+	}
+
+	public void setPagamento(FormaDePagamento formaDePagamento) {
+		this.formaDePagamento = formaDePagamento;
+	}
 
 	public TipoSituacao getSituacao() {
 		return TipoSituacao.toEnum(situacao);
 	}
 
 	public void setSituacao(TipoSituacao situacao) {
-		this.situacao = situacao.getCodigo();
+		this.situacao = situacao.getCod();
 	}
 
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appServices.AppServices.Services.CategoriaService;
 import com.appServices.AppServices.Services.ProfissaoService;
 import com.appServices.AppServices.domain.Categoria;
+import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.dto.CategoriaDTO;
 import com.appServices.AppServices.dto.ProfissaoDTO;
@@ -28,6 +29,16 @@ public class CategoriaResource {
 	
 	@Autowired
 	private ProfissaoService serviceProfissao;
+	
+	
+	
+	@RequestMapping(value="/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Categoria> findById(@PathVariable Integer id){
+		Categoria objOp = service.findById(id);
+		
+		return ResponseEntity.ok().body(objOp);
+	}
+	
 
 	//GET DE TODOS AS CATEGORIAS
 		@RequestMapping(method = RequestMethod.GET)

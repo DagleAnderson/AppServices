@@ -2,6 +2,7 @@ package com.appServices.AppServices.Services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,15 @@ import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.domain.ItensPedido;
 import com.appServices.AppServices.domain.ItensSolicitacao;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.FormaDePagamento;
+import com.appServices.AppServices.domain.PagamentoComDinheiro;
 import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
+import com.appServices.AppServices.domain.enums.TipoPagamento;
 import com.appServices.AppServices.domain.enums.TipoPerfil;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
@@ -47,6 +51,7 @@ import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.ItensPedidoRepository;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
+import com.appServices.AppServices.repositories.PagamentoRepository;
 import com.appServices.AppServices.repositories.PedidoRepository;
 import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
@@ -102,6 +107,9 @@ public class DBService {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	@Autowired
 	private ItensPedidoRepository itensPedidoRepository;
@@ -335,11 +343,15 @@ public class DBService {
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);
 		solicitacao3.getItemServico().addAll(Arrays.asList(itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));**/
 		
+
+		
 		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli2 ,0.0, TipoSituacao.APROVADO, solicitacao1);
 		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, orcamento1);
 		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0,TipoUnidade.MT, 0.0, 80.0, orcamento1);
 		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0, orcamento1);
 		orcamento1.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
+		FormaDePagamento pag1 = new PagamentoComDinheiro(null, orcamento1);
+		orcamento1.setPagamento(pag1);
 		
 		/**Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli3 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
 		ItensOrcamento itensOrc4 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento2);
@@ -411,6 +423,8 @@ public class DBService {
 				 /** itensOrc4,itensOrc5,itensOrc6,
 				 itensOrc7,itensOrc8,itensOrc9**/
 				 ));
+		 
+		 pagamentoRepository.save(pag1);
 		 
 		 /** pedidoRepository.saveAll(Arrays.asList(pedido1));
 		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/

@@ -32,7 +32,7 @@ public class PedidoDTO implements Serializable {
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
 		this.data = obj.getData();
-		this.situacao = obj.getSituacao().getCodigo();
+		this.situacao = obj.getSituacao().getCod();
 		this.statusPagamento = obj.getStatusPagamento().getCod();
 		
 	}
@@ -90,7 +90,7 @@ public class PedidoDTO implements Serializable {
 	}
 
 	public void setSituacao(TipoSituacao situacao) {
-		this.situacao = situacao.getCodigo();
+		this.situacao = situacao.getCod();
 	}
 	
 	public StatusPagamento getStatusPagamento() {

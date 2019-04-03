@@ -64,7 +64,7 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 		this.desconto = desconto;
 		this.data = data;
-		this.situacao = situacao.getCodigo();
+		this.situacao = situacao.getCod();
 		this.statusPagamento = statusPg.getCod();
 		this.orcamento = orcamento;
 	}
@@ -168,7 +168,7 @@ public class Pedido implements Serializable{
 	}
 
 	public void setSituacao(TipoSituacao situacao) {
-		this.situacao = situacao.getCodigo();
+		this.situacao = situacao.getCod();
 	}
 	
 	public StatusPagamento getStatusPagamento() {

@@ -15,9 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
-import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity

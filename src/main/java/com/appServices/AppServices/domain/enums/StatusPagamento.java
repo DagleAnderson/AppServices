@@ -1,8 +1,9 @@
 package com.appServices.AppServices.domain.enums;
 
 public enum StatusPagamento {
-	ABERTO(1,"ABERTO"),
-	FEHCADO(2,"FECHADO");
+	PENDENTE(1,"PENDENTE"),
+	FATURADO(2,"FATURADO"),
+	CANCELADO(3,"CANCELADO");
 	
 	private Integer cod;
 	private String nome;

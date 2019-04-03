@@ -50,6 +50,9 @@ public class Orcamento implements Serializable{
 	private Double desconto;
 	private Integer situacao;
 	
+	@OneToOne(mappedBy="orcamento",cascade = CascadeType.ALL)
+	private FormaDePagamento formaDePagamento;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="solicitacao_id")
@@ -71,7 +74,7 @@ public class Orcamento implements Serializable{
 		this.data = data;
 		this.cliente = cliente;
 		this.desconto = desc;
-		this.situacao = situacao.getCodigo();
+		this.situacao = situacao.getCod();
 		this.solicitacao = solicitacao;
 	}
 	
@@ -188,10 +191,17 @@ public class Orcamento implements Serializable{
 	}
 
 	public void setSituacao(TipoSituacao situacao) {
-		this.situacao = situacao.getCodigo();
+		this.situacao = situacao.getCod();
 	}
 
 
+	public FormaDePagamento getPagamento() {
+		return formaDePagamento;
+	}
+
+	public void setPagamento(FormaDePagamento formaDePagamento) {
+		this.formaDePagamento = formaDePagamento;
+	}
 
 	public SolicitacaoServico getSolicitacao() {
 		return solicitacao;

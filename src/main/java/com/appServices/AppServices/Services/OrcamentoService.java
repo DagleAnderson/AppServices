@@ -20,7 +20,6 @@ import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.dto.OrcamentoDTO;
-import com.appServices.AppServices.dto.OrcamentoNewDTO;
 import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
 import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
@@ -97,10 +96,10 @@ public class OrcamentoService {
 	
 	
 	
-	public Orcamento fromNewDTO(Orcamento obj,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
+	public Orcamento fromNew(Orcamento obj,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
 		
-	Orcamento orcamento = new Orcamento(obj.getId(), obj.getProdutoServico(),obj.getData(), prestador, cliente, obj.getDesconto(),obj.getSituacao(),solicitacao);
+	Orcamento orcamento = new Orcamento(obj.getId(), obj.getProdutoServico(),obj.getData(), prestador, cliente, obj.getDesconto(),TipoSituacao.PENDENTE,solicitacao);
 	
 	extractArrayItens(obj,orcamento);
 	
