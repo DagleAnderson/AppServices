@@ -3,7 +3,6 @@ package com.appServices.AppServices.domain;
 
 import javax.persistence.Entity;
 
-import com.appServices.AppServices.domain.enums.TipoPagamento;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
@@ -11,28 +10,25 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 public class PagamentoComDinheiro extends FormaDePagamento{
 	private static final long serialVersionUID = 1L;
 	
-	private Integer tipoPagamento;
+	private Integer numeroDeParcelas;
 	
 	public PagamentoComDinheiro() {
 		
 	}
 
-	public PagamentoComDinheiro(Integer id,Orcamento orcamento) {
+	public PagamentoComDinheiro(Integer id,Orcamento orcamento,Integer numeroDeParcelas) {
 		super(id,orcamento);
-		this.tipoPagamento = 1;
-		// TODO Auto-generated constructor stub
+		this.numeroDeParcelas = numeroDeParcelas;
+
+	}
+
+	public Integer getNumeroDeParcelas() {
+		return numeroDeParcelas;
+	}
+
+	public void setNumeroDeParcelas(Integer numeroDeParcelas) {
+		this.numeroDeParcelas = numeroDeParcelas;
 	}
 	
-	
-
-	public TipoPagamento getTipoPagamento() {
-		return TipoPagamento.toEnum(this.tipoPagamento);
-	}
-
-
-	public void setTipoPagamento(TipoPagamento tipoPagamento) {
-		this.tipoPagamento = tipoPagamento.getCodigo();
-	}
-
 
 }

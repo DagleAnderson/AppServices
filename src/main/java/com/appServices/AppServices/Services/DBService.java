@@ -51,7 +51,7 @@ import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.ItensPedidoRepository;
 import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
-import com.appServices.AppServices.repositories.PagamentoRepository;
+import com.appServices.AppServices.repositories.FormaDePagamentoRepository;
 import com.appServices.AppServices.repositories.PedidoRepository;
 import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
@@ -109,7 +109,7 @@ public class DBService {
 	private PedidoRepository pedidoRepository;
 	
 	@Autowired
-	private PagamentoRepository pagamentoRepository;
+	private FormaDePagamentoRepository formaDePagamentoRepository;
 	
 	@Autowired
 	private ItensPedidoRepository itensPedidoRepository;
@@ -163,7 +163,7 @@ public class DBService {
 		
 
 		//Cadastro de Categoria e Profissao		
-		Categoria areaProf1= new Categoria(null, "Construção e Reforma");		
+		Categoria areaProf1= new Categoria(null, "Construção & Reforma");		
 		Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
 		Profissao prof2 = new Profissao(null, "Arquiteto",areaProf1);
 		Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
@@ -177,7 +177,7 @@ public class DBService {
 		Profissao prof11 = new Profissao(null, "Arquiteto",areaProf1);
 		Profissao prof12= new Profissao(null, "Engenheiro",areaProf1);
 		
-		Categoria areaProf2= new Categoria(null, "Tecnologia e ELetrônicos");		
+		Categoria areaProf2= new Categoria(null, "Tecnologia & ELetrônicos");		
 		Profissao prof13 = new Profissao(null, "programador",areaProf2);
 		Profissao prof14 = new Profissao(null, "Técnico em Informatica",areaProf2);
 		Profissao prof15 = new Profissao(null, "Analista de sistemas",areaProf2);
@@ -199,7 +199,7 @@ public class DBService {
 		Profissao prof29= new Profissao(null, "Mecânico",areaProf3);
 		
 		
-		Categoria areaProf4 = new Categoria(null,"Saúde e Bem Estar");
+		Categoria areaProf4 = new Categoria(null,"Saúde & Bem Estar");
 		Profissao prof30= new Profissao(null, "Médico",areaProf4);
 		Profissao prof31= new Profissao(null, "Instrutor",areaProf4);
 		Profissao prof32= new Profissao(null, "Nutricionista",areaProf4);
@@ -209,7 +209,7 @@ public class DBService {
 		Profissao prof34= new Profissao(null, "Professor de inglês",areaProf5);
 		Profissao prof35= new Profissao(null, "Palestrante",areaProf5);
 
-		Categoria areaProf6 = new Categoria(null,"Eletrodomésticos");
+		Categoria areaProf6 = new Categoria(null,"Eletro & Domésticos");
 		Profissao prof36= new Profissao(null, "montador de móveis",areaProf6);
 		Profissao prof37= new Profissao(null, "eletricista",areaProf6);
 		
@@ -264,7 +264,7 @@ public class DBService {
 		EnderecoPrestador end6 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 		prest1.setEndereco(end6);
 				
-		Prestador prest2 = new Prestador(null,"Ceará Pinturas","pinturas em Geral",cli2.getEmail(),"domiciliar",prof1);	
+		Prestador prest2 = new Prestador(null,"Jennifer","Programadora",cli2.getEmail(),"Home Office",prof1);	
 		cli2.setPrestador(prest2);
 		EnderecoPrestador end7 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 		prest2.setEndereco(end7);
@@ -324,7 +324,7 @@ public class DBService {
 				itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
 				itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
 				itensSolicitacao7,itensSolicitacao8));
-		
+		                  
 	   /**SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli3, prof1,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao10 = new ItensSolicitacao(null, "quebrado", solicitacao2);
@@ -345,13 +345,13 @@ public class DBService {
 		
 
 		
-		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli2 ,0.0, TipoSituacao.APROVADO, solicitacao1);
+		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli2 ,0.0,null, TipoSituacao.APROVADO, solicitacao1);
 		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, orcamento1);
 		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0,TipoUnidade.MT, 0.0, 80.0, orcamento1);
 		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0, orcamento1);
 		orcamento1.getItensOrcamento().addAll(Arrays.asList(itensOrc1,itensOrc2,itensOrc3));
-		FormaDePagamento pag1 = new PagamentoComDinheiro(null, orcamento1);
-		orcamento1.setPagamento(pag1);
+		FormaDePagamento pag1 = new PagamentoComDinheiro(null, orcamento1,1);
+		orcamento1.setFormaDePagamento(pag1);
 		
 		/**Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli3 ,0.0, TipoSituacao.PENDENTE, solicitacao2);
 		ItensOrcamento itensOrc4 = new ItensOrcamento(null, "memória", 1.0, 0.0, 200.0, orcamento2);
@@ -424,7 +424,7 @@ public class DBService {
 				 itensOrc7,itensOrc8,itensOrc9**/
 				 ));
 		 
-		 pagamentoRepository.save(pag1);
+		 formaDePagamentoRepository.save(pag1);
 		 
 		 /** pedidoRepository.saveAll(Arrays.asList(pedido1));
 		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/

@@ -69,7 +69,9 @@ public class OrcamentoResource implements Serializable{
 		SolicitacaoServico solicit = solicitacaoService.find(solicitacao); 
 		
 		
+		
 		Orcamento Newobj = service.fromNew(obj, cli, prest,solicit);
+	
 		
 		obj = service.insert(Newobj);
 		

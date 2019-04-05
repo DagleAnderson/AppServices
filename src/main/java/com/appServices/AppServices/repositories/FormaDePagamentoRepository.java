@@ -10,7 +10,7 @@ import com.appServices.AppServices.domain.FormaDePagamento;
 
 
 @Repository
-public interface PagamentoRepository extends JpaRepository<FormaDePagamento, Integer>  {
+public interface FormaDePagamentoRepository extends JpaRepository<FormaDePagamento, Integer>  {
 	
 
 }

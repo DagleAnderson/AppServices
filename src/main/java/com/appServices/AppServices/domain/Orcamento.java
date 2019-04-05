@@ -67,14 +67,15 @@ public class Orcamento implements Serializable{
 	}
 	
 	public Orcamento(Integer id,String produtoServico,Date data, Prestador prestador, Cliente cliente, Double desc,
-			TipoSituacao situacao,SolicitacaoServico solicitacao) {
+			FormaDePagamento formaPagamento,TipoSituacao situacao,SolicitacaoServico solicitacao) {
 		this.id = id;
 		this.produtoServico = produtoServico;
 		this.prestador = prestador;
 		this.data = data;
 		this.cliente = cliente;
 		this.desconto = desc;
-		this.situacao = situacao.getCod();
+		this.formaDePagamento = formaPagamento;
+		this.situacao = (situacao == null)? null: situacao.getCod();
 		this.solicitacao = solicitacao;
 	}
 	
@@ -195,11 +196,11 @@ public class Orcamento implements Serializable{
 	}
 
 
-	public FormaDePagamento getPagamento() {
+	public FormaDePagamento getFormaDePagamento() {
 		return formaDePagamento;
 	}
 
-	public void setPagamento(FormaDePagamento formaDePagamento) {
+	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
 		this.formaDePagamento = formaDePagamento;
 	}
 

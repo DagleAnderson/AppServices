@@ -40,7 +40,7 @@ public class OrcamentoDTO {
 		this.cliente = obj.getCliente().getId();
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
-		this.formaDePagamento = obj.getPagamento();
+		this.formaDePagamento = obj.getFormaDePagamento();
 		this.situacao = obj.getSituacao().getCod();
 		
 	}
@@ -109,11 +109,11 @@ public class OrcamentoDTO {
 	
 	
 
-	public FormaDePagamento getPagamento() {
+	public FormaDePagamento getFormaDePagamento() {
 		return formaDePagamento;
 	}
 
-	public void setPagamento(FormaDePagamento formaDePagamento) {
+	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
 		this.formaDePagamento = formaDePagamento;
 	}
 

@@ -14,12 +14,14 @@ import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.PagamentoComDinheiro;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.dto.OrcamentoDTO;
+import com.appServices.AppServices.repositories.FormaDePagamentoRepository;
 import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
 import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
@@ -40,9 +42,12 @@ public class OrcamentoService {
 	@Autowired
 	private ItensOrcamentoRepository itensOrcamentoRepo;
 	
+	private FormaDePagamentoRepository formaDePagamentoRepository;
+	
 	@Autowired 
 	private SolicitacaoServicoRepository solicitacaoRepository;
 	
+
 	@Autowired
 	private EmailServiceOrcamento emailService;
 	
@@ -57,12 +62,13 @@ public class OrcamentoService {
 	@Transactional
 	public Orcamento insert(Orcamento obj) {
 		obj.setId(null);
-
-		obj = repository.save(obj);
-		
+		obj.getFormaDePagamento().setOrcamento(obj);
 		itensOrcamentoRepo.saveAll(obj.getItensOrcamento());
 		
+		obj = repository.save(obj);
+
 		 emailService.sendOrderConfirmationEmail(obj);
+
 
 		return obj;
 	}
@@ -90,7 +96,7 @@ public class OrcamentoService {
 	
 	public Orcamento fromDTO(OrcamentoDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
-		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(),prestador, cliente, objDTO.getDesconto(),objDTO.getSituacao(),solicitacao);
+		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(),prestador, cliente, objDTO.getDesconto(),objDTO.getFormaDePagamento(), objDTO.getSituacao(),solicitacao);
 		return orcamento;
 	}
 	
@@ -99,7 +105,7 @@ public class OrcamentoService {
 	public Orcamento fromNew(Orcamento obj,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
 		
-	Orcamento orcamento = new Orcamento(obj.getId(), obj.getProdutoServico(),obj.getData(), prestador, cliente, obj.getDesconto(),TipoSituacao.PENDENTE,solicitacao);
+	Orcamento orcamento = new Orcamento(obj.getId(), obj.getProdutoServico(),obj.getData(), prestador, cliente, obj.getDesconto(),obj.getFormaDePagamento(),TipoSituacao.PENDENTE,solicitacao);
 	
 	extractArrayItens(obj,orcamento);
 	
