@@ -71,7 +71,11 @@ public class Cliente implements Serializable {
 	@JoinColumn(name="prestador_id")
 	private Prestador prestador;
 	
+	@JsonIgnore
+	@OneToOne(mappedBy="cliente")
+	private PagSeguro pagSeguro;
 	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<SolicitacaoServico> solicitacao = new ArrayList<>();
@@ -236,6 +240,16 @@ public class Cliente implements Serializable {
 
 	public void setPrestador(Prestador prestador) {
 		this.prestador = prestador;
+	}
+	
+	
+	public PagSeguro getPagSeguro() {
+		return pagSeguro;
+	}
+
+
+	public void setPagSeguro(PagSeguro pagSeguro) {
+		this.pagSeguro = pagSeguro;
 	}
 	
 
