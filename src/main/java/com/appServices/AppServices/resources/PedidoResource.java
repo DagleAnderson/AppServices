@@ -56,7 +56,7 @@ public class PedidoResource implements Serializable {
 	@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
-			@Valid @RequestBody PedidoNewDTO objDTO,
+			@Valid @RequestBody Pedido objDTO,
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
 			@RequestParam(value="orcamento",defaultValue="0") Integer orcamento){

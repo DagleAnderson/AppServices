@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,6 +23,7 @@ public class ItensPedido implements Serializable {
 	private Integer id;
 	private String item;
 	private Double quantidade;
+	private Integer unidade;
 	private Double desconto;
 	private Double valor;
 	
@@ -34,10 +36,11 @@ public class ItensPedido implements Serializable {
 	public ItensPedido() {
 	}
 
-	public ItensPedido(Integer id, String item,Double quantidade,Double desconto, Double valor, Pedido pedido) {
+	public ItensPedido(Integer id, String item,Double quantidade,TipoUnidade unidade,Double desconto, Double valor, Pedido pedido) {
 		this.id = id;
 		this.item = item;
 		this.quantidade = quantidade;
+		this.unidade = unidade.getCodigo();
 		this.desconto = desconto;
 		this.valor = valor;
 		this.pedido = pedido;
@@ -95,6 +98,15 @@ public class ItensPedido implements Serializable {
 
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+
+	public TipoUnidade getUnidade() {
+		return TipoUnidade.toEnum(unidade);
+	}
+
+	public void setUnidade(TipoUnidade unidade) {
+		this.unidade = unidade.getCodigo();
 	}
 
 	public Double getDesconto() {

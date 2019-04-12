@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.appServices.AppServices.domain.Pedido;
+import com.appServices.AppServices.domain.enums.StatusAtendimento;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,8 +19,7 @@ public class PedidoDTO implements Serializable {
 	private Double total;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
-	private Integer situacao;
-	private Integer statusPagamento;
+	private Integer atendimento;
 	
 	public PedidoDTO() {
 		
@@ -32,8 +32,8 @@ public class PedidoDTO implements Serializable {
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
 		this.data = obj.getData();
-		this.situacao = obj.getSituacao().getCod();
-		this.statusPagamento = obj.getStatusPagamento().getCod();
+		this.atendimento = (obj.getAtendimento() == null)?null: obj.getAtendimento().getCod();
+
 		
 	}
 
@@ -85,21 +85,15 @@ public class PedidoDTO implements Serializable {
 		this.data = data;
 	}
 
-	public TipoSituacao getSituacao() {
-		return TipoSituacao.toEnum(situacao);
+	public StatusAtendimento getAtendimento() {
+		return StatusAtendimento.toEnum(atendimento);
 	}
 
-	public void setSituacao(TipoSituacao situacao) {
-		this.situacao = situacao.getCod();
+	public void setAtendimento(StatusAtendimento atendimento) {
+		this.atendimento = atendimento.getCod();
 	}
 	
-	public StatusPagamento getStatusPagamento() {
-		return StatusPagamento.toEnum(statusPagamento);
-	}
-
-	public void setStatusPagamento(StatusPagamento status) {
-		this.statusPagamento = status.getCod();
-	}
+	
 
 	
 	

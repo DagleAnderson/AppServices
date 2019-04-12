@@ -1,15 +1,16 @@
 package com.appServices.AppServices.domain.enums;
 
-public enum StatusPagamento {
+public enum StatusAtendimento {
 	PENDENTE(1,"PENDENTE"),
-	APROVADO(2,"APROVADO"),
-	CANCELADO(3,"CANCELADO");
+	CONFIRMADO(2,"CONFIRMADO"),
+	REALIZADO(3,"REALIZADO"),
+	CANCELADO(4,"CANCELADO");
 	
 	private Integer cod;
 	private String nome;
 	
 	
-	private StatusPagamento(Integer codigo, String nome){
+	private StatusAtendimento(Integer codigo, String nome){
 		this.cod = codigo;
 		this.nome = nome;
 	}
@@ -34,11 +35,11 @@ public enum StatusPagamento {
 		this.nome = nome;
 	}
 	
-	public static StatusPagamento toEnum(Integer cod) {
+	public static StatusAtendimento toEnum(Integer cod) {
 		if(cod==null) {
 			return null;
 		}
-		for(StatusPagamento x : StatusPagamento.values()) {
+		for(StatusAtendimento x : StatusAtendimento.values()) {
 			if(cod.equals(x.getCod())) {
 				return x;
 			}
@@ -46,7 +47,6 @@ public enum StatusPagamento {
 		
 		throw new IllegalArgumentException("id inválido" + cod);	
 	}
-	
 	
 	
 	

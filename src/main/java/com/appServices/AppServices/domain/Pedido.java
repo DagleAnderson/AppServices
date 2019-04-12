@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
+import com.appServices.AppServices.domain.enums.StatusAtendimento;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -46,27 +46,26 @@ public class Pedido implements Serializable{
 	private Double total;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
-	private Integer situacao;
-	private Integer statusPagamento;
 	
 	@OneToOne
 	@JoinColumn(name="orcamento_id")
 	private Orcamento orcamento;
 	
+	private Integer atendimento;
+	
 	public Pedido() {
 		
 	}
 
-	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double desconto, Date data,TipoSituacao situacao,StatusPagamento statusPg,Orcamento orcamento) {
+	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double desconto, Date data,Orcamento orcamento,StatusAtendimento atendimento) {
 		this.id = id;
 		this.produtoServico = produtoServico;
 		this.prestador = prestador;
 		this.cliente = cliente;
 		this.desconto = desconto;
 		this.data = data;
-		this.situacao = situacao.getCod();
-		this.statusPagamento = statusPg.getCod();
 		this.orcamento = orcamento;
+		this.atendimento =(atendimento == null)?null:atendimento.getCod();
 	}
 
 	@Override
@@ -111,9 +110,6 @@ public class Pedido implements Serializable{
 		this.produtoServico = produtoServico;
 	}
 
-	public void setItensPedido(List<ItensPedido> itensPedido) {
-		this.itensPedido = itensPedido;
-	}
 
 	public Prestador getPrestador() {
 		return prestador;
@@ -135,7 +131,7 @@ public class Pedido implements Serializable{
 		return itensPedido;
 	}
 
-	public void setItens(List<ItensPedido> itensPedido) {
+	public void setItensPedido(List<ItensPedido> itensPedido) {
 		this.itensPedido = itensPedido;
 	}
 
@@ -162,22 +158,6 @@ public class Pedido implements Serializable{
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-	public TipoSituacao getSituacao() {
-		return TipoSituacao.toEnum(situacao);
-	}
-
-	public void setSituacao(TipoSituacao situacao) {
-		this.situacao = situacao.getCod();
-	}
-	
-	public StatusPagamento getStatusPagamento() {
-		return StatusPagamento.toEnum(statusPagamento);
-	}
-
-	public void setStatusPagamento(StatusPagamento status) {
-		this.statusPagamento = status.getCod();
-	}
 
 	public Orcamento getOrcamento() {
 		return orcamento;
@@ -187,9 +167,14 @@ public class Pedido implements Serializable{
 		this.orcamento = orcamento;
 	}
 	
-	
+	public StatusAtendimento getAtendimento() {
+		return StatusAtendimento.toEnum(this.atendimento) ;
+	}
 
-	
+	public void setAtendimento(StatusAtendimento atendimento) {
+		this.atendimento = atendimento.getCod();
+	}
+
 	public double getValorTotal() {
 		double soma = 0.0;
 		

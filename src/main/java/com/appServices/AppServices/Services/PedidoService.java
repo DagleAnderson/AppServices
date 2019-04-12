@@ -21,8 +21,11 @@ import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusAtendimento;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
+import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
 import com.appServices.AppServices.repositories.ItensPedidoRepository;
@@ -35,6 +38,7 @@ public class PedidoService {
 	//atributos internos para obternção de valores
 	private String item;
 	private Double quantidade;
+	private Integer unidade;
 	private Double descontoItem;
 	private Double valorItem;
 	
@@ -99,29 +103,31 @@ public class PedidoService {
 	
 	public Pedido fromDTO(PedidoDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
 
-		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(),objDTO.getSituacao(),objDTO.getStatusPagamento(),orcamento);		
+		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(),orcamento,objDTO.getAtendimento());		
 		return Pedido;
 	}
 	
 	
 	
-public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
+public Pedido fromNewDTO(Pedido objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
 		
 		
-	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(), TipoSituacao.toEnum(objDTO.getSituacao()),StatusPagamento.toEnum(objDTO.getStatusPagamento()),orcamento);
+	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(),orcamento,StatusAtendimento.PENDENTE);
 	extractArrayItens(objDTO,pedido);
 		
 		return pedido;
 	}
 	
-	private void extractArrayItens(PedidoNewDTO objDTO,Pedido pedido) {
+	private void extractArrayItens(Pedido obj,Pedido pedido) {
 
-		for(int x=0; x < objDTO.getItemPedido().size();x++ ) {
-			 item = objDTO.getItemPedido().get(x);
-			 quantidade = objDTO.getQuantidade().get(x);
-			 descontoItem= objDTO.getDescontoItem().get(x);
-			 valorItem = objDTO.getValorItem().get(x);	
-			 ItensPedido itensPedido = new ItensPedido(null,item,quantidade,descontoItem,valorItem,pedido);
+		for(int x=0; x < obj.getItensPedido().size();x++ ) {
+			 item = obj.getItensPedido().get(x).getItem();
+			 quantidade = obj.getItensPedido().get(x).getQuantidade();
+			 unidade = obj.getItensPedido().get(x).getUnidade().getCodigo();
+			 descontoItem=obj.getItensPedido().get(x).getDesconto();
+			 valorItem = obj.getItensPedido().get(x).getValor();
+			 
+			 ItensPedido itensPedido = new ItensPedido(null,item,quantidade,TipoUnidade.toEnum(unidade),descontoItem,valorItem,pedido);
 			 pedido.getItensPedido().add(itensPedido);
 			 
 		}
@@ -129,11 +135,7 @@ public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestado
 	
 	
 	private void updateData(Pedido newObj,Pedido obj) {
-		newObj.setId(obj.getId());
-		newObj.setProdutoServico(obj.getProdutoServico());
-		newObj.setDesconto(obj.getDesconto());
-		newObj.setTotal(obj.getTotal());
-		newObj.setSituacao(obj.getSituacao());
+		newObj.setAtendimento(obj.getAtendimento());
 		
 	}
 	
