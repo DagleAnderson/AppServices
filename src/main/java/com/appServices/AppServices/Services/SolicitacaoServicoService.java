@@ -91,9 +91,9 @@ public class SolicitacaoServicoService {
 		return repository.findAll();
 	}
 	
-	public SolicitacaoServico fromDTO(SolicitacaoServicoDTO objDTO,Cliente cliente, Profissao profissao) {
+	public SolicitacaoServico fromDTO(SolicitacaoServicoDTO objDTO) {
 
-		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),objDTO.getData(),cliente,null,objDTO.getStatusSolicitacao());
+		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),objDTO.getData(),null,null,objDTO.getSituacao());
 
 		return solicitacaoServ;
 	}
@@ -104,7 +104,7 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 		
 		
 		SolicitacaoServico SolicitacaoServico = new SolicitacaoServico(objDTO.getId(), objDTO.getProdutoServico()
-				,objDTO.getData(), cliente, profissao,StatusSolicitacao.toEnum(objDTO.getStatusSolicitacao()));
+				,objDTO.getData(), cliente, profissao,StatusSolicitacao.toEnum(objDTO.getSituacao()));
 		
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, objDTO.getItemSolicitacao1(), SolicitacaoServico);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, objDTO.getItemSolicitacao2(), SolicitacaoServico);
@@ -126,7 +126,7 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 	
 	private void updateData(SolicitacaoServico newObj,SolicitacaoServico obj) {
 		newObj.setId(obj.getId());
-		newObj.setProdutoServico(obj.getProdutoServico());;
+		newObj.setSituacao(obj.getSituacao());
 		
 	}
 	

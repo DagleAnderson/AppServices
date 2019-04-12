@@ -83,20 +83,22 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')")
+	//@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
-			@Valid @RequestBody OrcamentoDTO objDTO,@PathVariable Integer id,
-			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
-			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
-			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao){
+			@Valid @RequestBody OrcamentoDTO objDTO,@PathVariable Integer id
+			//@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+			//@RequestParam(value="prestador",defaultValue="0") Integer prestador
+			//@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao
+			){
 		
-		Cliente cli = clienteService.find(cliente);
-		Prestador prest = prestadorService.find(prestador);
+		//Cliente cli = clienteService.find(cliente);
+		//Prestador prest = prestadorService.find(prestador);
 		
-		SolicitacaoServico solicit =solicitacaoService.find(solicitacao); 
-	
-		Orcamento obj = service.fromDTO(objDTO, cli, prest,solicit);
+		//SolicitacaoServico solicit =solicitacaoService.find(solicitacao); 
+		
+		Orcamento obj = service.fromDTO(objDTO);
+		
 		obj.setId(id);
 		obj = service.update(obj);
 		
@@ -104,7 +106,7 @@ public class OrcamentoResource implements Serializable{
 		
 	}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')")
+	//@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);

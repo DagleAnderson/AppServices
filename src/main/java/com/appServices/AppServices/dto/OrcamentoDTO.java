@@ -41,7 +41,7 @@ public class OrcamentoDTO {
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
 		this.formaDePagamento = obj.getFormaDePagamento();
-		this.situacao = obj.getSituacao().getCod();
+		this.situacao = (obj.getSituacao() == null)? null: obj.getSituacao().getCod();
 		
 	}
 

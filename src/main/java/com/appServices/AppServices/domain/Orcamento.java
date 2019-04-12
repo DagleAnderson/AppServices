@@ -188,7 +188,7 @@ public class Orcamento implements Serializable{
 	}
 
 	public TipoSituacao getSituacao() {
-		return TipoSituacao.toEnum(situacao);
+		return TipoSituacao.toEnum(this.situacao);
 	}
 
 	public void setSituacao(TipoSituacao situacao) {

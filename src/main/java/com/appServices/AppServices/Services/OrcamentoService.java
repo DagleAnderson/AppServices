@@ -42,7 +42,6 @@ public class OrcamentoService {
 	@Autowired
 	private ItensOrcamentoRepository itensOrcamentoRepo;
 	
-	private FormaDePagamentoRepository formaDePagamentoRepository;
 	
 	@Autowired 
 	private SolicitacaoServicoRepository solicitacaoRepository;
@@ -94,9 +93,9 @@ public class OrcamentoService {
 	}
 	
 	
-	public Orcamento fromDTO(OrcamentoDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
+	public Orcamento fromDTO(OrcamentoDTO objDTO) {
 
-		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(),prestador, cliente, objDTO.getDesconto(),objDTO.getFormaDePagamento(), objDTO.getSituacao(),solicitacao);
+		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),objDTO.getData(),null, null, objDTO.getDesconto(),objDTO.getFormaDePagamento(), objDTO.getSituacao(),null);
 		return orcamento;
 	}
 	
@@ -129,8 +128,6 @@ public class OrcamentoService {
 
 	private void updateData(Orcamento newObj,Orcamento obj) {
 		newObj.setId(obj.getId());
-		newObj.setProdutoServico(obj.getProdutoServico());
-		newObj.setDesconto(obj.getDesconto());
 		newObj.setSituacao(obj.getSituacao());
 		
 	}

@@ -20,19 +20,15 @@ import com.appServices.AppServices.Services.ClienteService;
 import com.appServices.AppServices.Services.PagSeguroService;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.EnderecoCliente;
-import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.PagSeguro;
-import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
-import com.appServices.AppServices.dto.PedidoDTO;
 
 import br.com.uol.pagseguro.domain.AccountCredentials;
 import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Item;
 import br.com.uol.pagseguro.domain.PaymentRequest;
-import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.Shipping;
 import br.com.uol.pagseguro.domain.Transaction;
@@ -47,6 +43,7 @@ import br.com.uol.pagseguro.service.NotificationService;
 public class pagSeguroResource {
 	
 	private String pagamento;
+	private String url_redirect;
 	
 	@Autowired
 	ClienteService clienteService;
@@ -59,6 +56,16 @@ public class pagSeguroResource {
 	
 	@Value("${pagSeguro.token}")
 	private String token;
+	
+	
+	@RequestMapping(value="/pagSeguro/{id}",method = RequestMethod.GET)
+	public ResponseEntity<PagSeguro> find(@PathVariable Integer id){
+		
+		PagSeguro objOp = pagSeguroService.findById(id);
+		
+		return ResponseEntity.ok().body(objOp);
+	}
+	
 	
 	
 	@RequestMapping(value="/pagseguro-createpayment",method = RequestMethod.POST)
@@ -77,7 +84,10 @@ public class pagSeguroResource {
 			request.setNotificationURL("https://localhost:8080/pagamento/pagseguro-notificacao");
 			request.setRedirectURL("https://localhost:8080/categorias");
 			
-			PagSeguro pagSeg = new PagSeguro(null, cli, 1.99,StatusPagamento.PENDENTE,request.register(getCredentials()),null,null);
+			this.url_redirect = request.register(getCredentials());
+			System.out.println(url_redirect);
+			this.url_redirect = request.register(getCredentials()).substring(59);
+			PagSeguro pagSeg = new PagSeguro(null, cli, 1.99,StatusPagamento.PENDENTE,url_redirect,null,null);
 			
 			pagSeguroService.insert(pagSeg);	
 			
@@ -90,6 +100,7 @@ public class pagSeguroResource {
 		return null;
 	}
 
+	
 	//Dados do cliente solicitante do serviço
 	private Sender getSender(Cliente cliente) {
 		

@@ -29,7 +29,7 @@ public class SolicitacaoServico implements Serializable{
 	private String produtoServico;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
-	private Integer statusSolicitacao;
+	private Integer situacao;
 	
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
@@ -57,7 +57,7 @@ public class SolicitacaoServico implements Serializable{
 		this.data = data;
 		this.cliente = cliente;
 		this.profissao = profissao;
-		this.statusSolicitacao =  status.getCod();
+		this.situacao =  (status == null)? null: status.getCod();;
 	}
 
 	
@@ -151,12 +151,12 @@ public class SolicitacaoServico implements Serializable{
 	}
 	
 	
-	public StatusSolicitacao getStatusSolicitacao() {
-		return StatusSolicitacao.toEnum(this.statusSolicitacao);
+	public StatusSolicitacao getSituacao() {
+		return StatusSolicitacao.toEnum(this.situacao);
 	}
 
-	public void setStatusSolicitacao(StatusSolicitacao status) {
-		this.statusSolicitacao = status.getCod();
+	public void setSituacao(StatusSolicitacao status) {
+		this.situacao = status.getCod();
 	}
 	
 	

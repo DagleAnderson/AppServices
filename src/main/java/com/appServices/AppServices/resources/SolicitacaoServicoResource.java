@@ -74,16 +74,14 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
+	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
-			@Valid @RequestBody SolicitacaoServicoDTO objDTO,@PathVariable Integer id,
-			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
-			@RequestParam(value="profissao",defaultValue="0") Integer profissao){
+			@Valid @RequestBody SolicitacaoServicoDTO objDTO,@PathVariable Integer id){
 		
-		Cliente cli = clienteService.find(cliente);
+		//Cliente cli = clienteService.find(cliente);
 	
-		SolicitacaoServico obj = service.fromDTO(objDTO,cli,null);
+		SolicitacaoServico obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		

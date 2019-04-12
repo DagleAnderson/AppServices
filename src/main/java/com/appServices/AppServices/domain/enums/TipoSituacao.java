@@ -3,18 +3,26 @@ package com.appServices.AppServices.domain.enums;
 public enum TipoSituacao {
 	PENDENTE(1,"PENDENTE"),
 	ANALISE( 2,"ANALISE"),
-	APROVADO(3,"APROVADO");
+	APROVADO(3,"APROVADO"),
+	REJEITADO(4,"REJEITADO");
 	
 	private Integer cod;
 	private String nome;
+	
 	
 	private TipoSituacao(Integer codigo, String nome){
 		this.cod = codigo;
 		this.nome = nome;
 	}
 
+
 	public Integer getCod() {
 		return cod;
+	}
+
+
+	public void setCod(Integer cod) {
+		this.cod = cod;
 	}
 
 
@@ -22,8 +30,12 @@ public enum TipoSituacao {
 		return nome;
 	}
 
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
-	public  static TipoSituacao toEnum(Integer cod){
+	public static TipoSituacao toEnum(Integer cod) {
 		if(cod==null) {
 			return null;
 		}
@@ -33,8 +45,9 @@ public enum TipoSituacao {
 			}
 		}
 		
-		throw new IllegalArgumentException("id inválido"+cod);	
+		throw new IllegalArgumentException("id inválido" + cod);	
 	}
+	
 	
 	
 }

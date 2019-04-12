@@ -17,7 +17,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 	private String profissao;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
-	private Integer statusSolicitacao;
+	private Integer situacao;
 	
 	public SolicitacaoServicoDTO() {
 		
@@ -29,7 +29,7 @@ public class SolicitacaoServicoDTO implements Serializable{
 		this.cliente = objDTO.getCliente().getNome() +" "+ objDTO.getCliente().getSobrenome();
 		this.profissao = objDTO.getProfissao().getNome();
 		this.data = objDTO.getData();
-		this.statusSolicitacao = objDTO.getStatusSolicitacao().getCod();
+		this.situacao = objDTO.getSituacao().getCod();
 	}
 
 	public Integer getId() {
@@ -75,12 +75,12 @@ public class SolicitacaoServicoDTO implements Serializable{
 	}
 	
 	
-	public StatusSolicitacao getStatusSolicitacao() {
-		return StatusSolicitacao.toEnum(statusSolicitacao);
+	public StatusSolicitacao getSituacao() {
+		return StatusSolicitacao.toEnum(situacao);
 	}
 
-	public void setStatusSolicitacao(StatusSolicitacao status) {
-		this.statusSolicitacao = status.getCod();
+	public void setSituacao(StatusSolicitacao situacao) {
+		this.situacao = situacao.getCod();
 	}
 	
 	

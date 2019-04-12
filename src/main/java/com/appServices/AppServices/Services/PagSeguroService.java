@@ -1,11 +1,15 @@
 package com.appServices.AppServices.Services;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.PagSeguro;
-import com.appServices.AppServices.domain.Pedido;
+import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.repositories.PagSeguroRepository;
 
 @Service
@@ -13,6 +17,16 @@ public class PagSeguroService {
 
 	@Autowired
 	private PagSeguroRepository repository;
+
+	
+	public PagSeguro findById(Integer id) {
+		
+		Optional<PagSeguro> objOp = repository.findById(id);
+		
+		return objOp.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Prestador.class.getName())
+				);
+	}
 
 
 	@Transactional
