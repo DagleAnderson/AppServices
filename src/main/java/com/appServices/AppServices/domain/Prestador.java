@@ -2,10 +2,15 @@ package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +37,10 @@ public class Prestador implements Serializable {
 	@JsonIgnore
 	@OneToOne(mappedBy = "prestador")
 	private Cliente cliente;
+
+	@ElementCollection
+	@CollectionTable(name="TELEFONE_PRESTADOR")
+	private Set<String> telefones =  new HashSet<>();
 	
 	private String email;
 	
@@ -134,11 +143,20 @@ public class Prestador implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
 
 	public EnderecoPrestador getEndereco() {
 		return endereco;
 	}
-	
 	
 
 	public String getEmail() {

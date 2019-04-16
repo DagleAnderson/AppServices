@@ -135,7 +135,7 @@ public class DBService {
 		Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,pe.encode("221094"),"dagle_life@hotmail.com");
 		EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
 		cli1.setEndereco(end1);
-		
+		cli1.getTelefones().addAll(Arrays.asList("77-991489740","77-998436524"));
 		
 		Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,pe.encode("221094"),"dagleandersonlima@gmail.com");	
 		cli2.addPerfil(TipoPerfil.ADMIN);
@@ -262,8 +262,10 @@ public class DBService {
 		//Cadsatro de Prestador	
 		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral",cli1.getEmail(),"domiciliar",prof1);	
 		cli1.setPrestador(prest1);
+		prest1.getTelefones().addAll(Arrays.asList("77-991489740","77-99994455"));
 		EnderecoPrestador end6 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 		prest1.setEndereco(end6);
+		
 				
 		Prestador prest2 = new Prestador(null,"Jennifer","Programadora",cli2.getEmail(),"Home Office",prof1);	
 		cli2.setPrestador(prest2);

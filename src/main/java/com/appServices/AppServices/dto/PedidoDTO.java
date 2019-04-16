@@ -15,6 +15,7 @@ public class PedidoDTO implements Serializable {
 	private Integer id;
 	private String produtoServico;
 	private String prestador;
+	private String cliente;
 	private Double desconto;
 	private Double total;
 	@JsonFormat(pattern="dd/MM/yyyy")
@@ -29,6 +30,7 @@ public class PedidoDTO implements Serializable {
 		this.id = obj.getId();
 		this.produtoServico = obj.getProdutoServico();
 		this.prestador = obj.getPrestador().getNomeFantasia();
+		this.cliente = obj.getCliente().getNome()+' '+obj.getCliente().getSobrenome();
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
 		this.data = obj.getData();
@@ -59,6 +61,15 @@ public class PedidoDTO implements Serializable {
 
 	public void setPrestador(String prestador) {
 		this.prestador = prestador;
+	}
+
+	
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 	public Double getDesconto() {

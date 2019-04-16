@@ -18,9 +18,8 @@ public class OrcamentoDTO {
 	private Integer prestadorId;
 	
 	private String prestador;
-	
-	@JsonIgnore
-	private Integer cliente;
+
+	private String cliente;
 	
 	private Double desconto;
 	private Double total;
@@ -37,7 +36,7 @@ public class OrcamentoDTO {
 		this.produtoServico = obj.getProdutoServico();
 		this.prestadorId = obj.getPrestador().getId();
 		this.prestador = obj.getPrestador().getNomeFantasia();
-		this.cliente = obj.getCliente().getId();
+		this.cliente = obj.getCliente().getNome() +' '+obj.getCliente().getSobrenome();
 		this.desconto = obj.getDesconto();
 		this.total = obj.getTotal();
 		this.formaDePagamento = obj.getFormaDePagamento();
@@ -87,11 +86,11 @@ public class OrcamentoDTO {
 		this.prestador = prestador;
 	}
 
-	public Integer getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Integer cliente) {
+	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
 

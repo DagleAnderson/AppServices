@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/auth/forgot/**",
 			"/estados/**",
 			"/paypal/**",
-			"/pagamento/**"
+			"/pagamento/**",
+			"/pedido/**"
 	};
 	
 	

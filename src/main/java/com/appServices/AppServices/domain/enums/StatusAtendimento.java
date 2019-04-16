@@ -2,9 +2,8 @@ package com.appServices.AppServices.domain.enums;
 
 public enum StatusAtendimento {
 	PENDENTE(1,"PENDENTE"),
-	CONFIRMADO(2,"CONFIRMADO"),
-	REALIZADO(3,"REALIZADO"),
-	CANCELADO(4,"CANCELADO");
+	REALIZADO(2,"REALIZADO"),
+	CANCELADO(3,"CANCELADO");
 	
 	private Integer cod;
 	private String nome;

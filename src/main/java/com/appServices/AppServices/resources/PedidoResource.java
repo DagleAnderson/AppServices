@@ -53,7 +53,7 @@ public class PedidoResource implements Serializable {
 	}
 	
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
+	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody Pedido objDTO,
@@ -79,7 +79,7 @@ public class PedidoResource implements Serializable {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
+	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
 			@Valid @RequestBody PedidoDTO objDTO,@PathVariable Integer id,
@@ -99,7 +99,7 @@ public class PedidoResource implements Serializable {
 		
 	}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
+	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
