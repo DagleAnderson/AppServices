@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Avaliacoes implements Serializable{
+public class Avaliacao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -34,12 +34,12 @@ public class Avaliacoes implements Serializable{
 
 
 
-	public Avaliacoes() {
+	public Avaliacao() {
 		
 	}
 
 
-	public Avaliacoes(Integer id, Cliente cliente, Prestador prestador, Double estrelas, String comentario) {
+	public Avaliacao(Integer id, Cliente cliente, Prestador prestador, Double estrelas, String comentario) {
 		this.id = id;
 		this.cliente = cliente;
 		this.prestador = prestador;
@@ -65,7 +65,7 @@ public class Avaliacoes implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Avaliacoes other = (Avaliacoes) obj;
+		Avaliacao other = (Avaliacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.appServices.AppServices.domain.Avaliacoes;
+import com.appServices.AppServices.domain.Avaliacao;
 import com.appServices.AppServices.domain.Categoria;
 import com.appServices.AppServices.domain.Cidade;
 import com.appServices.AppServices.domain.Cliente;
@@ -260,19 +260,19 @@ public class DBService {
 					));
 		
 		//Cadsatro de Prestador	
-		Prestador prest1 = new Prestador(null,"Anderson Pintor","Pinturas em geral",cli1.getEmail(),"domiciliar",prof1);	
+		Prestador prest1 = new Prestador(null,"D'aglê Anderson","Full Stack Development",cli1.getEmail(),"home Office",prof13);	
 		cli1.setPrestador(prest1);
 		prest1.getTelefones().addAll(Arrays.asList("77-991489740","77-99994455"));
 		EnderecoPrestador end6 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 		prest1.setEndereco(end6);
 		
 				
-		Prestador prest2 = new Prestador(null,"Jennifer","Programadora",cli2.getEmail(),"Home Office",prof1);	
+		Prestador prest2 = new Prestador(null,"Jennifer","Programadora",cli2.getEmail(),"Home Office",prof13);	
 		cli2.setPrestador(prest2);
 		EnderecoPrestador end7 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 		prest2.setEndereco(end7);
 		
-		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral",cli3.getEmail(),"domiciliar",prof2);	
+		Prestador prest3 = new Prestador(null,"Engenheiros","casas em geral",cli3.getEmail(),"domiciliar",prof1);	
 		cli3.setPrestador(prest3);
 		EnderecoPrestador end8 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest3);
 		prest3.setEndereco(end8);
@@ -376,7 +376,7 @@ public class DBService {
 		ItensPedido itensPed1 = new ItensPedido(null, "memória", 1.0, 0.0, 200.0, pedido1);
 		ItensPedido itensPed2 = new ItensPedido(null, "formatação", 1.0, 0.0, 80.0, pedido1);
 		ItensPedido itensPed3 = new ItensPedido(null, "limpeza", 1.0, 0.0, 20.0, pedido1);
-		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/
+		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3)); **/
 		
 		 
 		 //Estados
@@ -396,13 +396,14 @@ public class DBService {
 		
 		
 		//Avaliações de clientes
-		Avaliacoes aval1 = new Avaliacoes(null, cli2, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
+		Avaliacao aval1 = new Avaliacao(null, cli2, prest1, 5.0, "Um dos melhores pintores que ja contratei na vida");
 		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
-		 Avaliacoes aval2 = new Avaliacoes(null, cli2, prest1, 3.0, "Minha casa ficou top");
+		 Avaliacao aval2 = new Avaliacao(null, cli2, prest1, 3.0, "Minha casa ficou top");
 		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
-		 Avaliacoes aval3 = new Avaliacoes(null, cli2, prest1, 1.0, "deixou tudo limpo depois do serviço");
+		 Avaliacao aval3 = new Avaliacao(null, cli2, prest1, 1.0, "deixou tudo limpo depois do serviço");
 		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
-		 Avaliacoes aval4 = new Avaliacoes(null, cli2, prest1, 1.0, "recomendo sempre!");
+		 Avaliacao aval4 = new Avaliacao(null, cli2, prest1, 1.0, "recomendo sempre!");
+		
 		 prest1.getAvaliacoes().addAll(Arrays.asList(aval1,aval2,aval3,aval4));
 		 
 		
@@ -417,7 +418,8 @@ public class DBService {
 		 
 		 avaliacoesRespository.saveAll(Arrays.asList(aval1));
 		 
-		 solicitacaoRepository.saveAll(Arrays.asList(solicitacao1/**,solicitacao2,solicitacao3**/));
+		 
+		 solicitacaoRepository.saveAll(Arrays.asList(solicitacao1/**solicitacao2,solicitacao3**/));
 		 itensSolicitacaoRepository.saveAll(Arrays.asList(
 				 itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
 				 itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
@@ -431,6 +433,8 @@ public class DBService {
 				 ));
 		 
 		 formaDePagamentoRepository.saveAll(Arrays.asList(pag1,pag2,pag3));
+		 
+		
 		 
 		 /** pedidoRepository.saveAll(Arrays.asList(pedido1));
 		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/

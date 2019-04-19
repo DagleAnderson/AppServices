@@ -59,7 +59,7 @@ public class Prestador implements Serializable {
 	private List<Orcamento> orcamentos = new ArrayList<>();
 
 	@OneToMany(cascade=CascadeType.ALL,mappedBy = "prestador")
-	private List<Avaliacoes> avaliacoes = new ArrayList<>();
+	private List<Avaliacao> avaliacao = new ArrayList<>();
 	
 	private Double mediaDeAvaliacao;
 
@@ -197,12 +197,12 @@ public class Prestador implements Serializable {
 		this.orcamentos = orcamentos;
 	}
 
-	public List<Avaliacoes> getAvaliacoes() {
-		return avaliacoes;
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacao;
 	}
 
-	public void setAvaliacoes(List<Avaliacoes> avaliacoes) {
-		this.avaliacoes = avaliacoes;
+	public void setAvaliacoes(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 	
 	
@@ -217,13 +217,13 @@ public class Prestador implements Serializable {
 	public Double getMediaDeAvaliacao() {
 		double valor = 0;
 		
-		for(int i=0; i < this.avaliacoes.size();i++) {
-			Avaliacoes aval = this.avaliacoes.get(i);
+		for(int i=0; i < this.avaliacao.size();i++) {
+			Avaliacao aval = this.avaliacao.get(i);
 			valor =  valor + aval.getEstrelas(); 
 		}
 		
 		
-		return valor/ this.avaliacoes.size(); 
+		return valor/ this.avaliacao.size(); 
 	}
 	
 	

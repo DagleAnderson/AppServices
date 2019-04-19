@@ -101,9 +101,9 @@ public class PedidoService {
 		return repository.findAll();
 	}
 	
-	public Pedido fromDTO(PedidoDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
+	public Pedido fromDTO(PedidoDTO objDTO) {
 
-		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente, objDTO.getDesconto(),objDTO.getData(),orcamento,objDTO.getAtendimento());		
+		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),null,null, objDTO.getDesconto(),objDTO.getData(),null,objDTO.getAtendimento());		
 		return Pedido;
 	}
 	

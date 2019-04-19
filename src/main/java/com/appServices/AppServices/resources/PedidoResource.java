@@ -82,16 +82,17 @@ public class PedidoResource implements Serializable {
 	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
-			@Valid @RequestBody PedidoDTO objDTO,@PathVariable Integer id,
-			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
-			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
-			@RequestParam(value="orcamento",defaultValue="0") Integer orcamento){
+			@Valid @RequestBody PedidoDTO objDTO,@PathVariable Integer id
+			//@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+			//@RequestParam(value="prestador",defaultValue="0") Integer prestador,
+			//@RequestParam(value="orcamento",defaultValue="0") Integer orcamento
+			){
 		
-		Cliente cli = clienteService.find(cliente);
-		Prestador prest = prestadorService.find(prestador);
-		Orcamento orcam = orcamentoService.find(orcamento); 
+		//Cliente cli = clienteService.find(cliente);
+		//Prestador prest = prestadorService.find(prestador);
+		//Orcamento orcam = orcamentoService.find(orcamento); 
 
-		Pedido obj = service.fromDTO(objDTO, cli, prest,orcam);
+		Pedido obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		

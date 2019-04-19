@@ -122,9 +122,10 @@ public class PrestadorService {
 	}
 	
 	private void updateData(Prestador newObj, Prestador obj) {
-	 newObj.setNomeFantasia(obj.getNomeFantasia());
-	 newObj.setSlogan(obj.getSlogan());
-	 newObj.setLocalAtendimento(obj.getLocalAtendimento());
+	 //newObj.setNomeFantasia(obj.getNomeFantasia());
+	 //newObj.setSlogan(obj.getSlogan());
+	 //newObj.setLocalAtendimento(obj.getLocalAtendimento());
+		newObj.setAvaliacoes(obj.getAvaliacoes());
 	}
 }
 

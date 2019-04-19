@@ -65,7 +65,7 @@ public class Cliente implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
-	private List<Avaliacoes> avaliacoes = new ArrayList<>();
+	private List<Avaliacao> avaliacao = new ArrayList<>();
 	
 	@OneToOne()
 	@JoinColumn(name="prestador_id")
