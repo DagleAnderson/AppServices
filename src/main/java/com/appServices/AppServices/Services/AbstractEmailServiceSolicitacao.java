@@ -75,7 +75,7 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 		Context context = new Context();
 		context.setVariable("solicitacao", obj);
 		
-		return templateEngine.process("email/solicitacao/confirmacaoPrestadorSolic", context);
+		return templateEngine.process("email/solicitacao/sendNewSolicitacao", context);
 	
 	}
 	

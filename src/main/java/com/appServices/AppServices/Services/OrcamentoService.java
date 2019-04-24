@@ -66,7 +66,7 @@ public class OrcamentoService {
 		
 		obj = repository.save(obj);
 
-		 emailService.sendOrderConfirmationEmail(obj);
+		 emailService.sendOrderConfirmationHtmlEmail(obj);
 
 
 		return obj;

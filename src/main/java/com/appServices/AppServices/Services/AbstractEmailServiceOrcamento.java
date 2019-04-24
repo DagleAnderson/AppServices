@@ -51,7 +51,7 @@ public abstract class AbstractEmailServiceOrcamento implements EmailServiceOrcam
 		Context context = new Context();
 		context.setVariable("orcamento", obj);
 		
-		return templateEngine.process("email/orcamento", context);
+		return templateEngine.process("email/orcamento/sendNewOrcamento", context);
 	
 	}
 	
@@ -72,7 +72,7 @@ public abstract class AbstractEmailServiceOrcamento implements EmailServiceOrcam
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true );
 		mmh.setTo(obj.getCliente().getEmail());
 		mmh.setFrom(sender);
-		mmh.setSubject("Pedido Confirmado! Código:"+ obj.getId());
+		mmh.setSubject(" Você tem um novo Orçamento! Código:#"+ obj.getId());
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
 		mmh.setText(htmlFromTemplateOrcamento(obj),true);
 		
