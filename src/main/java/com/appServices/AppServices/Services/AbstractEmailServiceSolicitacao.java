@@ -54,22 +54,28 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	
 	
 	private void GetEmailsPrestadores(SolicitacaoServico obj) {
+		
+		System.out.println("profissao Id:"+obj.getProfissao().getId());
+		System.out.println("numero de prestadores:"+obj.getProfissao().getPrestador().size());
+		
 		for( int n=0; n < obj.getProfissao().getPrestador().size();n++) {
 			Prestador prestEmail = new Prestador();
 				prestEmail = obj.getProfissao().getPrestador().get(n);
 				String emailsPrestadores = prestEmail.getEmail();
 			
-				emails.add(emailsPrestadores);		
+				this.emails.add(emailsPrestadores);		
 		}
+		
+		System.out.println(this.emails);
 		
 		
 	}
 
 	protected String htmlFromTemplateSolicitacao(SolicitacaoServico obj) {
 		Context context = new Context();
-		context.setVariable("Solicitação de Serviço", obj);
+		context.setVariable("solicitacao", obj);
 		
-		return templateEngine.process("email/solicitacaoDeServiço", context);
+		return templateEngine.process("email/solicitacao/confirmacaoPrestadorSolic", context);
 	
 	}
 	
@@ -78,7 +84,7 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	public void sendOrderConfirmationHtmlEmail(SolicitacaoServico obj) { 
 		try {
 		MimeMessage mm = prepareMimeMessageFromSolicitacaoServico(obj);
-		sendHtmlEmail(mm);
+			sendHtmlEmail(mm);
 		}
 		catch (MessagingException e) {
 			sendOrderConfirmationEmail(obj);
@@ -88,7 +94,8 @@ public abstract class AbstractEmailServiceSolicitacao implements EmailServiceSol
 	protected  MimeMessage prepareMimeMessageFromSolicitacaoServico(SolicitacaoServico obj) throws MessagingException {
 		MimeMessage mimeMessage =  javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true );
-		mmh.setTo(obj.getCliente().getEmail());
+		GetEmailsPrestadores(obj);
+		mmh.setTo(emails.toArray(new String[emails.size()]));
 		mmh.setFrom(sender);
 		mmh.setSubject("Nova Solicitação de Serviço para você! Código:#"+ obj.getId());
 		mmh.setSentDate(new Date(System.currentTimeMillis()));

@@ -66,7 +66,7 @@ public class SolicitacaoServicoService {
 		
 		 profissaoRepository.save(obj.getProfissao());
 		 
-		 emailService.sendOrderConfirmationEmail(obj);
+		 emailService.sendOrderConfirmationHtmlEmail(obj);
 
 		return obj;
 	}

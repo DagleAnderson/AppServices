@@ -23,7 +23,7 @@ public class SmtpEmailServiceSolicitacao extends AbstractEmailServiceSolicitacao
 	public void sendEmail(SimpleMailMessage msg) {
 		// TODO Auto-generated method stub
 		
-		LOG.info("Simulando envio dE email...");
+		LOG.info("Simulando envio de email...");
 		mailSender.send(msg);
 		LOG.info("Email enviado");
 	}
