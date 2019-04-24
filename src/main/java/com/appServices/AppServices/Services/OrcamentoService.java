@@ -66,7 +66,7 @@ public class OrcamentoService {
 		
 		obj = repository.save(obj);
 
-		 emailService.sendOrderConfirmationHtmlEmail(obj);
+		 emailService.sendOrderConfirmationHtmlEmail(obj,TipoSituacao.PENDENTE);
 
 
 		return obj;
@@ -75,7 +75,19 @@ public class OrcamentoService {
 	public Orcamento update(Orcamento obj) {
 		Orcamento newObj = find(obj.getId());
 		updateData(newObj, obj);
+		
+		if(newObj.getSituacao().getCod() == 3) {
+		 
+		 emailService.sendOrderConfirmationHtmlEmail(newObj,TipoSituacao.APROVADO);
+		}
+		
+		if(newObj.getSituacao().getCod() == 4) {
+			 emailService.sendOrderConfirmationHtmlEmail(newObj,TipoSituacao.REJEITADO);
+			}
+		
 		return repository.save(newObj);
+		
+
 
 	}
 

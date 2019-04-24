@@ -6,6 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.enums.TipoSituacao;
 
 public interface EmailServiceOrcamento {
 
@@ -13,7 +14,7 @@ public interface EmailServiceOrcamento {
 	
 	void sendEmail(SimpleMailMessage msg);
 	
-	void sendOrderConfirmationHtmlEmail(Orcamento obj); 
+	void sendOrderConfirmationHtmlEmail(Orcamento obj,TipoSituacao situacao); 
 	
 	void sendHtmlEmail(MimeMessage msg); 
 	
