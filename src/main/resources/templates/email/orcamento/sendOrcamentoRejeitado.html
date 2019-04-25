@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+  <head> <title th:remove="all">Order Confirmation</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+     <body>  
+     <div> 
+   		 <p>    Data: <span     th:text="${#dates.format(orcamento.data, 'dd/MM/yyyy hh:mm')}"></span>   </p> 
+     </div>
+   	
+   	
+   <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:400px; height: 20px">
+   <tbody>
+      <tr>
+         <td style="width:400px;height: 20px; background-color:rgb(9, 70, 139)">
+          
+          </td>
+          
+      </tr>
+      <tr>
+         <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:400px;height: 20px">
+               <tbody>
+                  <tr>
+                     <td style="width: 129px;background-color:rgb(9, 70, 139)   "></td>
+                     <td style="width: 362px;" >
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:362px;">
+                           <tbody>
+                               <tr>  
+                                 <td style="font-family: verdana;font-weight: bold; font-size: 35px; color:#ff0000; text-align: center;padding-top: 15px">
+                                     <img  th:src="@{https://s3-sa-east-1.amazonaws.com/appservicesba/email/rejeitado.png}">
+                                     	REJEITADO
+                                      <img  th:src="@{https://s3-sa-east-1.amazonaws.com/appservicesba/email/rejeitado.png}">
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="font-family: verdana; font-size: 31px; color: #0F2846; text-align: center;font-weight: bold;">
+                                     Orçamento #<span th:text="${orcamento.id}"></span>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="font-family: verdana; font-size: 25px; color: #0F2846; text-align: center;padding-top: 15px">
+                                     - Que pena!Sentimos muito -
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="font-family: verdana; font-size: 31px; color: #0F2846; text-align: center;font-weight: bold;">
+                                    <span th:text="${orcamento.prestador.nomeFantasia}"></span>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td align="center" style="padding-top: 15px">
+                                    <img style="
+                                                border-radius: 50%;
+                                                margin:20px auto 0 auto;
+                                                margin-bottom: -20px;
+                                                border: solid 3px #fff;
+                                                width: 140px;
+                                                height: 140px;
+                                                " th:src="@{https://s3-sa-east-1.amazonaws.com/appservicesba/clientprofile/cp{id}.jpg(id=${orcamento.prestador.id})}"> 
+                                     <h2 style="color:darkblue" text-center><strong><span th:text="${orcamento.cliente.nome}"></span> <span th:text="${orcamento.cliente.sobrenome}"></span></strong></h2>
+                                      <h4 style="color:red" text-center>Produto / Serviço:<span th:text="${orcamento.solicitacao.produtoServico}"></span></h4>
+                                     
+                                         
+                                 </td>
+                              </tr>
+                               <tr>
+                                 <td style="font-family: verdana; font-size: 20px; color: #0F2846; text-align: center;padding-top: 20px;font-weight: bold;">
+                                     Não desanime! 
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="font-family: verdana; font-size: 20px; color: #0F2846; text-align: center;padding-top: 20px">
+                                     Você ainda pode enviar novos orçamentos para este cliente ou para as novas solicitações. 
+                                 </td>
+                              </tr>               
+                              <tr>
+                                 <td style="padding-top: 20px;padding-bottom: 20px">
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:190px;">
+                                       <tr>
+                                          <td style="font-family: arial; font-size: 19px; color: #ffffff; background-color:rgb(9, 70, 139) ;border-radius: 5px; padding-top: 8px; padding-bottom: 8px;text-align: center;font-weight: bold;width:190px;">
+                                             <a href="#" style="text-decoration: none; color: #ffffff">ir para o appServices</a>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:362px;height: 20px">
+                                       <tbody>
+                                          <tr>
+                                             <td style="width: 250px;font-family: arial; font-style: italic; color: #000000; font-size: 14px; text-align: right;padding-right: 0px">
+                                               <p style="
+                                                         margin-top: 30px"
+                                                  >Um abraço, equipe</p>
+                                             </td>
+                                             <td style="width: 171px;">
+                                                 <img  alt="" border="0"  th:src="@{https://s3-sa-east-1.amazonaws.com/appservicesba/email/logo.jpg}" style="
+                                                 width:99px; 
+                                                 height:50px;
+                                                 margin-bottom: 17px;
+                                                 padding:0px 10px;
+                                                 display:inline-block
+                                                 
+                                                 "  /></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </td>
+                     <td style="width: 109px;background-color:rgb(9, 70, 139) "></td>
+                  </tr>
+               </tbody>
+            </table>
+         </td>
+      </tr>
+      <tr>
+         <td align="top" style="width:400px;height: 20px; background-color:rgb(9, 70, 139)"> </td>
+      </tr>
+   </tbody>
+</table>
+</table>
+</body> 
+</html>
