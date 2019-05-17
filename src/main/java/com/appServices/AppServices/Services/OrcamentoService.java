@@ -14,16 +14,16 @@ import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
-import com.appServices.AppServices.domain.PagamentoComDinheiro;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.dto.OrcamentoDTO;
-import com.appServices.AppServices.repositories.FormaDePagamentoRepository;
+import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
 
 
@@ -45,6 +45,13 @@ public class OrcamentoService {
 	
 	@Autowired 
 	private SolicitacaoServicoRepository solicitacaoRepository;
+	
+	@Autowired 
+	private ClienteRepository clienteRepository;
+	
+	@Autowired 
+	private PrestadorRepository prestadorRepository;
+	
 	
 
 	@Autowired
@@ -144,6 +151,7 @@ public class OrcamentoService {
 		
 	}
 	
+	//GetList Orcamentos por solilicitação 
 	public Page<Orcamento> search(Integer idSolicitacao,Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
@@ -151,5 +159,25 @@ public class OrcamentoService {
 		Optional<SolicitacaoServico> solicitacao = solicitacaoRepository.findById(idSolicitacao);
 		
 		return repository.search(solicitacao,pageRequest);
+	}
+	
+	//GetList of orçamentos by client
+	public Page<Orcamento> searchByClient(Integer idClient,Integer page, Integer linesPerPage,String orderBy,String direction){
+			
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Cliente> cliente = clienteRepository.findById(idClient);
+			
+			return repository.searchByClient(cliente,pageRequest);
+		}
+	
+	//GetList of orçamentos by prestador
+	public Page<Orcamento> searchByPrestador(Integer idPrestador,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<Prestador> prestador= prestadorRepository.findById(idPrestador);
+		
+		return repository.searchByPrestador(prestador,pageRequest);
 	}
 }

@@ -30,6 +30,7 @@ import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusAtendimento;
 import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.StatusSolicitacao;
 import com.appServices.AppServices.domain.enums.TipoPagamento;
@@ -169,7 +170,7 @@ public class DBService {
 		Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
 		Profissao prof2 = new Profissao(null, "Arquiteto",areaProf1);
 		Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
-		/**Profissao prof4 = new Profissao(null, "Pintor",areaProf1);
+		Profissao prof4 = new Profissao(null, "Pintor",areaProf1);
 		Profissao prof5 = new Profissao(null, "Arquiteto",areaProf1);
 		Profissao prof6 = new Profissao(null, "Engenheiro",areaProf1);
 		Profissao prof7 = new Profissao(null, "Pintor",areaProf1);
@@ -177,13 +178,13 @@ public class DBService {
 		Profissao prof9 = new Profissao(null, "Engenheiro",areaProf1);
 		Profissao prof10 = new Profissao(null, "Pintor",areaProf1);
 		Profissao prof11 = new Profissao(null, "Arquiteto",areaProf1);
-		Profissao prof12= new Profissao(null, "Engenheiro",areaProf1);**/
+		Profissao prof12= new Profissao(null, "Engenheiro",areaProf1);
 		
 		Categoria areaProf2= new Categoria(null, "Tecnologia & Eletrônicos");		
 		Profissao prof13 = new Profissao(null, "programador",areaProf2);
 		Profissao prof14 = new Profissao(null, "Técnico em Informática",areaProf2);
 		Profissao prof15 = new Profissao(null, "Analista de sistemas",areaProf2);
-		/**Profissao prof16 = new Profissao(null, "programador",areaProf1);
+		Profissao prof16 = new Profissao(null, "programador",areaProf1);
 		Profissao prof17 = new Profissao(null, "Técnico em Informatica",areaProf2);
 		Profissao prof18 = new Profissao(null, "Analista de sistemas",areaProf2);
 		Profissao prof19 = new Profissao(null, "programador",areaProf2);
@@ -191,7 +192,7 @@ public class DBService {
 		Profissao prof21 = new Profissao(null, "Analista de sistemas",areaProf2);
 		Profissao prof22 = new Profissao(null, "programador",areaProf2);
 		Profissao prof23 = new Profissao(null, "Técnico em Informatica",areaProf2);
-		Profissao prof24 = new Profissao(null, "Analista de sistemas",areaProf2);**/
+		Profissao prof24 = new Profissao(null, "Analista de sistemas",areaProf2);
 		
 		Categoria areaProf3= new Categoria(null, "Veículo automotores");		
 		Profissao prof25 = new Profissao(null, "Mecânico",areaProf3);
@@ -216,18 +217,18 @@ public class DBService {
 		Profissao prof37= new Profissao(null, "eletricista",areaProf6);
 		
 			areaProf1.getProfissoes().addAll(Arrays.asList(
-					prof1,prof2,prof3
-					/**prof4,prof5,prof6,
+					prof1,prof2,prof3,
+					prof4,prof5,prof6,
 					prof7,prof8,prof9,
-					prof10,prof11,prof12**/
+					prof10,prof11,prof12
 					
 					
 					));
 			areaProf2.getProfissoes().addAll(Arrays.asList(
-					prof13,prof14,prof15
-					/**prof16,prof17,prof18,
+					prof13,prof14,prof15,
+					prof16,prof17,prof18,
 					prof19,prof20,prof21,
-					prof22,prof23,prof24**/
+					prof22,prof23,prof24
 					));
 			areaProf3.getProfissoes().addAll(Arrays.asList(
 					prof25,prof26,prof27,
@@ -247,13 +248,13 @@ public class DBService {
 			areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3,areaProf4,areaProf5,areaProf6));
 			servicosRepository.saveAll(Arrays.asList(
 					prof1,prof2,prof3,
-					/**prof4,prof5,prof6,
+					prof4,prof5,prof6,
 					prof7,prof8,prof9,
-					prof10,prof11,prof12,**/
+					prof10,prof11,prof12,
 					prof13,prof14,prof15,
-					/**prof16,prof17,prof18,
+					prof16,prof17,prof18,
 					prof19,prof20,prof21,
-					prof22,prof23,prof24,**/
+					prof22,prof23,prof24,
 					prof25,prof26,prof27,
 					prof28,prof29,prof30,
 					prof31,prof32,prof33,
@@ -301,7 +302,7 @@ public class DBService {
 		
 		//Solicitacao de Servico,Orcamento e Pedido
 		
-		/**SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "casa na chácara",data.parse("05/04/2019 00:00"), cli1, prof1,StatusSolicitacao.ABERTA);
+		SolicitacaoServico solicitacao1 = new SolicitacaoServico(null, "casa na chácara",data.parse("05/04/2019 00:00"), cli1, prof14,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null,
 		"As paredes e o teto estão manchados e existem alguns pontos que precisarão de reparos(correções com massa corrida)", solicitacao1);
 		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, 
@@ -324,9 +325,9 @@ public class DBService {
 		solicitacao1.getItemServico().addAll(Arrays.asList(
 				itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
 				itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
-				itensSolicitacao7,itensSolicitacao8)); **/
+				itensSolicitacao7,itensSolicitacao8)); 
 		                  
-	   /**SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli3, prof1,StatusSolicitacao.ABERTA);
+	 SolicitacaoServico solicitacao2 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli3, prof1,StatusSolicitacao.ABERTA);
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao10 = new ItensSolicitacao(null, "quebrado", solicitacao2);
 		ItensSolicitacao itensSolicitacao11 = new ItensSolicitacao(null, "reforma geral", solicitacao2);
@@ -337,7 +338,7 @@ public class DBService {
 		ItensSolicitacao itensSolicitacao16 = new ItensSolicitacao(null, "quebrado", solicitacao2); 
 
 		solicitacao2.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
-		
+		 /**
 		SolicitacaoServico solicitacao3 = new SolicitacaoServico(null, "reforma do sofa",data.parse("06/04/2019 00:00"), cli1, prof2,StatusSolicitacao.FECHADA);
 		ItensSolicitacao itensSolicitacao7 = new ItensSolicitacao(null, "couro rasgodo e meio quebrado", solicitacao3);
 		ItensSolicitacao itensSolicitacao8 = new ItensSolicitacao(null, "quebrado", solicitacao3);
@@ -346,7 +347,7 @@ public class DBService {
 		
 
 		
-		/**Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli1 ,0.0,null, TipoSituacao.PENDENTE, solicitacao1);
+		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli1 ,0.0,null, TipoSituacao.PENDENTE, solicitacao1);
 		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, orcamento1);
 		ItensOrcamento itensOrc2 = new ItensOrcamento(null, "formatação", 1.0,TipoUnidade.MT, 0.0, 80.0, orcamento1);
 		ItensOrcamento itensOrc3 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0, orcamento1);
@@ -354,7 +355,7 @@ public class DBService {
 		FormaDePagamento pag1 = new PagamentoComCartao(null, orcamento1,1);
 		orcamento1.setFormaDePagamento(pag1);
 		
-		Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli1 ,0.0,null, TipoSituacao.PENDENTE, solicitacao1);
+		Orcamento orcamento2 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest2, cli2 ,0.0,null, TipoSituacao.PENDENTE, solicitacao1);
 		ItensOrcamento itensOrc4 = new ItensOrcamento(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, orcamento2);
 		ItensOrcamento itensOrc5 = new ItensOrcamento(null, "formatação", 1.0,TipoUnidade.MT, 0.0, 80.0, orcamento2);
 		ItensOrcamento itensOrc6 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0, orcamento2);
@@ -362,19 +363,19 @@ public class DBService {
 		FormaDePagamento pag2 = new PagamentoComDinheiro(null, orcamento2,1);
 		orcamento2.setFormaDePagamento(pag2);
 		
-		Orcamento orcamento3 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli1 ,0.0,null, TipoSituacao.ANALISE, solicitacao1);
+		Orcamento orcamento3 = new Orcamento(null,"computador",data.parse("11/04/2019 22:00"), prest1, cli2 ,0.0,null, TipoSituacao.ANALISE, solicitacao1);
 		ItensOrcamento itensOrc7 = new ItensOrcamento(null,"limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0, orcamento3);
 		ItensOrcamento itensOrc8 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0,orcamento3);
 		ItensOrcamento itensOrc9 = new ItensOrcamento(null, "limpeza", 1.0,TipoUnidade.KG, 0.0, 20.0,orcamento3);
 		orcamento3.getItensOrcamento().addAll(Arrays.asList(itensOrc7,itensOrc8,itensOrc9));
 		FormaDePagamento pag3 = new PagamentoComDinheiro(null, orcamento3,1);
-		orcamento3.setFormaDePagamento(pag3);**/
+		orcamento3.setFormaDePagamento(pag3);
 
-		/**Pedido pedido1 = new Pedido(null,"computador", prest1, cli2 ,0.0,data.parse("10/04/2019 22:00"), TipoSituacao.APROVADO,StatusPagamento.ABERTO, orcamento1);
-		ItensPedido itensPed1 = new ItensPedido(null, "memória", 1.0, 0.0, 200.0, pedido1);
-		ItensPedido itensPed2 = new ItensPedido(null, "formatação", 1.0, 0.0, 80.0, pedido1);
-		ItensPedido itensPed3 = new ItensPedido(null, "limpeza", 1.0, 0.0, 20.0, pedido1);
-		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3)); **/
+		Pedido pedido1 = new Pedido(null,"computador", prest1, cli2 ,0.0,data.parse("10/04/2019 22:00"), orcamento1,StatusAtendimento.PENDENTE);
+		ItensPedido itensPed1 = new ItensPedido(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, pedido1);
+		ItensPedido itensPed2 = new ItensPedido(null, "formatação", 1.0,TipoUnidade.UN, 0.0, 80.0, pedido1);
+		ItensPedido itensPed3 = new ItensPedido(null, "limpeza", 1.0,TipoUnidade.UN, 0.0, 20.0, pedido1);
+		pedido1.getItensPedido().addAll(Arrays.asList(itensPed1,itensPed2,itensPed3)); 
 		
 		 
 		 //Estados
@@ -417,7 +418,7 @@ public class DBService {
 		 avaliacoesRespository.saveAll(Arrays.asList(aval1));
 		 
 		 
-		/** solicitacaoRepository.saveAll(Arrays.asList(solicitacao1/**solicitacao2,solicitacao3));
+		solicitacaoRepository.saveAll(Arrays.asList(solicitacao1,solicitacao2));
 		 itensSolicitacaoRepository.saveAll(Arrays.asList(
 				 itensSolicitacao1,itensSolicitacao2,itensSolicitacao3,
 				 itensSolicitacao4,itensSolicitacao5,itensSolicitacao6,
@@ -430,12 +431,12 @@ public class DBService {
 				 itensOrc7,itensOrc8,itensOrc9
 				 ));
 		 
-		 formaDePagamentoRepository.saveAll(Arrays.asList(pag1,pag2,pag3)); **/
+		 formaDePagamentoRepository.saveAll(Arrays.asList(pag1,pag2,pag3));
 		 
 		
 		 
-		 /** pedidoRepository.saveAll(Arrays.asList(pedido1));
-		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));**/
+		  pedidoRepository.saveAll(Arrays.asList(pedido1));
+		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
 		 
 		 
 		 estadoRepository.saveAll(Arrays.asList(estado1,estado2));

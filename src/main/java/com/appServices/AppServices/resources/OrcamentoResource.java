@@ -122,7 +122,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	//GetList Orcamentos por solilicitação
+	//GetList Orcamentos by solilicitação
 	@RequestMapping(value="/list",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllBySolicitacaoPage(
 			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao,
@@ -133,6 +133,40 @@ public class OrcamentoResource implements Serializable{
 			){
 		
 		Page<Orcamento> objList =service.search(solicitacao, page, linesPerPage, orderBy, direction);
+		
+		Page<OrcamentoDTO> listOrcamento= objList.map(obj -> new OrcamentoDTO(obj));
+		
+		return ResponseEntity.ok().body(listOrcamento);
+	}
+	
+	//GetList of orçamentos by client
+	@RequestMapping(value="/listOrcamentoClient",method = RequestMethod.GET)
+	public ResponseEntity<Page<OrcamentoDTO>> findAllByClientPage(
+			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
+		
+		Page<Orcamento> objList =service.searchByClient(cliente, page, linesPerPage, orderBy, direction);
+		
+		Page<OrcamentoDTO> listOrcamento= objList.map(obj -> new OrcamentoDTO(obj));
+		
+		return ResponseEntity.ok().body(listOrcamento);
+	}
+	
+	//GetList of orçamentos by prestador
+	@RequestMapping(value="/listOrcamentoPrestador",method = RequestMethod.GET)
+	public ResponseEntity<Page<OrcamentoDTO>> findAllByPrestadorPage(
+			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
+		
+		Page<Orcamento> objList =service.searchByPrestador(prestador, page, linesPerPage, orderBy, direction);
 		
 		Page<OrcamentoDTO> listOrcamento= objList.map(obj -> new OrcamentoDTO(obj));
 		

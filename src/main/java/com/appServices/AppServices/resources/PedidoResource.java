@@ -25,6 +25,7 @@ import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.dto.OrcamentoDTO;
 import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
 
@@ -122,5 +123,39 @@ public class PedidoResource implements Serializable {
 		
 		return ResponseEntity.ok().body(objList);
 	}
+	
+	//GetList of pedidos by client
+		@RequestMapping(value="/listPedidoClient",method = RequestMethod.GET)
+		public ResponseEntity<Page<PedidoDTO>> findAllByClientPage(
+				@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<Pedido> objList =service.searchByClient(cliente, page, linesPerPage, orderBy, direction);
+			
+			Page<PedidoDTO> listPedido= objList.map(obj -> new PedidoDTO(obj));
+			
+			return ResponseEntity.ok().body(listPedido);
+		}
+		
+		//GetList of pedidos by prestador
+		@RequestMapping(value="/listPedidoPrestador",method = RequestMethod.GET)
+		public ResponseEntity<Page<PedidoDTO>> findAllByPrestadorPage(
+				@RequestParam(value="prestador",defaultValue="0") Integer prestador,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<Pedido> objList =service.searchByPrestador(prestador, page, linesPerPage, orderBy, direction);
+			
+			Page<PedidoDTO> listPedido= objList.map(obj -> new PedidoDTO(obj));
+			
+			return ResponseEntity.ok().body(listPedido);
+		}
 
 }

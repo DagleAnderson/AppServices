@@ -23,9 +23,11 @@ import com.appServices.AppServices.Services.ProfissaoService;
 import com.appServices.AppServices.Services.SolicitacaoServicoService;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.dto.OrcamentoDTO;
+import com.appServices.AppServices.dto.PrestadorDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoNewDTO;
 
@@ -97,6 +99,8 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.noContent().build();	
 	}
 	
+	
+	//get all SOLICITACOES
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<SolicitacaoServicoDTO>> findAll(
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente){
@@ -106,7 +110,7 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	
+	//get solicitações client individual {my solicitações}
 		@RequestMapping(value="/listCliente",method = RequestMethod.GET)
 		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClientePage(
 				@RequestParam(value="cliente",defaultValue="0") Integer cliente,
@@ -123,7 +127,7 @@ public class SolicitacaoServicoResource {
 			return ResponseEntity.ok().body(listSolicitacao);
 		}
 		
-		
+		//get solicitação by profissões {solicitações received of the prestador}
 		@RequestMapping(value="/listProfissao",method = RequestMethod.GET)
 		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByProfissaoPage(
 				@RequestParam(value="profissao",defaultValue="0") Integer profissao,
@@ -139,5 +143,5 @@ public class SolicitacaoServicoResource {
 			
 			return ResponseEntity.ok().body(listSolicitacao);
 		}
-
+		
 }

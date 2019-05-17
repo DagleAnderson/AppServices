@@ -1,6 +1,8 @@
 package com.appServices.AppServices.Services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -15,6 +17,8 @@ import org.thymeleaf.context.Context;
 
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Pedido;
+import com.appServices.AppServices.domain.enums.StatusAtendimento;
+
 
 public abstract class AbstractEmailServicePedido implements EmailServicePedido{
 	
@@ -26,6 +30,8 @@ public abstract class AbstractEmailServicePedido implements EmailServicePedido{
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	List<String> emails = new ArrayList<>();
 	
 	@Override
 	public void sendOrderConfirmationEmail(Pedido obj){
@@ -47,19 +53,29 @@ public abstract class AbstractEmailServicePedido implements EmailServicePedido{
 	}
 	
 	
-	protected String htmlFromTemplatePedido(Pedido obj) {
+	protected String htmlFromTemplatePedido(Pedido obj,StatusAtendimento atendimento) {
 		Context context = new Context();
 		context.setVariable("pedido", obj);
 		
-		return templateEngine.process("email/confirmacaoPedido", context);
+		if(atendimento.getCod() == 1) {
+			return templateEngine.process("email/pedido/sendNewPedido", context);
+			}
+			if(atendimento.getCod() == 2) {
+				return templateEngine.process("email/pedido/sendPedidoAtendido", context);	
+			}
+			if(atendimento.getCod() == 3) {
+				return templateEngine.process("email/pedido/sendPedidoNaoAtendido", context);	
+			}
+		
+			return null;
 	
 	}
 	
 	
 	@Override
-	public void sendOrderConfirmationHtmlEmail(Pedido obj) { 
+	public void sendOrderConfirmationHtmlEmail(Pedido obj,StatusAtendimento atendimento) { 
 		try {
-		MimeMessage mm = prepareMimeMessageFromPedido(obj);
+		MimeMessage mm = prepareMimeMessageFromPedido(obj,atendimento);
 		sendHtmlEmail(mm);
 		}
 		catch (MessagingException e) {
@@ -67,16 +83,36 @@ public abstract class AbstractEmailServicePedido implements EmailServicePedido{
 		}
 }
 
-	protected  MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException {
+	protected  MimeMessage prepareMimeMessageFromPedido(Pedido obj,StatusAtendimento atendimento) throws MessagingException {
 		MimeMessage mimeMessage =  javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true );
-		mmh.setTo(obj.getCliente().getEmail());
+		
+		this.GetEmails(obj);
+		mmh.setTo(emails.toArray(new String[emails.size()]));
 		mmh.setFrom(sender);
-		mmh.setSubject("Pedido Confirmado! Código:"+ obj.getId());
+		
+		//verificação: 'QUAL O CABEÇALHO?'
+				if(atendimento.getCod() == 1) {
+					mmh.setSubject("Parabéns!Pedido #"+ obj.getId()+" foi confirmado e os dados já foram liberados para o atendimento.");
+				}
+				if(atendimento.getCod() == 2){
+					mmh.setSubject(" Atendimento realizado com sucesso!Pedido #"+ obj.getId());
+				}
+				if(atendimento.getCod() == 3){
+					mmh.setSubject(" Que pena!Lamentamos essa situação.Pedido #"+ obj.getId()+" Não foi atendido.");
+				}
+				
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
-		mmh.setText(htmlFromTemplatePedido(obj),true);
+		mmh.setText(htmlFromTemplatePedido(obj,atendimento),true);
 		
 		return mimeMessage;
+	}
+	
+private void GetEmails(Pedido obj) {
+	
+	this.emails.add(obj.getCliente().getEmail());	
+	this.emails.add(obj.getPrestador().getEmail());	
+		
 	}
 	
 	@Override

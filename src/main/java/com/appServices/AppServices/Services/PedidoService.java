@@ -22,15 +22,12 @@ import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.StatusAtendimento;
-import com.appServices.AppServices.domain.enums.StatusPagamento;
-import com.appServices.AppServices.domain.enums.StatusSolicitacao;
-import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.domain.enums.TipoUnidade;
 import com.appServices.AppServices.dto.PedidoDTO;
-import com.appServices.AppServices.dto.PedidoNewDTO;
+import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.ItensPedidoRepository;
-import com.appServices.AppServices.repositories.OrcamentoRepository;
 import com.appServices.AppServices.repositories.PedidoRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.security.UserSpringSecurity;
 
 @Service
@@ -49,7 +46,11 @@ public class PedidoService {
 	@Autowired
 	private ItensPedidoRepository itensPedidoRepo;
 	
-	private OrcamentoService orcamentoService;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private PrestadorRepository prestadorRepository;
 	
 	@Autowired
 	private EmailServicePedido emailServicePedido;
@@ -76,7 +77,7 @@ public class PedidoService {
 		
 		itensPedidoRepo.saveAll(obj.getItensPedido());
 		
-		emailServicePedido.sendOrderConfirmationEmail(obj);
+		emailServicePedido.sendOrderConfirmationHtmlEmail(obj,StatusAtendimento.PENDENTE);
 		
 		return obj;
 	}
@@ -84,6 +85,15 @@ public class PedidoService {
 	public Pedido update(Pedido obj) {
 		Pedido newObj = find(obj.getId());
 		updateData(newObj, obj);
+		
+		if(newObj.getAtendimento().getCod() == 2) {
+			 
+			emailServicePedido.sendOrderConfirmationHtmlEmail(newObj,StatusAtendimento.REALIZADO);
+			}
+			
+			if(newObj.getAtendimento().getCod() == 3) {
+				emailServicePedido.sendOrderConfirmationHtmlEmail(newObj,StatusAtendimento.CANCELADO);
+				}
 		return repository.save(newObj);
 
 	}
@@ -149,4 +159,24 @@ public Pedido fromNewDTO(Pedido objDTO,Cliente cliente, Prestador prestador,Orca
 		
 		return repository.findByCliente(cliente, pageRequest);
 	}
+	
+	//GetList of pedido by client
+		public Page<Pedido> searchByClient(Integer idClient,Integer page, Integer linesPerPage,String orderBy,String direction){
+				
+				PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+				
+				Optional<Cliente> cliente = clienteRepository.findById(idClient);
+				
+				return repository.searchByClient(cliente,pageRequest);
+			}
+		
+		//GetList of pedido by prestador
+		public Page<Pedido> searchByPrestador(Integer idPrestador,Integer page, Integer linesPerPage,String orderBy,String direction){
+			
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Prestador> prestador= prestadorRepository.findById(idPrestador);
+			
+			return repository.searchByPrestador(prestador,pageRequest);
+		}
 }

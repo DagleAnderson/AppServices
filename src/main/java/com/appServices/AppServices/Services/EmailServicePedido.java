@@ -6,6 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Pedido;
+import com.appServices.AppServices.domain.enums.StatusAtendimento;
 
 public interface EmailServicePedido {
 
@@ -13,7 +14,7 @@ public interface EmailServicePedido {
 	
 	void sendEmail(SimpleMailMessage msg);
 	
-	void sendOrderConfirmationHtmlEmail(Pedido obj); 
+	void sendOrderConfirmationHtmlEmail(Pedido obj,StatusAtendimento atendimento); 
 	
 	void sendHtmlEmail(MimeMessage msg); 
 	

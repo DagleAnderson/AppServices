@@ -130,23 +130,26 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 		
 	}
 	
-public Page<SolicitacaoServico> findByCliente(Integer idCliente,Integer page, Integer linesPerPage,String orderBy,String direction){
+	
+	// GetList Solicitacao by client
+	public Page<SolicitacaoServico> findByCliente(Integer idCliente,Integer page, Integer linesPerPage,String orderBy,String direction){
+			
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+			
+			return repository.findByCliente(cliente,pageRequest);
+		}
+
+	// GetList Solicitacao by Profissao
+	public Page<SolicitacaoServico> findByProfissao(Integer idProfissao,Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+		Optional<Profissao> profissao = profissaoRepository.findById(idProfissao);
 		
-		return repository.findByCliente(cliente,pageRequest);
+		return repository.findByProfissao(profissao,pageRequest);
 	}
-
-public Page<SolicitacaoServico> findByProfissao(Integer idProfissao,Integer page, Integer linesPerPage,String orderBy,String direction){
-	
-	PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-	
-	Optional<Profissao> profissao = profissaoRepository.findById(idProfissao);
-	
-	return repository.findByProfissao(profissao,pageRequest);
-}
 
 
 	
