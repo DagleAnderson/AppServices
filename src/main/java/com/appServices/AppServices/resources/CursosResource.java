@@ -27,53 +27,58 @@ public class CursosResource {
 	@Autowired
 	private CursosService service;
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Cursos> find(@PathVariable Integer id){
-
-		Cursos obj = service.find(id);
-		return ResponseEntity.ok().body(obj);
-	}
+	//BUSCA DE CURSO POR ID
+		@PreAuthorize("hasAnyRole('CLIENTE')")
+		@RequestMapping(value="/{id}",method = RequestMethod.GET)
+		public ResponseEntity<Cursos> find(@PathVariable Integer id){
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')")
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> Insert(@Valid @RequestBody CursosNewDTO objDTO){
-		Cursos obj = service.fromNewDTO(objDTO);
-		obj = service.insert(obj);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		
-		return ResponseEntity.created(uri).build();
-	}
+			Cursos obj = service.find(id);
+			return ResponseEntity.ok().body(obj);
+		}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')")
-	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<Cursos> update(@Valid @RequestBody CursosDTO objDTO,@PathVariable Integer id){
-		
-		Cursos obj = service.fromDTO(objDTO);
-		obj.setId(id);
-		
-		obj = service.upadate(obj);
-		
-		return ResponseEntity.noContent().build();			
-	}
+	//INSERÇÃO DE NOVO CURSO
+		@PreAuthorize("hasAnyRole('PRESTADOR')")
+		@RequestMapping(method = RequestMethod.POST)
+		public ResponseEntity<Void> Insert(@Valid @RequestBody CursosNewDTO objDTO){
+			Cursos obj = service.fromNewDTO(objDTO);
+			obj = service.insert(obj);
+			
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+					.path("/{id}").buildAndExpand(obj.getId()).toUri();
+			
+			return ResponseEntity.created(uri).build();
+		}
 	
-	@PreAuthorize("hasAnyRole('PRESTADOR')")
-	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
-		service.delete(id);
-		
-		return ResponseEntity.noContent().build();
-	}
+	
+	//ALTERAÇÃO DE CURSO
+		@PreAuthorize("hasAnyRole('PRESTADOR')")
+		@RequestMapping(value="/{id}",method = RequestMethod.PUT)
+		public ResponseEntity<Cursos> update(@Valid @RequestBody CursosDTO objDTO,@PathVariable Integer id){
+			
+			Cursos obj = service.fromDTO(objDTO);
+			obj.setId(id);
+			
+			obj = service.upadate(obj);
+			
+			return ResponseEntity.noContent().build();			
+		}
+	
+	//EXCLUSÃO DE CURSO
+		@PreAuthorize("hasAnyRole('PRESTADOR')")
+		@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+		public ResponseEntity<Void> delete(@PathVariable Integer id){
+			service.delete(id);
+			
+			return ResponseEntity.noContent().build();
+		}
 	
 	//GET DE TODOS OS CURSOS
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<CursosDTO>> findAll(){
-		List<Cursos> objList = service.findAll();
-		List<CursosDTO> listDto = objList.stream().map(obj -> new CursosDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
-	}
+		@RequestMapping(method = RequestMethod.GET)
+		public ResponseEntity<List<CursosDTO>> findAll(){
+			List<Cursos> objList = service.findAll();
+			List<CursosDTO> listDto = objList.stream().map(obj -> new CursosDTO(obj)).collect(Collectors.toList());
+			return ResponseEntity.ok().body(listDto);
+		}
 	
 	
 }

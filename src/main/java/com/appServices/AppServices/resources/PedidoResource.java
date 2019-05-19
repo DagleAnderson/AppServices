@@ -46,6 +46,7 @@ public class PedidoResource implements Serializable {
 	@Autowired
 	private OrcamentoService orcamentoService;
 	
+	//BUSCA DE PEDIDO DO ID
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Pedido> find(@PathVariable Integer id){
 		Pedido objOp = service.find(id);
@@ -54,6 +55,7 @@ public class PedidoResource implements Serializable {
 	}
 	
 	
+	//INSERÇÃO DE NOVO PEDIDO
 	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
@@ -80,6 +82,7 @@ public class PedidoResource implements Serializable {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	//ALTERAÇÃO DE PEDIDO - (ATÉ O MOMENTO APENAS FAZ ATUALIZAÇÃO DO STATUS DO PEDIDO)
 	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
@@ -101,6 +104,7 @@ public class PedidoResource implements Serializable {
 		
 	}
 	
+	//DELETAR PEDIDO
 	//@PreAuthorize("hasAnyRole('CLIENTE')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
@@ -110,6 +114,7 @@ public class PedidoResource implements Serializable {
 	}
 	
 	
+	//BUSCAR PEDIDO POR PROFISSÃO
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<PedidoDTO>> findAllProfissaoPage(
 			@RequestParam(value="page",defaultValue ="0") Integer page, 
@@ -124,6 +129,7 @@ public class PedidoResource implements Serializable {
 		return ResponseEntity.ok().body(objList);
 	}
 	
+	//BUSCAR PEDIDO POR CLIENTE
 	//GetList of pedidos by client
 		@RequestMapping(value="/listPedidoClient",method = RequestMethod.GET)
 		public ResponseEntity<Page<PedidoDTO>> findAllByClientPage(
@@ -141,6 +147,7 @@ public class PedidoResource implements Serializable {
 			return ResponseEntity.ok().body(listPedido);
 		}
 		
+	//BUSCAR PEDIDO POR PRESTADOR	
 		//GetList of pedidos by prestador
 		@RequestMapping(value="/listPedidoPrestador",method = RequestMethod.GET)
 		public ResponseEntity<Page<PedidoDTO>> findAllByPrestadorPage(

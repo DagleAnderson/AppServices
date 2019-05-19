@@ -31,16 +31,16 @@ public class CategoriaResource {
 	private ProfissaoService serviceProfissao;
 	
 	
-	
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Categoria> findById(@PathVariable Integer id){
-		Categoria objOp = service.findById(id);
-		
-		return ResponseEntity.ok().body(objOp);
-	}
+	//BUSCA DE CATEGORORIA POR ID
+		@RequestMapping(value="/{id}",method = RequestMethod.GET)
+		public ResponseEntity<Categoria> findById(@PathVariable Integer id){
+			Categoria objOp = service.findById(id);
+			
+			return ResponseEntity.ok().body(objOp);
+		}
 	
 
-	//GET DE TODOS AS CATEGORIAS
+	//BUSCA DE TODOS AS CATEGORIAS
 		@RequestMapping(method = RequestMethod.GET)
 		public ResponseEntity<List<CategoriaDTO>> findAll(){
 			List<Categoria> objList = service.findAll();
@@ -48,23 +48,24 @@ public class CategoriaResource {
 			return ResponseEntity.ok().body(listDto);
 		}
 		
-	//	@PreAuthorize("hasAnyRole('ADMIN')")
-		@RequestMapping(value="{id}/profissoes",method = RequestMethod.GET)
-		public ResponseEntity<Page<ProfissaoDTO>> findAllPage(
-				@PathVariable Integer id,
-				@RequestParam(value="page",defaultValue ="0") Integer page, 
-				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
-				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
-				@RequestParam(value="direction",defaultValue ="ASC") String direction
-				){
+	//BUSCAR PROFISSOÕES POR CATEGORIA	
+		//	@PreAuthorize("hasAnyRole('ADMIN')")
+			@RequestMapping(value="{id}/profissoes",method = RequestMethod.GET)
+			public ResponseEntity<Page<ProfissaoDTO>> findAllPage(
+					@PathVariable Integer id,
+					@RequestParam(value="page",defaultValue ="0") Integer page, 
+					@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+					@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+					@RequestParam(value="direction",defaultValue ="ASC") String direction
+					){
+				
+				Page<Profissao> objList =serviceProfissao.search(id, page, linesPerPage, orderBy, direction);
+				
+				Page<ProfissaoDTO> listProfissao= objList.map(obj -> new ProfissaoDTO(obj));
+				
+				return ResponseEntity.ok().body(listProfissao);
+			}
 			
-			Page<Profissao> objList =serviceProfissao.search(id, page, linesPerPage, orderBy, direction);
-			
-			Page<ProfissaoDTO> listProfissao= objList.map(obj -> new ProfissaoDTO(obj));
-			
-			return ResponseEntity.ok().body(listProfissao);
-		}
-		
 		
 }
 

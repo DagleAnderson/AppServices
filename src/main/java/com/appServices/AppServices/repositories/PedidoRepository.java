@@ -22,13 +22,13 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 	@Transactional(readOnly=true)	
 	Page<PedidoDTO> findByCliente(Cliente cliente,Pageable pageRequest);
 	
-	//find pedidos by cliente
+	//busca por cliente
 	@Transactional(readOnly=true)
 	@Query("SELECT DISTINCT obj FROM Pedido obj INNER JOIN obj.cliente cli WHERE cli IN :cliente")
 	Page<Pedido> searchByClient(@Param("cliente") Optional<Cliente> cliente, Pageable pageRequest);
 	
 			
-	//find pedidos by prestador
+	//busca por prestador
 	@Transactional(readOnly=true)
 	@Query("SELECT DISTINCT obj FROM Pedido obj INNER JOIN obj.prestador prest WHERE prest IN :prestador")
 	Page<Pedido> searchByPrestador(@Param("prestador") Optional<Prestador> prestador, Pageable pageRequest);

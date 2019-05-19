@@ -47,6 +47,8 @@ public class OrcamentoResource implements Serializable{
 	@Autowired
 	private SolicitacaoServicoService solicitacaoService;
 	
+	
+	//BUSCA DE ORÇAMENTO ID
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Orcamento> find(@PathVariable Integer id){
 		Orcamento objOp = service.find(id);
@@ -54,7 +56,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(objOp);
 	}
 	
-	
+	//INSERT DE NOVO ORÇAMENTO
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody Orcamento obj,
@@ -83,6 +85,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.created(uri).build();
 	}
 	
+	//PUT DE ORÇAMENTO (ATÉ O MOMENTO ESSE PUT ESTÁ FOCDO EM ALTARAR APENAS O STATUS)
 	//@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
@@ -106,6 +109,7 @@ public class OrcamentoResource implements Serializable{
 		
 	}
 	
+	//DELETAR ORÇAMENTO
 	//@PreAuthorize("hasAnyRole('PRESTADOR')")
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
@@ -114,6 +118,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.noContent().build();	
 	}
 	
+	//BUSCA TODOS OS ORÇAMENTOS
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<OrcamentoDTO>> findAll(){
 		List<Orcamento> objList =service.findAll();
@@ -122,7 +127,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	//GetList Orcamentos by solilicitação
+	//BUSCA TODOS ORÇAMENTOS POR SOLICITAÇÃO
 	@RequestMapping(value="/list",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllBySolicitacaoPage(
 			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao,
@@ -139,7 +144,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(listOrcamento);
 	}
 	
-	//GetList of orçamentos by client
+	//BUSCA DE ORÇAMENTOS POR CLIENTE
 	@RequestMapping(value="/listOrcamentoClient",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByClientPage(
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
@@ -156,7 +161,7 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(listOrcamento);
 	}
 	
-	//GetList of orçamentos by prestador
+	//BUSCA DE ORÇAMENTOS POR PRESTADOR POR PAGINA
 	@RequestMapping(value="/listOrcamentoPrestador",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByPrestadorPage(
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,

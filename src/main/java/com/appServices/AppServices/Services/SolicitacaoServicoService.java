@@ -131,7 +131,7 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 	}
 	
 	
-	// GetList Solicitacao by client
+	// BUSCA SOLICITAÇÃO POR CLIENTE
 	public Page<SolicitacaoServico> findByCliente(Integer idCliente,Integer page, Integer linesPerPage,String orderBy,String direction){
 			
 			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
@@ -140,6 +140,18 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 			
 			return repository.findByCliente(cliente,pageRequest);
 		}
+	
+	// BUSCA SOLICITAÇÃO POR CLIENTE E SITUAÇÃO
+	public Page<SolicitacaoServico> findByClienteAndSituacao(Integer idCliente,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
+			
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+			
+			return repository.findByClienteAndSituacao(cliente,status,pageRequest);
+		}
+	
+	
 
 	// GetList Solicitacao by Profissao
 	public Page<SolicitacaoServico> findByProfissao(Integer idProfissao,Integer page, Integer linesPerPage,String orderBy,String direction){

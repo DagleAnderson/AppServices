@@ -30,65 +30,69 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService service;
 	 
-
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@PathVariable Integer id){
-		Cliente objOp = service.find(id);
-		
-		return ResponseEntity.ok().body(objOp);
-	}
+	//BUSCAR CLIENTE POR ID
+		@RequestMapping(value="/{id}",method = RequestMethod.GET)
+		public ResponseEntity<Cliente> find(@PathVariable Integer id){
+			Cliente objOp = service.find(id);
+			
+			return ResponseEntity.ok().body(objOp);
+		}
 	
-	@RequestMapping(value="/email",method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email){
-		Cliente obj = service.findByEmail(email);
-		
-		return ResponseEntity.ok().body(obj);
-	}
+	//BURCAR CLIENTE POR EMAIL
+		@RequestMapping(value="/email",method = RequestMethod.GET)
+		public ResponseEntity<Cliente> find(@RequestParam(value="value") String email){
+			Cliente obj = service.findByEmail(email);
+			
+			return ResponseEntity.ok().body(obj);
+		}
 	
- 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> Insert(@Valid @RequestBody ClienteNewDTO objDTO){
-		Cliente obj = service.fromNewDTO(objDTO);
-		obj = service.insert(obj);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		
-		return ResponseEntity.created(uri).build();
-	}
+	//INSERÇÃO DE NOVO CLIENTE
+		@RequestMapping(method = RequestMethod.POST)
+		public ResponseEntity<Void> Insert(@Valid @RequestBody ClienteNewDTO objDTO){
+			Cliente obj = service.fromNewDTO(objDTO);
+			obj = service.insert(obj);
+			
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+					.path("/{id}").buildAndExpand(obj.getId()).toUri();
+			
+			return ResponseEntity.created(uri).build();
+		}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
-	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO,@PathVariable Integer id){
+	//ALTERAR DADOS DO CLIENTE	
+		@PreAuthorize("hasAnyRole('CLIENTE')")
+		@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
+		public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO,@PathVariable Integer id){
+			
+			Cliente obj = service.fromDTO(objDTO);
+			obj.setId(id);
+			obj = service.update(obj);
+			return ResponseEntity.noContent().build();
+			
+		}
 		
-		Cliente obj = service.fromDTO(objDTO);
-		obj.setId(id);
-		obj = service.update(obj);
-		return ResponseEntity.noContent().build();
-		
-	}
+	//DELETAR CLIENTE
+		@PreAuthorize("hasAnyRole('CLIENTE')")
+		@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+		public ResponseEntity<Void> delete(@PathVariable Integer id){
+			service.delete(id);
+			
+			return ResponseEntity.noContent().build();	
+		}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
-	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
-		service.delete(id);
-		
-		return ResponseEntity.noContent().build();	
-	}
+	//BUSCAR TODOS OS CLIENTES
+		@PreAuthorize("hasAnyRole('CLIENTE')")
+		@RequestMapping(method = RequestMethod.GET)
+		public ResponseEntity<List<ClienteDTO>> findAll(){
+			List<Cliente> objList =service.findAll();
+			List<ClienteDTO> listDto = objList.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+			
+			return ResponseEntity.ok().body(listDto);
+		}
 	
-	@PreAuthorize("hasAnyRole('CLIENTE')")
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<ClienteDTO>> findAll(){
-		List<Cliente> objList =service.findAll();
-		List<ClienteDTO> listDto = objList.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
-		
-		return ResponseEntity.ok().body(listDto);
-	}
-	
-	//upload de imagem de perfil
-	@RequestMapping(value="/picture",method = RequestMethod.POST)
-	public ResponseEntity<Void> uploadProfilePicture(@RequestParam("file") MultipartFile file){
-		URI uri = service.uploadProfilePicture(file);
-		return ResponseEntity.created(uri).build();
-	}
+	//UPLOAD DE IMAGEM DE PERFIL
+		@RequestMapping(value="/picture",method = RequestMethod.POST)
+		public ResponseEntity<Void> uploadProfilePicture(@RequestParam("file") MultipartFile file){
+			URI uri = service.uploadProfilePicture(file);
+			return ResponseEntity.created(uri).build();
+		}
 }

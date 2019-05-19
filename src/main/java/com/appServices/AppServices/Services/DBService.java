@@ -131,7 +131,7 @@ public class DBService {
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 			
-		//Cadastro de Cliente
+		//Cadastro de Clientes
 		
 		Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,pe.encode("221094"),"dagle_life@hotmail.com");
 		EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
@@ -345,7 +345,10 @@ public class DBService {
 		ItensSolicitacao itensSolicitacao9 = new ItensSolicitacao(null, "reforma geral", solicitacao3);
 		solicitacao3.getItemServico().addAll(Arrays.asList(itensSolicitacao7,itensSolicitacao8,itensSolicitacao9));**/
 		
-
+		
+		
+		
+		//Cadasto de orçamentos
 		
 		Orcamento orcamento1 = new Orcamento(null,"computador",data.parse("10/04/2019 22:00"), prest1, cli1 ,0.0,null, TipoSituacao.PENDENTE, solicitacao1);
 		ItensOrcamento itensOrc1 = new ItensOrcamento(null, "memória", 1.0,TipoUnidade.UN, 0.0, 200.0, orcamento1);

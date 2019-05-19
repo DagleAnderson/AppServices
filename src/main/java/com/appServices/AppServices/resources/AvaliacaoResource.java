@@ -43,9 +43,7 @@ public class AvaliacaoResource {
 		Cliente cli = clienteService.find(cliente);
 		Prestador prest = prestadorService.find(prestador) ;
 		
-		
-		
-		
+		//criação de novo objeto Avaliação passando cliente e prestador como parâmetrp
 		Avaliacao newObj = service.fromNew(obj, cli, prest);
 	
 		

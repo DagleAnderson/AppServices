@@ -29,6 +29,7 @@ public class SolicitacaoServico implements Serializable{
 	private String produtoServico;
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
+	
 	private Integer situacao;
 	
 	@ManyToOne

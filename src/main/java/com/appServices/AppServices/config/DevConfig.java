@@ -23,6 +23,7 @@ public class DevConfig {
 	@Autowired
 	private DBService dbService;
 	
+	/* {AppServices/src/main/resources/application-dev.properties} */
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	
 	private String strategy;
@@ -34,7 +35,6 @@ public class DevConfig {
 			return false;
 		}
 			dbService.instantiateTestDataBase();	
-		
 		return true;
 	}
 	

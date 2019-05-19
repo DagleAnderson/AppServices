@@ -17,18 +17,18 @@ import com.appServices.AppServices.domain.SolicitacaoServico;
 
 @Repository
 public interface OrcamentoRepository extends JpaRepository<Orcamento, Integer> {
-		//find orcamentos by solicitacao
+		//busca por solicitação
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.solicitacao solic WHERE solic IN :solicitacao")
 		Page<Orcamento> search(@Param("solicitacao") Optional<SolicitacaoServico> solicitacao, Pageable pageRequest);
 		
-		//find  orcamentos by cliente
+		//busca por cliente
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.cliente cli WHERE cli IN :cliente")
 		Page<Orcamento> searchByClient(@Param("cliente") Optional<Cliente> cliente, Pageable pageRequest);
 		
 		
-		//find orcamentos by prestador
+		//find por prestador
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.prestador prest WHERE prest IN :prestador")
 		Page<Orcamento> searchByPrestador(@Param("prestador") Optional<Prestador> prestador, Pageable pageRequest);

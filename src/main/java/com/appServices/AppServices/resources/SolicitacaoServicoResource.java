@@ -100,6 +100,8 @@ public class SolicitacaoServicoResource {
 	}
 	
 	
+	
+	
 	//get all SOLICITACOES
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<SolicitacaoServicoDTO>> findAll(
@@ -110,7 +112,7 @@ public class SolicitacaoServicoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	//get solicitações client individual {my solicitações}
+	//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR CLIENTE {MINHAS SOLICITAÇÕES}
 		@RequestMapping(value="/listCliente",method = RequestMethod.GET)
 		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClientePage(
 				@RequestParam(value="cliente",defaultValue="0") Integer cliente,
@@ -126,6 +128,28 @@ public class SolicitacaoServicoResource {
 			
 			return ResponseEntity.ok().body(listSolicitacao);
 		}
+		
+		
+		//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR CLIENTE E SITUACAO {MINHAS SOLICITAÇÕES}
+				@RequestMapping(value="/listSituacao",method = RequestMethod.GET)
+				public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClienteAndSituacaoPage(
+						@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+						@RequestParam(value="situacao",defaultValue="0") Integer situacao,
+						@RequestParam(value="page",defaultValue ="0") Integer page, 
+						@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+						@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+						@RequestParam(value="direction",defaultValue ="ASC") String direction
+						){
+					
+					Page<SolicitacaoServico> objList =service.findByClienteAndSituacao(cliente, situacao, page, linesPerPage, orderBy, direction);
+					
+					Page<SolicitacaoServicoDTO> listSolicitacao= objList.map(obj -> new SolicitacaoServicoDTO(obj));
+					
+					return ResponseEntity.ok().body(listSolicitacao);
+				}
+				
+		
+		
 		
 		//get solicitação by profissões {solicitações received of the prestador}
 		@RequestMapping(value="/listProfissao",method = RequestMethod.GET)

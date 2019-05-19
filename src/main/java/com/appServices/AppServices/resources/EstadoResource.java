@@ -17,16 +17,18 @@ import com.appServices.AppServices.domain.Estado;
 import com.appServices.AppServices.dto.CidadeDTO;
 import com.appServices.AppServices.dto.EstadoDTO;
 
+
+// ESTA CLASSE AINDA NÃO ESTÁ SENDO UTILIZADA 
+
 @RestController
 @RequestMapping(value ="/estados")
 public class EstadoResource {
-	
+
 	@Autowired
 	private EstadoService service;
 	
 	@Autowired
 	private CidadeService cidadeService;
-	
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<EstadoDTO>>findAll(){
