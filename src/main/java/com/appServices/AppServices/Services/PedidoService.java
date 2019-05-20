@@ -168,6 +168,17 @@ public Pedido fromNewDTO(Pedido objDTO,Cliente cliente, Prestador prestador,Orca
 				Optional<Cliente> cliente = clienteRepository.findById(idClient);
 				
 				return repository.searchByClient(cliente,pageRequest);
+		}
+		
+
+		// BUSCA PEDIDO POR CLIENTE E SITUAÇÃO
+		public Page<Pedido> findByClienteAndSituacao(Integer idCliente,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
+				
+				PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+				
+				Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+				
+				return repository.findByClienteAndSituacao(cliente,status,pageRequest);
 			}
 		
 		//GetList of pedido by prestador
@@ -179,4 +190,18 @@ public Pedido fromNewDTO(Pedido objDTO,Cliente cliente, Prestador prestador,Orca
 			
 			return repository.searchByPrestador(prestador,pageRequest);
 		}
+		
+		
+		// BUSCA PEDIDO POR PRESTADOR E SITUAÇÃO
+		public Page<Pedido> findByPrestadorAndSituacao(Integer idPrestador,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
+				
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Prestador> prestador= prestadorRepository.findById(idPrestador);
+			
+				
+				return repository.findByPrestadorAndSituacao(prestador,status,pageRequest);
+			}
+		
+		
 }

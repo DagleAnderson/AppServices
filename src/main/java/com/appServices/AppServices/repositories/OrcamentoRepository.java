@@ -29,7 +29,7 @@ public interface OrcamentoRepository extends JpaRepository<Orcamento, Integer> {
 		Page<Orcamento> searchByClient(@Param("cliente") Optional<Cliente> cliente, Pageable pageRequest);
 		
 
-		// busca por cliente e situação - {solicitações a serem exidas no perfil de cliente}
+		// busca por cliente e situação - {orcamentos a serem exidas no perfil de cliente}
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.cliente cli WHERE cli =:cliente AND obj.situacao =:status")
 		Page<Orcamento> findByClienteAndSituacao(
@@ -45,7 +45,7 @@ public interface OrcamentoRepository extends JpaRepository<Orcamento, Integer> {
 		Page<Orcamento> searchByPrestador(@Param("prestador") Optional<Prestador> prestador, Pageable pageRequest);
 		
 		
-		// busca por prestador e situação - {solicitações a serem exidas no perfil de prestador}
+		// busca por prestador e situação - {orcamentos a serem exidas no perfil de prestador}
 				@Transactional(readOnly=true)
 				@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.prestador prest WHERE prest =:prestador AND obj.situacao =:status")
 				Page<Orcamento> findByPrestadorAndSituacao(

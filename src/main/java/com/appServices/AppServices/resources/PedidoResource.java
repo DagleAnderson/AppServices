@@ -147,6 +147,29 @@ public class PedidoResource implements Serializable {
 			return ResponseEntity.ok().body(listPedido);
 		}
 		
+		
+		//BUSCAR PEDIDOS INDIVIDUAIS POR CLIENTE E SITUACAO {MINHAS SOLICITAÇÕES}
+		@RequestMapping(value="/listCliBySituacao",method = RequestMethod.GET)
+		public ResponseEntity<Page<PedidoDTO>> findAllByClienteAndSituacaoPage(
+				@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+				@RequestParam(value="situacao",defaultValue="0") Integer situacao,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<Pedido> objList =service.findByClienteAndSituacao(cliente, situacao, page, linesPerPage, orderBy, direction);
+			
+			Page<PedidoDTO> listPedido= objList.map(obj -> new PedidoDTO(obj));
+			
+			return ResponseEntity.ok().body(listPedido);
+		}
+			
+		
+		
+		
+		
 	//BUSCAR PEDIDO POR PRESTADOR	
 		//GetList of pedidos by prestador
 		@RequestMapping(value="/listPedidoPrestador",method = RequestMethod.GET)
@@ -164,5 +187,25 @@ public class PedidoResource implements Serializable {
 			
 			return ResponseEntity.ok().body(listPedido);
 		}
+		
+		
+		//BUSCAR PEDIDOS INDIVIDUAIS POR PRESTADOR E SITUACAO {MINHAS SOLICITAÇÕES}
+		@RequestMapping(value="/listPrestBySituacao",method = RequestMethod.GET)
+		public ResponseEntity<Page<PedidoDTO>> findAllByProfAndSituacaoPage(
+				@RequestParam(value="prestador",defaultValue="0") Integer prestador,
+				@RequestParam(value="situacao",defaultValue="0") Integer situacao,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<Pedido> objList =service.findByPrestadorAndSituacao(prestador, situacao, page, linesPerPage, orderBy, direction);
+			
+			Page<PedidoDTO> listPedido= objList.map(obj -> new PedidoDTO(obj));
+			
+			return ResponseEntity.ok().body(listPedido);
+		}
+		
 
 }

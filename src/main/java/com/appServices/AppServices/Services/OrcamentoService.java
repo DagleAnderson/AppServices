@@ -196,7 +196,7 @@ public class OrcamentoService {
 	
 	
 	
-	// BUSCA SOLICITAÇÃO POR PRESTADOR E SITUAÇÃO
+	// BUSCA ORCAMENTO POR PRESTADOR E SITUAÇÃO
 		public Page<Orcamento> findByPrestadorAndSituacao(Integer idPrestador,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
 				
 			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
