@@ -131,7 +131,7 @@ public class SolicitacaoServicoResource {
 		
 		
 		//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR CLIENTE E SITUACAO {MINHAS SOLICITAÇÕES}
-				@RequestMapping(value="/listSituacao",method = RequestMethod.GET)
+				@RequestMapping(value="/listCliBySituacao",method = RequestMethod.GET)
 				public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClienteAndSituacaoPage(
 						@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 						@RequestParam(value="situacao",defaultValue="0") Integer situacao,
@@ -162,6 +162,24 @@ public class SolicitacaoServicoResource {
 				){
 			
 			Page<SolicitacaoServico> objList =service.findByProfissao(profissao, page, linesPerPage, orderBy, direction);
+			
+			Page<SolicitacaoServicoDTO> listSolicitacao= objList.map(obj -> new SolicitacaoServicoDTO(obj));
+			
+			return ResponseEntity.ok().body(listSolicitacao);
+		}
+		
+		//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR PROFISSAO E SITUACAO {MINHAS SOLICITAÇÕES}
+		@RequestMapping(value="/listProBySituacao",method = RequestMethod.GET)
+		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByProfAndSituacaoPage(
+				@RequestParam(value="profissao",defaultValue="0") Integer profissao,
+				@RequestParam(value="situacao",defaultValue="0") Integer situacao,
+				@RequestParam(value="page",defaultValue ="0") Integer page, 
+				@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+				@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+				@RequestParam(value="direction",defaultValue ="ASC") String direction
+				){
+			
+			Page<SolicitacaoServico> objList =service.findByProfissaoAndSituacao(profissao, situacao, page, linesPerPage, orderBy, direction);
 			
 			Page<SolicitacaoServicoDTO> listSolicitacao= objList.map(obj -> new SolicitacaoServicoDTO(obj));
 			

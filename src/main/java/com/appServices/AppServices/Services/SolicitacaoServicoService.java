@@ -162,6 +162,18 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 		
 		return repository.findByProfissao(profissao,pageRequest);
 	}
+	
+	
+	// BUSCA SOLICITAÇÃO POR CLIENTE E SITUAÇÃO
+		public Page<SolicitacaoServico> findByProfissaoAndSituacao(Integer idProfissao,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
+				
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Profissao> profissao = profissaoRepository.findById(idProfissao);
+			
+				
+				return repository.findByProfissaoAndSituacao(profissao,status,pageRequest);
+			}
 
 
 	
