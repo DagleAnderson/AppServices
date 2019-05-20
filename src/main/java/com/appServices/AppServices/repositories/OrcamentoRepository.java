@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 
 @Repository
@@ -27,10 +28,29 @@ public interface OrcamentoRepository extends JpaRepository<Orcamento, Integer> {
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.cliente cli WHERE cli IN :cliente")
 		Page<Orcamento> searchByClient(@Param("cliente") Optional<Cliente> cliente, Pageable pageRequest);
 		
+
+		// busca por cliente e situação - {solicitações a serem exidas no perfil de cliente}
+		@Transactional(readOnly=true)
+		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.cliente cli WHERE cli =:cliente AND obj.situacao =:status")
+		Page<Orcamento> findByClienteAndSituacao(
+				@Param("cliente") Optional<Cliente> cliente,
+				@Param("status") Integer status, 
+				Pageable pageRequest);
+		
+		
 		
 		//find por prestador
 		@Transactional(readOnly=true)
 		@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.prestador prest WHERE prest IN :prestador")
 		Page<Orcamento> searchByPrestador(@Param("prestador") Optional<Prestador> prestador, Pageable pageRequest);
+		
+		
+		// busca por prestador e situação - {solicitações a serem exidas no perfil de prestador}
+				@Transactional(readOnly=true)
+				@Query("SELECT DISTINCT obj FROM Orcamento obj INNER JOIN obj.prestador prest WHERE prest =:prestador AND obj.situacao =:status")
+				Page<Orcamento> findByPrestadorAndSituacao(
+						@Param("prestador") Optional<Prestador> prestador,
+						@Param("status") Integer status, 
+						Pageable pageRequest);
 		
 }

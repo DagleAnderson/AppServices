@@ -153,7 +153,7 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 	
 	
 
-	// GetList Solicitacao by Profissao
+	// BURCAR SOLICITAÇÃO POR PROFISSÃO
 	public Page<SolicitacaoServico> findByProfissao(Integer idProfissao,Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
@@ -164,7 +164,7 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 	}
 	
 	
-	// BUSCA SOLICITAÇÃO POR CLIENTE E SITUAÇÃO
+	// BUSCA SOLICITAÇÃO POR PROFISSAO E SITUAÇÃO
 		public Page<SolicitacaoServico> findByProfissaoAndSituacao(Integer idProfissao,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
 				
 			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);

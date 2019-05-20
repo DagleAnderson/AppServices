@@ -15,6 +15,7 @@ import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.domain.enums.TipoUnidade;
@@ -151,7 +152,7 @@ public class OrcamentoService {
 		
 	}
 	
-	//GetList Orcamentos por solilicitação 
+	//BUSCAR ORÇAMENTO POR SOLICITAÇÃO
 	public Page<Orcamento> search(Integer idSolicitacao,Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
@@ -161,7 +162,7 @@ public class OrcamentoService {
 		return repository.search(solicitacao,pageRequest);
 	}
 	
-	//GetList of orçamentos by client
+	//BURCAR ORÇAMENTO POR CLIENTE
 	public Page<Orcamento> searchByClient(Integer idClient,Integer page, Integer linesPerPage,String orderBy,String direction){
 			
 			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
@@ -171,7 +172,19 @@ public class OrcamentoService {
 			return repository.searchByClient(cliente,pageRequest);
 		}
 	
-	//GetList of orçamentos by prestador
+	
+	// BUSCA ORÇAMENTO POR CLIENTE E SITUAÇÃO
+	public Page<Orcamento> findByClienteAndSituacao(Integer idCliente,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
+			
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+			
+			return repository.findByClienteAndSituacao(cliente,status,pageRequest);
+		}
+	
+	
+	//BURCAR ORÇAMENTO POR PRESTADOR
 	public Page<Orcamento> searchByPrestador(Integer idPrestador,Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
@@ -180,4 +193,20 @@ public class OrcamentoService {
 		
 		return repository.searchByPrestador(prestador,pageRequest);
 	}
+	
+	
+	
+	// BUSCA SOLICITAÇÃO POR PRESTADOR E SITUAÇÃO
+		public Page<Orcamento> findByPrestadorAndSituacao(Integer idPrestador,Integer status, Integer page, Integer linesPerPage,String orderBy,String direction){
+				
+			PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+			
+			Optional<Prestador> prestador= prestadorRepository.findById(idPrestador);
+			
+				
+				return repository.findByPrestadorAndSituacao(prestador,status,pageRequest);
+			}
+		
+		
+		
 }

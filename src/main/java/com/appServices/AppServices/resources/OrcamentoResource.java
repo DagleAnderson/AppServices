@@ -29,6 +29,7 @@ import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.dto.OrcamentoDTO;
 import com.appServices.AppServices.dto.OrcamentoNewDTO;
+import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
 
 @RestController
 @RequestMapping("/orcamento")
@@ -161,6 +162,27 @@ public class OrcamentoResource implements Serializable{
 		return ResponseEntity.ok().body(listOrcamento);
 	}
 	
+	//BUSCAR ORCAMENTOS INDIVIDUAIS POR CLIENTE E SITUACAO {MINHAS SOLICITAÇÕES}
+	@RequestMapping(value="/listCliBySituacao",method = RequestMethod.GET)
+	public ResponseEntity<Page<OrcamentoDTO>> findAllByClienteAndSituacaoPage(
+			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+			@RequestParam(value="situacao",defaultValue="0") Integer situacao,
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
+		
+		Page<Orcamento> objList =service.findByClienteAndSituacao(cliente, situacao, page, linesPerPage, orderBy, direction);
+		
+		Page<OrcamentoDTO> listOrcamento= objList.map(obj -> new OrcamentoDTO(obj));
+		
+		return ResponseEntity.ok().body(listOrcamento);
+	}
+	
+	
+	
+	
 	//BUSCA DE ORÇAMENTOS POR PRESTADOR POR PAGINA
 	@RequestMapping(value="/listOrcamentoPrestador",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByPrestadorPage(
@@ -177,4 +199,24 @@ public class OrcamentoResource implements Serializable{
 		
 		return ResponseEntity.ok().body(listOrcamento);
 	}
+	
+	//BUSCAR ORCAMENTOS INDIVIDUAIS POR PRESTADOR E SITUACAO {MINHAS SOLICITAÇÕES}
+	@RequestMapping(value="/listPrestBySituacao",method = RequestMethod.GET)
+	public ResponseEntity<Page<OrcamentoDTO>> findAllByProfAndSituacaoPage(
+			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
+			@RequestParam(value="situacao",defaultValue="0") Integer situacao,
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
+		
+		Page<Orcamento> objList =service.findByPrestadorAndSituacao(prestador, situacao, page, linesPerPage, orderBy, direction);
+		
+		Page<OrcamentoDTO> listOrcamento= objList.map(obj -> new OrcamentoDTO(obj));
+		
+		return ResponseEntity.ok().body(listOrcamento);
+	}
+	
+	
 }
