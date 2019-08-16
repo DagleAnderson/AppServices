@@ -59,7 +59,7 @@ public class ClienteResource {
 		}
 	
 	//ALTERAR DADOS DO CLIENTE	
-		@PreAuthorize("hasAnyRole('CLIENTE')")
+		//@PreAuthorize("hasAnyRole('CLIENTE')")
 		@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 		public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO,@PathVariable Integer id){
 			

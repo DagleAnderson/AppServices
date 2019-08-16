@@ -113,7 +113,7 @@ public class SolicitacaoServicoResource {
 	}
 	
 	//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR CLIENTE {MINHAS SOLICITAÇÕES}
-		@RequestMapping(value="/listCliente",method = RequestMethod.GET)
+		@RequestMapping(value="/listByCliente",method = RequestMethod.GET)
 		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClientePage(
 				@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 				@RequestParam(value="page",defaultValue ="0") Integer page, 
@@ -131,7 +131,7 @@ public class SolicitacaoServicoResource {
 		
 		
 		//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR CLIENTE E SITUACAO {MINHAS SOLICITAÇÕES}
-				@RequestMapping(value="/listCliBySituacao",method = RequestMethod.GET)
+				@RequestMapping(value="/listByCliAndSituacao",method = RequestMethod.GET)
 				public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByClienteAndSituacaoPage(
 						@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 						@RequestParam(value="situacao",defaultValue="0") Integer situacao,
@@ -152,7 +152,7 @@ public class SolicitacaoServicoResource {
 		
 		
 		//get solicitação by profissões {solicitações received of the prestador}
-		@RequestMapping(value="/listProfissao",method = RequestMethod.GET)
+		@RequestMapping(value="/listByProfissao",method = RequestMethod.GET)
 		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByProfissaoPage(
 				@RequestParam(value="profissao",defaultValue="0") Integer profissao,
 				@RequestParam(value="page",defaultValue ="0") Integer page, 
@@ -169,7 +169,7 @@ public class SolicitacaoServicoResource {
 		}
 		
 		//BUSCAR SOLICITAÇÕES INDIVIDUAIS POR PROFISSAO E SITUACAO {MINHAS SOLICITAÇÕES}
-		@RequestMapping(value="/listProBySituacao",method = RequestMethod.GET)
+		@RequestMapping(value="/listByProAndSituacao",method = RequestMethod.GET)
 		public ResponseEntity<Page<SolicitacaoServicoDTO>> findAllByProfAndSituacaoPage(
 				@RequestParam(value="profissao",defaultValue="0") Integer profissao,
 				@RequestParam(value="situacao",defaultValue="0") Integer situacao,

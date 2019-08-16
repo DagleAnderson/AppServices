@@ -161,7 +161,7 @@ public class SolicitacaoServico implements Serializable{
 	}
 	
 	
-	@Override
+	/**@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Olá prestador(a)! Nós do AppServices temos uma nova solicitação de serviço para você."+"\n");
@@ -180,6 +180,22 @@ public class SolicitacaoServico implements Serializable{
 			builder.append(i +" ) "+LayoutItensToString(i++)+"\n");
 			builder.append(" - "+is.toString()+"\n");
 		}	
+		return builder.toString();
+	}**/
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("----------- **   Solicitação de Serviço   ** -------------");
+		builder.append("\n");
+		builder.append("Cliente: ");
+		builder.append(getCliente().getNome() +" "+ getCliente().getSobrenome() + "\n");
+		builder.append("e-mail: ");
+		builder.append(getCliente().getEmail()+ "\n");
+		builder.append("Produto / Serviço: ");
+		builder.append(getProdutoServico()+"\n");
+		builder.append("\n");
+
 		return builder.toString();
 	}
 

@@ -146,7 +146,7 @@ public class OrcamentoResource implements Serializable{
 	}
 	
 	//BUSCA DE ORÇAMENTOS POR CLIENTE
-	@RequestMapping(value="/listOrcamentoClient",method = RequestMethod.GET)
+	@RequestMapping(value="/listOrcamentoByClient",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByClientPage(
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 			@RequestParam(value="page",defaultValue ="0") Integer page, 
@@ -163,7 +163,7 @@ public class OrcamentoResource implements Serializable{
 	}
 	
 	//BUSCAR ORCAMENTOS INDIVIDUAIS POR CLIENTE E SITUACAO {MINHAS SOLICITAÇÕES}
-	@RequestMapping(value="/listCliBySituacao",method = RequestMethod.GET)
+	@RequestMapping(value="/listByCliAndSituacao",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByClienteAndSituacaoPage(
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 			@RequestParam(value="situacao",defaultValue="0") Integer situacao,
@@ -184,7 +184,7 @@ public class OrcamentoResource implements Serializable{
 	
 	
 	//BUSCA DE ORÇAMENTOS POR PRESTADOR POR PAGINA
-	@RequestMapping(value="/listOrcamentoPrestador",method = RequestMethod.GET)
+	@RequestMapping(value="/listOrcamentoByPrestador",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByPrestadorPage(
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
 			@RequestParam(value="page",defaultValue ="0") Integer page, 
@@ -201,7 +201,7 @@ public class OrcamentoResource implements Serializable{
 	}
 	
 	//BUSCAR ORCAMENTOS INDIVIDUAIS POR PRESTADOR E SITUACAO {MINHAS SOLICITAÇÕES}
-	@RequestMapping(value="/listPrestBySituacao",method = RequestMethod.GET)
+	@RequestMapping(value="/listByPrestAndSituacao",method = RequestMethod.GET)
 	public ResponseEntity<Page<OrcamentoDTO>> findAllByProfAndSituacaoPage(
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
 			@RequestParam(value="situacao",defaultValue="0") Integer situacao,

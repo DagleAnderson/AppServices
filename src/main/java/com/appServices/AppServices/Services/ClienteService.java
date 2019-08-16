@@ -106,7 +106,7 @@ public class ClienteService {
 	
 	public Cliente findByEmail(String email){
 		UserSpringSecurity user = UserService.authenticated();
-		if(user == null || !user.hasRole(TipoPerfil.ADMIN) && !email.equals(user.getUsername())) {
+		if(user == null || !user.hasRole(TipoPerfil.ADMIN) && !email.equals(user.getUsername())){
 			throw new AuthorizationException("Acesso negado");
 		}
 		Cliente obj = repository.findByEmail(email);
