@@ -56,13 +56,7 @@ public class PrestadorService {
 	public Prestador insert(Prestador obj){
 		obj.setId(null);
 		obj = repository.save(obj);
-		
-		clienteRepository.save(obj.getCliente());
 		enderecoRepository.save(obj.getEndereco());
-		profissaoRepository.save(obj.getProfissao());
-		categoriaRepository.save(obj.getProfissao().getCategoria());
-		
-		
 		return  obj ;
 		
 	}
