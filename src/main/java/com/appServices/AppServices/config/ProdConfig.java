@@ -23,7 +23,7 @@ public class ProdConfig {
 	@Autowired
 	private DBService dbService;
 	
-	/* {AppServices/src/main/resources/application-dev.properties} */
+	/* {AppServices/src/main/resources/application-prod.properties} */
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	
 	private String strategy;
