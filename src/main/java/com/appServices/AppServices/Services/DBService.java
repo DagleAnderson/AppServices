@@ -409,8 +409,8 @@ public class DBService {
 		 
 		
 		 
-		 // pedidoRepository.saveAll(Arrays.asList(pedido1));
-		// itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
+		  pedidoRepository.saveAll(Arrays.asList(pedido1));
+		 itensPedidoRepository.saveAll(Arrays.asList(itensPed1,itensPed2,itensPed3));
 		 
 		 
 		 estadoRepository.saveAll(Arrays.asList(estado1,estado2));
