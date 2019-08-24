@@ -5,7 +5,7 @@
     </head>
      <body>  
      <div> 
-   		 <p>    Data: <span     th:text="${#dates.format(orcamento.data, 'dd/MM/yyyy hh:mm')}"></span>   </p> 
+   		 <p>    Data: <span     th:text="${#dates.format(pedido.data, 'dd/MM/yyyy hh:mm')}"></span>   </p> 
      </div>
    	
    	
@@ -50,9 +50,9 @@
                               </tr>
                               <tr>
                                  <td align="center" style="padding-top: 15px">                 
-                                      <h4 style="color:red" text-center>Produto / Serviço:<span th:text="${orcamento.solicitacao.produtoServico}"></span></h4>
-                                      <h4 style="color:red" text-center>Prestador :<span th:text="${orcamento.prestador.nomeFantasia}"></span></h4>    
-                                      <h4 style="color:red" text-center>Cliente :<span th:text="${orcamento.cliente.nome}"></span> <span th:text="${orcamento.cliente.sobrenome}"></span></h4>         
+                                      <h4 style="color:red" text-center>Produto / Serviço:<span th:text="${pedido.produtoServico}"></span></h4>
+                                      <h4 style="color:red" text-center>Prestador :<span th:text="${pedido.prestador.nomeFantasia}"></span></h4>    
+                                      <h4 style="color:red" text-center>Cliente :<span th:text="${pedido.cliente.nome}"></span> <span th:text="${pedido.cliente.sobrenome}"></span></h4>         
                                  </td>
                               </tr>
                               <tr>
